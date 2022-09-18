@@ -194,6 +194,27 @@ const pwaPlugins = [
 module.exports = {
   siteMetadata,
   plugins: [
+    {
+      resolve: "gatsby-source-elasticsearch",
+      options: {
+        connection: {
+          host: "https://koat.es.us-east-1.aws.found.io:9243/p-twentyfour/_search",
+          query: `{
+          "bool": {
+            "filter": [
+              {"match_phrase": {"id.keyword": "opensea"}},
+              {"range": {"@timestamp": {"format": "strict_date_optional_time","gte": "now-24h","lte": "now"}}}
+            ]
+          }
+        }
+      `,
+          auth: {
+            username: "KOAT_DEV",
+            password: "K0@Devthings",
+          },
+        },
+      },
+    },
     ...corePlugins,
     ...devPlugins,
     ...imagePlugins,

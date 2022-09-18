@@ -48,8 +48,8 @@ const PostGrid: React.FC<PostGridProps> = ({ posts }) => {
 const Grid = styled.ul`
   display: grid;
   grid-gap: var(--grid-gap-xl);
-  grid-template-columns: repeat(2, 1fr);
-  list-style: none;
+  grid-template-columns: 1fr;
+
 
   & > li {
     margin-bottom: 0;

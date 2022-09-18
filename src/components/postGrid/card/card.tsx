@@ -21,15 +21,28 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <Wrapper>
-      <CenteredImg src={thumbnail} alt={alt} />
-      <Text>
-        <div>
+      {/* <CenteredImg src={thumbnail} alt={alt} /> */}
+      <CardThumbnail></CardThumbnail>
+      <CardProjectDetails>
+        <p className="projectName">Project Name:</p>
+        <p className="name">Peace Eagle NFT<br />Free Mint</p>
+        <p className="mintDate">Minting Sep 4, 2022 @ 23:00:00</p>
+      </CardProjectDetails>
+      <NFTStats>
+        <StatBlock>
           <Category>{category}</Category>
-          <Title>{title}</Title>
-          <Desc>{desc}</Desc>
-        </div>
-        <DateTime dateTime={date}>{date}</DateTime>
-      </Text>
+          <DateTime dateTime={date}>{date}</DateTime>
+        </StatBlock>        <StatBlock>
+          <Category>{category}</Category>
+          <DateTime dateTime={date}>{date}</DateTime>
+        </StatBlock>        <StatBlock>
+          <Category>{category}</Category>
+          <DateTime dateTime={date}>{date}</DateTime>
+        </StatBlock>        <StatBlock>
+          <Category>{category}</Category>
+          <DateTime dateTime={date}>{date}</DateTime>
+        </StatBlock>
+      </NFTStats>
     </Wrapper>
   )
 }
@@ -37,26 +50,64 @@ const Card: React.FC<CardProps> = ({
 const Wrapper = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  height: 100%;
-  border-radius: var(--border-radius-base);
-  background-color: var(--color-card);
-
-  /* Fix Safari overflow:hidden with border radius not working error */
-  transform: translateZ(0);
+  align-items: center;
+  width: 100%;
+  height: 164px;
+  background: #F4F4F4;
+  border-radius: 30px;
+  padding: 13px 19px;
 `
 
-const Text = styled.div`
+const CardThumbnail = styled.div`
+  width: 141px;
+  height: 100%;
+  border: 1px solid #282828;
+  border-radius: 19px;
+  background: #D9E021;
+`
+
+const CardProjectDetails = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
-  justify-content: space-between;
-  padding: var(--sizing-md);
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: 0 20px;
 
-  & > * {
-    display: block;
+  .projectName {
+    font-size: 10px;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #000000;
   }
+
+  .name {
+    font-size: 16px;
+    text-align: left;
+    color: #000000;
+  }
+
+  .mintDate {
+    font-size: 13px;
+    text-align: left;
+    color: #000000;
+    margin: 15px 0;
+  }
+
+`
+
+const NFTStats = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  height: 100%;
+  padding: 0 20px;
+`
+
+const StatBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+
 `
 
 const Title = styled.h3`
