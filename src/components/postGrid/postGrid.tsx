@@ -50,7 +50,6 @@ const Grid = styled.ul`
   grid-gap: var(--grid-gap-xl);
   grid-template-columns: 1fr;
 
-
   & > li {
     margin-bottom: 0;
   }

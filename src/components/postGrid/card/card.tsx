@@ -5,6 +5,10 @@ import type Post from "Types/Post"
 import Category from "Styles/category"
 import DateTime from "Styles/dateTime"
 import CenteredImg from "./centeredImg"
+import Manipulation from "../../../images/Manipulation.png"
+import Active from "../../../images/active.png"
+import Conversion from "../../../images/conversion.png"
+import Market from "../../../images/market.png"
 
 type CardProps = Pick<
   Post,
@@ -21,41 +25,78 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <Wrapper>
-      {/* <CenteredImg src={thumbnail} alt={alt} /> */}
-      <CardThumbnail></CardThumbnail>
-      <CardProjectDetails>
-        <p className="projectName">Project Name:</p>
-        <p className="name">Peace Eagle NFT<br />Free Mint</p>
-        <p className="mintDate">Minting Sep 4, 2022 @ 23:00:00</p>
-      </CardProjectDetails>
-      <NFTStats>
-        <StatBlock>
-          <Category>{category}</Category>
-          <DateTime dateTime={date}>{date}</DateTime>
-        </StatBlock>        <StatBlock>
-          <Category>{category}</Category>
-          <DateTime dateTime={date}>{date}</DateTime>
-        </StatBlock>        <StatBlock>
-          <Category>{category}</Category>
-          <DateTime dateTime={date}>{date}</DateTime>
-        </StatBlock>        <StatBlock>
-          <Category>{category}</Category>
-          <DateTime dateTime={date}>{date}</DateTime>
-        </StatBlock>
-      </NFTStats>
+      <CardContainer>
+        {/* <CenteredImg src={thumbnail} alt={alt} /> */}
+        <CardThumbnail></CardThumbnail>
+        <CardProjectDetails>
+          <p className="projectName">Project Name:</p>
+          <p className="name">
+            Peace Eagle NFT
+            <br />
+            Free Mint
+          </p>
+          <p className="mintDate">Minting Sep 4, 2022 @ 23:00:00</p>
+        </CardProjectDetails>
+        <NFTStats>
+          <StatBlock>
+            <img src={Market} />
+            <StatTitle>Market Sentiment</StatTitle>
+            <SentimentValue>18</SentimentValue>
+            <SentimentValueAvg>avg 26</SentimentValueAvg>
+          </StatBlock>{" "}
+          <StatBlock>
+            <img src={Manipulation} />
+            <StatTitle>Manipulation</StatTitle>
+            <ManipulationValue>80% Organic</ManipulationValue>
+            <Promotion>20% Promotion</Promotion>
+          </StatBlock>{" "}
+          <StatBlock>
+            <img src={Active} />
+            <StatTitle>Active Public</StatTitle>
+            <ActivePublicValue>14,000</ActivePublicValue>
+          </StatBlock>{" "}
+          <StatBlock>
+            <img src={Conversion} />
+            <StatTitle>Conversion</StatTitle>
+            <SentimentValue>2.14%</SentimentValue>
+          </StatBlock>
+        </NFTStats>
+      </CardContainer>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
   width: 100%;
   height: 164px;
-  background: #F4F4F4;
+
+  ::after {
+    content: "";
+    top: 0;
+    left: -50px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: #ed1e79;
+    border-radius: 30px;
+    padding: 13px 19px;
+    z-index: 1;
+  }
+`
+
+const CardContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: #f4f4f4;
   border-radius: 30px;
   padding: 13px 19px;
+  z-index: 2;
 `
 
 const CardThumbnail = styled.div`
@@ -63,7 +104,7 @@ const CardThumbnail = styled.div`
   height: 100%;
   border: 1px solid #282828;
   border-radius: 19px;
-  background: #D9E021;
+  background: #d9e021;
 `
 
 const CardProjectDetails = styled.div`
@@ -72,7 +113,7 @@ const CardProjectDetails = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   min-height: 100%;
-  padding: 0 20px;
+  padding: 0 25px;
 
   .projectName {
     font-size: 10px;
@@ -93,36 +134,64 @@ const CardProjectDetails = styled.div`
     color: #000000;
     margin: 15px 0;
   }
-
 `
 
 const NFTStats = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 40px;
   height: 100%;
-  padding: 0 20px;
+  padding: 5px 20px;
+  margin-left: auto;
+  border-left: 5px solid #ffffff;
 `
 
 const StatBlock = styled.div`
   display: flex;
   flex-direction: column;
-
+  img {
+    object-fit: contain;
+    height: 26px;
+    width: 26px;
+    margin-bottom: 5px;
+  }
 `
 
-const Title = styled.h3`
-  margin-top: var(--sizing-xs);
-  font-size: var(--text-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.3;
+const StatTitle = styled.p`
+  font-size: 12px;
+  margin: 7px 0;
+  // @media (max-width: ${({ theme }) => theme.device.md}) {
+  //   font-size: 1.3125rem;
+  // }
 
-  @media (max-width: ${({ theme }) => theme.device.md}) {
-    font-size: 1.3125rem;
-  }
+  // @media (max-width: ${({ theme }) => theme.device.sm}) {
+  //   font-size: var(--text-md);
+  // }
+`
 
-  @media (max-width: ${({ theme }) => theme.device.sm}) {
-    font-size: var(--text-md);
-  }
+const SentimentValue = styled.p`
+  color: #ff7bac;
+  font-size: 32px;
+`
+
+const ManipulationValue = styled.p`
+  color: #40c3ea;
+  font-size: 16px;
+  margin: 5px 0;
+`
+
+const ActivePublicValue = styled.p`
+  color: #40c3ea;
+  font-size: 24px;
+`
+
+const SentimentValueAvg = styled.p`
+  font-size: 9px;
+`
+
+const Promotion = styled.p`
+  font-size: 11px;
+  color: #ff7bac;
 `
 
 const Desc = styled.p`
