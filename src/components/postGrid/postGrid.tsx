@@ -8,38 +8,35 @@ import useInfiniteScroll from "./useInfiniteScroll"
 import { ThumbnailWrapper } from "./card/centeredImg"
 
 interface PostGridProps {
-  posts: Post[]
+  nfts: []
 }
 
-const PostGrid: React.FC<PostGridProps> = ({ posts }) => {
+const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
   const scrollEdgeRef = useRef<HTMLDivElement>(null)
-  const currentList = useInfiniteScroll({
-    posts,
-    scrollEdgeRef,
-    maxPostNum: 10,
-    offsetY: 200,
-  })
+  // const currentList = useInfiniteScroll({
+  //   posts,
+  //   scrollEdgeRef,
+  //   maxPostNum: 10,
+  //   offsetY: 200,
+  // })
+
+  console.log("NFTS in PostGrid", nfts)
 
   return (
     <Grid role="list">
-      {currentList.map(data => {
-        const { id, slug, title, desc, date, category, thumbnail, alt } = data
-        const ariaLabel = `${title} - ${category} - Posted on ${date}`
-        return (
-          <List key={id} role="listitem">
-            <Link to={slug ?? ""} aria-label={ariaLabel}>
-              <Card
-                thumbnail={thumbnail}
-                alt={alt}
-                category={category}
-                title={title}
-                desc={desc}
-                date={date}
-              />
-            </Link>
-          </List>
-        )
-      })}
+      {nfts &&
+        nfts.map(data => {
+          const { _id, source } = data
+
+          console.log("NFT in card", data)
+          return (
+            <List key={_id} role="listitem">
+              {/* <Link to={slug ?? ""} aria-label={ariaLabel}>
+              </Link> */}
+              <Card nft={data} />
+            </List>
+          )
+        })}
       <div ref={scrollEdgeRef} />
     </Grid>
   )

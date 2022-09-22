@@ -5,60 +5,76 @@ import type Post from "Types/Post"
 import Category from "Styles/category"
 import DateTime from "Styles/dateTime"
 import CenteredImg from "./centeredImg"
-import Manipulation from "../../../images/Manipulation.png"
+import ManipulationImage from "../../../images/Manipulation.png"
 import Active from "../../../images/active.png"
 import Conversion from "../../../images/conversion.png"
 import Market from "../../../images/market.png"
+import Download from "../../../images/download.png"
+import Search from "../../../images/search.png"
+import Discord from "../../../images/discord.png"
+import Twitter from "../../../images/twitter.png"
+import Link from "../../../images/link.png"
 
 type CardProps = Pick<
   Post,
   "thumbnail" | "alt" | "category" | "title" | "desc" | "date"
 >
 
-const Card: React.FC<CardProps> = ({
-  thumbnail,
-  alt,
-  category,
-  title,
-  desc,
-  date,
-}) => {
+const Card: React.FC<CardProps> = ({ posts, nft }) => {
+  const {
+    "@timestamp": timestamp,
+    name,
+    image_url,
+    sentiment,
+    manipulation,
+    voices,
+  } = nft._source
+
+  console.log("NFT in card ", timestamp)
   return (
     <Wrapper>
       <CardContainer>
         {/* <CenteredImg src={thumbnail} alt={alt} /> */}
-        <CardThumbnail></CardThumbnail>
+        <CardThumbnail>
+          <img src={image_url || ""} />
+        </CardThumbnail>
         <CardProjectDetails>
           <p className="projectName">Project Name:</p>
           <p className="name">
-            Peace Eagle NFT
+            {name || ""}
             <br />
-            Free Mint
           </p>
-          <p className="mintDate">Minting Sep 4, 2022 @ 23:00:00</p>
+          <p className="mintDate">{`Minting ${timestamp}`}</p>
+          <SocialLinks>
+            <img src={Link} />
+            <img src={Twitter} />
+            <img src={Discord} />
+            <img src={Search} />
+            <img src={Download} />
+          </SocialLinks>
         </CardProjectDetails>
         <NFTStats>
           <StatBlock>
             <img src={Market} />
             <StatTitle>Market Sentiment</StatTitle>
-            <SentimentValue>18</SentimentValue>
+            <SentimentValue>{Math.ceil(sentiment) || "0"}</SentimentValue>
             <SentimentValueAvg>avg 26</SentimentValueAvg>
           </StatBlock>{" "}
           <StatBlock>
-            <img src={Manipulation} />
+            <img src={ManipulationImage} />
             <StatTitle>Manipulation</StatTitle>
-            <ManipulationValue>80% Organic</ManipulationValue>
-            <Promotion>20% Promotion</Promotion>
+            <ManipulationValue>{manipulation || "0"}</ManipulationValue>
+            <Promotion>Promotion</Promotion>
           </StatBlock>{" "}
           <StatBlock>
             <img src={Active} />
             <StatTitle>Active Public</StatTitle>
-            <ActivePublicValue>14,000</ActivePublicValue>
+            <ActivePublicValue>{voices || "0"}</ActivePublicValue>
           </StatBlock>{" "}
           <StatBlock>
             <img src={Conversion} />
             <StatTitle>Conversion</StatTitle>
-            <SentimentValue>2.14%</SentimentValue>
+            <SentimentValue>0%</SentimentValue>
           </StatBlock>
         </NFTStats>
       </CardContainer>
@@ -105,6 +121,15 @@ const CardThumbnail = styled.div`
   border: 1px solid #282828;
   border-radius: 19px;
   background: #d9e021;
+
+  postion: relative;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const CardProjectDetails = styled.div`
@@ -205,6 +230,13 @@ const Desc = styled.p`
   word-break: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
+`
+
+const SocialLinks = styled.div`
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  margin-top: auto;
 `
 
 export default React.memo(Card)

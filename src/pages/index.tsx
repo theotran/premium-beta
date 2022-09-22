@@ -1,8 +1,8 @@
-import React, { useState, useLayoutEffect } from "react"
+import React, { useState, useLayoutEffect, useEffect } from "react"
 import type { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-
+import axios from "axios"
 import type { Query, MarkdownRemarkFrontmatter } from "Types/GraphQL"
 import type Post from "Types/Post"
 import useSiteMetadata from "Hooks/useSiteMetadata"
@@ -48,8 +48,34 @@ const Home = ({
     })
   }, [currentCategory, postData])
 
+  const baseURL =
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-twentyfour/_search"
+
+  const baseURLWithAssets =
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-assets/_search/?size=10000"
+
+  const urlAssetAggregation =
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search"
+
+  const [NFTData, setNFTData] = useState(null)
+
+  useEffect(() => {
+    axios
+      .get(urlAssetAggregation, {
+        auth: {
+          username: "KOAT_DEV",
+          password: "K0@Devthings",
+        },
+      })
+      .then(response => {
+        setNFTData(response.data)
+      })
+  }, [])
+
   const site = useSiteMetadata()
   const postTitle = currentCategory || site.postTitle
+
+  console.log("Data", NFTData)
 
   return (
     <Layout>
@@ -58,7 +84,7 @@ const Home = ({
         <Content>
           <CategoryFilter categoryList={data.allMarkdownRemark.group} />
           <PostTitle>{postTitle}</PostTitle>
-          <PostGrid posts={posts} />
+          <PostGrid posts={posts} nfts={NFTData?.hits?.hits} />
         </Content>
       </Main>
     </Layout>

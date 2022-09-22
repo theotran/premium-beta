@@ -15,6 +15,7 @@ import useMenu from "./useMenu"
 import LinkList from "./linkList"
 import ThemeToggleButton from "./themeToggleButton"
 import MenuIcon from "./menuIcon"
+import PretiumBetaLogo from "../../images/pretium-beta-logo.png"
 
 interface NavBarProps {
   title?: string | null
@@ -40,7 +41,9 @@ const NavBar: React.FC<NavBarProps> = ({ title, themeToggler }) => {
       <NavBackground toggle={toggle} />
       <Content>
         <Title onClick={() => setToggle(false)}>
-          <Link to="/">Pretium Beta</Link>
+          <Link to="/">
+            <img src={PretiumBetaLogo} />
+          </Link>
         </Title>
         <LinkWrap>
           <Curtain ref={curtainRef} toggle={toggle} />
