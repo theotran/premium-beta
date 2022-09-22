@@ -1,4 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from "react"
+import dotenv from "dotenv"
 import type { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import styled from "styled-components"
@@ -59,12 +60,14 @@ const Home = ({
 
   const [NFTData, setNFTData] = useState(null)
 
+  console.log("Here", process.env.GATSBY_API_USERNAME)
+
   useEffect(() => {
     axios
       .get(urlAssetAggregation, {
         auth: {
-          username: "KOAT_DEV",
-          password: "K0@Devthings",
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
         },
       })
       .then(response => {
@@ -82,8 +85,8 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
-          <CategoryFilter categoryList={data.allMarkdownRemark.group} />
-          <PostTitle>{postTitle}</PostTitle>
+          {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />
+          <PostTitle>{postTitle}</PostTitle> */}
           <PostGrid posts={posts} nfts={NFTData?.hits?.hits} />
         </Content>
       </Main>
