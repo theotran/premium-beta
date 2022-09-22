@@ -45,7 +45,7 @@ const NavBar: React.FC<NavBarProps> = ({ title, themeToggler }) => {
             <img src={PretiumBetaLogo} />
           </Link>
         </Title>
-        <LinkWrap>
+        {/* <LinkWrap>
           <Curtain ref={curtainRef} toggle={toggle} />
           <LinkContent>
             <MenuIcon toggle={toggle} handleClick={handleClick} />
@@ -56,7 +56,7 @@ const NavBar: React.FC<NavBarProps> = ({ title, themeToggler }) => {
               </li>
             </LinkUl>
           </LinkContent>
-        </LinkWrap>
+        </LinkWrap> */}
       </Content>
     </Nav>
   )

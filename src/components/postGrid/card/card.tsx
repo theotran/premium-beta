@@ -14,6 +14,7 @@ import Search from "../../../images/search.png"
 import Discord from "../../../images/discord.png"
 import Twitter from "../../../images/twitter.png"
 import Link from "../../../images/link.png"
+import Brand from "../../../images/pretium-brand-logo.png"
 
 type CardProps = Pick<
   Post,
@@ -36,7 +37,11 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
       <CardContainer>
         {/* <CenteredImg src={thumbnail} alt={alt} /> */}
         <CardThumbnail>
-          <img src={image_url || ""} />
+          {image_url ? (
+            <NFTImage src={image_url} />
+          ) : (
+            <DefaultImage src={Brand} />
+          )}
         </CardThumbnail>
         <CardProjectDetails>
           <p className="projectName">Project Name:</p>
@@ -121,15 +126,24 @@ const CardThumbnail = styled.div`
   border: 1px solid #282828;
   border-radius: 19px;
   background: #d9e021;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   postion: relative;
   overflow: hidden;
+`
 
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
+const NFTImage = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+`
+
+const DefaultImage = styled.img`
+  object-fit: contain;
+  width: 90%;
+  height: 100%;
 `
 
 const CardProjectDetails = styled.div`
