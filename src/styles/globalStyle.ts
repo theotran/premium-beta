@@ -93,12 +93,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body.dark {
-      --color-text: #e6e6e6;
+      --color-text: #1d1d1d;
       --color-text-2: #d1d1d1;
       --color-text-3: #8c8c8c;
       --color-white: #e6e6e6;
       --color-nav-bar: #ffffff;
-      --color-nav-border: rgba(255, 255, 255, 0.2);
+      --color-nav-border: rgba(200, 200, 200, 0.7);
       --color-category-button: #484848;
       --color-background: #ffffff;
       --color-post-background: #ffffff;
