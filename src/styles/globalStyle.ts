@@ -100,8 +100,8 @@ const GlobalStyle = createGlobalStyle`
       --color-nav-bar: rgba(29, 29, 29, 0.7);
       --color-nav-border: rgba(255, 255, 255, 0.2);
       --color-category-button: #484848;
-      --color-background: #1c1c1c;
-      --color-post-background: #1c1c1c;
+      --color-background: #ffffff;
+      --color-post-background: #ffffff;
       --color-card: #2c2c2c;
       --color-code: #3a3a3a;
       --color-code-block: #242424;
