@@ -97,7 +97,7 @@ const GlobalStyle = createGlobalStyle`
       --color-text-2: #d1d1d1;
       --color-text-3: #8c8c8c;
       --color-white: #e6e6e6;
-      --color-nav-bar: rgba(29, 29, 29, 0.7);
+      --color-nav-bar: #ffffff;
       --color-nav-border: rgba(255, 255, 255, 0.2);
       --color-category-button: #484848;
       --color-background: #ffffff;

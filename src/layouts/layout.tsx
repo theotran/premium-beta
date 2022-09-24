@@ -27,8 +27,8 @@ const Layout: React.FC = ({ children }) => {
         <Footer role="contentinfo">
           <Copyright aria-label="Copyright">
             {copyrightStr}
-            <RepoLink href={homepage} target="__blank">
-              {name}
+            <RepoLink href={"https://koat.ai/"} target="__blank">
+              KOAT
             </RepoLink>
           </Copyright>
         </Footer>

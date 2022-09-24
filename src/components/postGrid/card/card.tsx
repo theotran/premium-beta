@@ -15,6 +15,7 @@ import Discord from "../../../images/discord.png"
 import Twitter from "../../../images/twitter.png"
 import Link from "../../../images/link.png"
 import Brand from "../../../images/pretium-brand-logo.png"
+import Star from "../../../images/star.png"
 
 type CardProps = Pick<
   Post,
@@ -32,10 +33,17 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
   } = nft._source
 
   console.log("NFT in card ", timestamp)
+
+  const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
+
+  const c = colors[Math.floor(Math.random() * 3)]
   return (
     <Wrapper>
+      <CardTheme style={{ background: c }}>
+        <img src={Star} />
+        <p>new</p>
+      </CardTheme>
       <CardContainer>
-        {/* <CenteredImg src={thumbnail} alt={alt} /> */}
         <CardThumbnail>
           {image_url ? (
             <NFTImage src={image_url} />
@@ -62,7 +70,7 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
           <StatBlock>
             <img src={Market} />
             <StatTitle>Market Sentiment</StatTitle>
-            <SentimentValue>{Math.ceil(sentiment) || "0"}</SentimentValue>
+            <SentimentValue>{Math.ceil(sentiment * 100) || "0"}</SentimentValue>
             <SentimentValueAvg>avg 26</SentimentValueAvg>
           </StatBlock>{" "}
           <StatBlock>
@@ -91,20 +99,33 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 164px;
+`
 
-  ::after {
-    content: "";
-    top: 0;
-    left: -50px;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    background: #ed1e79;
-    border-radius: 30px;
-    padding: 13px 19px;
-    z-index: 1;
+const CardTheme = styled.div`
+  top: 0;
+  left: -50px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  background: #4ea8de;
+  border-radius: 30px;
+  padding: 13px 19px;
+  z-index: 1;
+
+  img {
+    position: relative;
+    object-fit: contain;
+    right: 3px;
+  }
+
+  p {
+    color: #ffffff;
+    margin-top: 3px;
+    font-size: 8.5px;
   }
 `
 
