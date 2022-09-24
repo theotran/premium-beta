@@ -70,7 +70,9 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
           <StatBlock>
             <img src={Market} />
             <StatTitle>Market Sentiment</StatTitle>
-            <SentimentValue>{Math.ceil(sentiment * 100) || "0"}</SentimentValue>
+            <SentimentValue>
+              {sentiment ? `${Number(sentiment).toFixed(4)}%` : "0%"}
+            </SentimentValue>
             <SentimentValueAvg>avg 26</SentimentValueAvg>
           </StatBlock>{" "}
           <StatBlock>
@@ -200,6 +202,7 @@ const NFTStats = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 40px;
+  min-width: 50%;
   height: 100%;
   padding: 5px 20px;
   margin-left: auto;

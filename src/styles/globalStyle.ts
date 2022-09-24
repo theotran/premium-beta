@@ -41,12 +41,12 @@ const GlobalStyle = createGlobalStyle`
 
     --device-xs-max-width: 419px;
     --device-sm-max-width: 767px;
-    --device-md-max-width: 1023px;
+    --device-md-max-width: 1200px;
     --device-lg-max-width: 1441px;
 
     --device-xs-max-width-query: (max-width: 419px);
     --device-sm-max-width-query: (max-width: 767px);
-    --device-md-max-width-query: (max-width: 1023px);
+    --device-md-max-width-query: (max-width: 1200px);
     --device-lg-max-width-query: (max-width: 1441px);
 
     --font-weight-regular: 400;
