@@ -29,10 +29,11 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
     image_url,
     sentiment,
     manipulation,
+    impressions,
     voices,
   } = nft._source
 
-  console.log("NFT in card ", timestamp)
+  console.log("NFT in card ", nft._source)
 
   const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
 
@@ -70,9 +71,7 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
           <StatBlock>
             <img src={Market} />
             <StatTitle>Market Sentiment</StatTitle>
-            <SentimentValue>
-              {sentiment ? `${Number(sentiment).toFixed(4)}%` : "0%"}
-            </SentimentValue>
+            <SentimentValue>{Math.ceil(sentiment * 100) || "0"}</SentimentValue>
             <SentimentValueAvg>avg 26</SentimentValueAvg>
           </StatBlock>{" "}
           <StatBlock>
@@ -89,7 +88,11 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
           <StatBlock>
             <img src={Conversion} />
             <StatTitle>Conversion</StatTitle>
-            <SentimentValue>0%</SentimentValue>
+            <SentimentValue>
+              {voices && impressions
+                ? `${Number(voices / impressions).toFixed(4)}%`
+                : "0%"}
+            </SentimentValue>
           </StatBlock>
         </NFTStats>
       </CardContainer>
@@ -176,6 +179,7 @@ const CardProjectDetails = styled.div`
   align-items: flex-start;
   min-height: 100%;
   padding: 0 25px;
+  width: 300px;
 
   .projectName {
     font-size: 10px;
@@ -202,11 +206,11 @@ const NFTStats = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 40px;
-  min-width: 50%;
   height: 100%;
   padding: 5px 20px;
   margin-left: auto;
   border-left: 5px solid #ffffff;
+  min-width: 50%;
 `
 
 const StatBlock = styled.div`

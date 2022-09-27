@@ -1,4 +1,13 @@
 import React, { useState, useLayoutEffect, useEffect } from "react"
+import { initializeApp } from "firebase/app"
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  signInWithPopup,
+} from "firebase/auth"
+import { getAnalytics } from "firebase/analytics"
 import dotenv from "dotenv"
 import type { PageProps } from "gatsby"
 import { graphql } from "gatsby"
@@ -11,6 +20,50 @@ import Layout from "Layouts/layout"
 import SEO from "Components/seo"
 import PostGrid from "Components/postGrid"
 import CategoryFilter from "Components/catetgoryFilter"
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBQ03S-Q_9AVwYgYbyZpSuNVc56jAf4nDQ",
+  authDomain: "pretium-beta.firebaseapp.com",
+  projectId: "pretium-beta",
+  storageBucket: "pretium-beta.appspot.com",
+  messagingSenderId: "665041649891",
+  appId: "1:665041649891:web:923ccbe7763c80797845d6",
+  measurementId: "G-H62NHRYFHM",
+}
+
+const app = initializeApp(firebaseConfig)
+
+const provider = new GoogleAuthProvider()
+
+// export const auth = getAuth(app)
+
+const auth = getAuth()
+
+signInWithPopup(auth, provider)
+  .then(result => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result)
+    const token = credential.accessToken
+    // The signed-in user info.
+    const user = result.user
+    // ...
+  })
+  .catch(error => {
+    // Handle Errors here.
+    const errorCode = error.code
+    const errorMessage = error.message
+    // The email of the user's account used.
+    const email = error.customData.email
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error)
+    // ...
+  })
+
+console.log("App ", auth)
 
 const Home = ({
   pageContext,
