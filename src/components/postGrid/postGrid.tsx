@@ -30,11 +30,11 @@ const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
 
           console.log("NFT in card", data)
           return (
-            <List key={_id} role="listitem">
-              {/* <Link to={slug ?? ""} aria-label={ariaLabel}>
-              </Link> */}
-              <Card nft={data} />
-            </List>
+            <Card nft={data} />
+            // <List key={_id} role="listitem">
+            //   {/* <Link to={slug ?? ""} aria-label={ariaLabel}>
+            //   </Link> */}
+            // </List>
           )
         })}
       <div ref={scrollEdgeRef} />
@@ -43,46 +43,14 @@ const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
 }
 
 const Grid = styled.ul`
-  display: grid;
-  grid-gap: var(--grid-gap-xl);
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: 100%;
 
-  & > li {
-    margin-bottom: 0;
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.sm}) {
-    grid-gap: var(--grid-gap-lg);
-  }
-`
-
-const List = styled.li`
-  box-sizing: border-box;
-  grid-column: span 1;
-
-  a {
-    display: block;
-    height: 100%;
-  }
-
-  a:hover ${ThumbnailWrapper}::after, a:focus ${ThumbnailWrapper}::after {
-    opacity: 1;
-  }
-
-  & .gatsby-image-wrapper {
-    transition: opacity 1s ease-out, transform 0.5s ease;
-  }
-
-  a:hover,
-  a:focus {
-    .gatsby-image-wrapper {
-      transform: scale(1.03);
-    }
-  }
-
-  @media (max-width: ${({ theme }) => theme.device.sm}) {
-    grid-column: span 2;
-  }
+  // @media (max-width: ${({ theme }) => theme.device.sm}) {
+  //   grid-gap: var(--grid-gap-xl);
+  // }
 `
 
 export default PostGrid

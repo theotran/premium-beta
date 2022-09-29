@@ -203,14 +203,13 @@ const CardProjectDetails = styled.div`
 `
 
 const NFTStats = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 40px;
   height: 100%;
   padding: 5px 20px;
-  margin-left: auto;
   border-left: 5px solid #ffffff;
-  min-width: 50%;
+  width: 50%;
 `
 
 const StatBlock = styled.div`

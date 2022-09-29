@@ -109,7 +109,7 @@ const Home = ({
     "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-assets/_search/?size=10000"
 
   const urlAssetAggregation =
-    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search"
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?size=1000"
 
   const [NFTData, setNFTData] = useState(null)
 
@@ -128,6 +128,53 @@ const Home = ({
       })
   }, [])
 
+  // useEffect(() => {
+  //   getRedirectResult(auth)
+  //     .then(result => {
+  //       // This gives you a Google Access Token. You can use it to access Google APIs.
+  //       const credential = GoogleAuthProvider.credentialFromResult(result)
+  //       const token = credential.accessToken
+
+  //       // The signed-in user info.
+  //       const user = result.user
+  //       console.log("USER ", user)
+  //     })
+  //     .catch(error => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code
+  //       const errorMessage = error.message
+  //       // The email of the user's account used.
+  //       const email = error?.customData?.email
+  //       // The AuthCredential type that was used.
+  //       const credential = GoogleAuthProvider.credentialFromError(error)
+  //       // ...
+
+  //       console.log("ERROR ", error)
+  //     })
+  // })
+
+  // const signInGoogle = e => {
+  //   signInWithRedirect(auth, provider)
+  //     .then(result => {
+  //       // This gives you a Google Access Token. You can use it to access the Google API.
+  //       const credential = GoogleAuthProvider.credentialFromResult(result)
+  //       const token = credential.accessToken
+  //       // The signed-in user info.
+  //       const user = result.user
+  //       // ...
+  //     })
+  //     .catch(error => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code
+  //       const errorMessage = error.message
+  //       // The email of the user's account used.
+  //       const email = error?.customData?.email
+  //       // The AuthCredential type that was used.
+  //       const credential = GoogleAuthProvider.credentialFromError(error)
+  //       // ...
+  //     })
+  // }
+
   const site = useSiteMetadata()
   const postTitle = currentCategory || site.postTitle
 
@@ -138,6 +185,7 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
+          {/* <button onClick={signInGoogle}>Sign In</button> */}
           {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />
           <PostTitle>{postTitle}</PostTitle> */}
           <PostGrid posts={posts} nfts={NFTData?.hits?.hits} />
@@ -160,6 +208,7 @@ const Content = styled.div`
   padding-top: var(--sizing-lg);
   padding-bottom: var(--sizing-lg);
   margin: 0 auto;
+  display: flex;
 
   @media (max-width: ${({ theme }) => theme.device.sm}) {
     padding-top: var(--grid-gap-lg);

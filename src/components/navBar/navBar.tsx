@@ -82,7 +82,7 @@ const Content = styled.div`
   box-sizing: content-box;
   position: relative;
   margin: 0 auto;
-  max-width: var(--width);
+  max-width: 1200px;
   padding: 0 var(--padding-lg);
   height: 100%;
   z-index: 2;
