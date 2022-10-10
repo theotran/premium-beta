@@ -31,9 +31,10 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
     manipulation,
     impressions,
     voices,
+    created_date,
   } = nft._source
 
-  console.log("NFT in card ", nft._source)
+  // console.log("NFT in card ", nft._source)
 
   const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
 
@@ -58,7 +59,7 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
             {name || ""}
             <br />
           </p>
-          <p className="mintDate">{`Minting ${timestamp}`}</p>
+          <p className="mintDate">{`Minting ${Date(created_date)}`}</p>
           <SocialLinks>
             <img src={Link} />
             <img src={Twitter} />
@@ -77,7 +78,11 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
           <StatBlock>
             <img src={ManipulationImage} />
             <StatTitle>Manipulation</StatTitle>
-            <ManipulationValue>{manipulation || "0"}</ManipulationValue>
+            <ManipulationValue>
+              {manipulation && typeof manipulation === "number"
+                ? `${Number(manipulation).toFixed(6)}`
+                : "0"}
+            </ManipulationValue>
             <Promotion>Promotion</Promotion>
           </StatBlock>{" "}
           <StatBlock>
@@ -89,7 +94,7 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
             <img src={Conversion} />
             <StatTitle>Conversion</StatTitle>
             <SentimentValue>
-              {voices && impressions
+              {voices && impressions && typeof voices === "number"
                 ? `${Number(voices / impressions).toFixed(4)}%`
                 : "0%"}
             </SentimentValue>
@@ -242,13 +247,13 @@ const SentimentValue = styled.p`
 
 const ManipulationValue = styled.p`
   color: #40c3ea;
-  font-size: 16px;
+  font-size: 32px;
   margin: 5px 0;
 `
 
 const ActivePublicValue = styled.p`
   color: #40c3ea;
-  font-size: 24px;
+  font-size: 32px;
 `
 
 const SentimentValueAvg = styled.p`

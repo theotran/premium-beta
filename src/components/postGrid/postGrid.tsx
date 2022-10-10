@@ -20,7 +20,7 @@ const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
   //   offsetY: 200,
   // })
 
-  console.log("NFTS in PostGrid", nfts)
+  // console.log("NFTS in PostGrid", nfts)
 
   return (
     <Grid role="list">
@@ -28,9 +28,9 @@ const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
         nfts.map(data => {
           const { _id, source } = data
 
-          console.log("NFT in card", data)
+          // console.log("NFT in card", data)
           return (
-            <Card nft={data} />
+            <Card key={_id} nft={data} />
             // <List key={_id} role="listitem">
             //   {/* <Link to={slug ?? ""} aria-label={ariaLabel}>
             //   </Link> */}
