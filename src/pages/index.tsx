@@ -146,7 +146,7 @@ const Home = ({
         },
       })
       .then(response => {
-        setNFTData(response.data)
+        setNFTData(response.data?.hits?.hits)
       })
   }, [])
 
@@ -233,7 +233,7 @@ const Home = ({
         },
       })
       .then(response => {
-        setNFTData(response.data)
+        setNFTData(response.data?.hits?.hits)
       })
   }
 
@@ -246,8 +246,19 @@ const Home = ({
         },
       })
       .then(response => {
-        setNFTData(response.data)
+        setNFTData(response.data?.hits?.hits)
       })
+  }
+
+  const SortByVoices = () => {
+    const data = NFTData
+
+    if (data) {
+      const dataSortedByVoices = [...data].sort((a, b) => {
+        return a?._source?.voices - b?._source?.voices
+      })
+      setNFTData(dataSortedByVoices)
+    }
   }
 
   const site = useSiteMetadata()
@@ -259,6 +270,7 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
+          <button onClick={() => SortByVoices()}>Sort Voices</button>
           <Filter
             fetchPremint={FetchPremint}
             fetchPast30DaysFuture1Year={FetchAssetsPast30DaysToFuture1Year}
@@ -266,7 +278,7 @@ const Home = ({
           {/* <button onClick={signInGoogle}>Sign In</button> */}
           {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />
           <PostTitle>{postTitle}</PostTitle> */}
-          <PostGrid posts={posts} nfts={NFTData?.hits?.hits} />
+          <PostGrid posts={posts} nfts={NFTData} />
         </Content>
       </Main>
     </Layout>
