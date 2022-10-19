@@ -112,6 +112,12 @@ const Home = ({
   const urlAssetAggregation =
     "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?size=10"
 
+  const preMintURL =
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets/_search"
+
+  const assets30DaysToFuture1Year =
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-assets/_search"
+
   const [NFTData, setNFTData] = useState(null)
 
   useEffect(() => {
@@ -191,8 +197,60 @@ const Home = ({
   //     })
   // }
 
+  const FetchPremint = () => {
+    axios
+      .get(preMintURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        data: {
+          from: 0,
+          size: 20,
+          track_total_hits: "true",
+          _source: "false",
+          sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
+          fields: [
+            { field: "created_date", format: "strict_date_optional_time" },
+            { field: "asset_id", include_unmapped: "false" },
+            { field: "pretium", include_unmapped: "false" },
+          ],
+          query: {
+            bool: {
+              filter: [
+                {
+                  range: {
+                    created_date: {
+                      format: "strict_date_optional_time",
+                      gte: "now-1d",
+                      lte: "now+7d",
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      })
+      .then(response => {
+        setNFTData(response.data)
+      })
+  }
+
+  const FetchAssetsPast30DaysToFuture1Year = () => {
+    axios
+      .get(assets30DaysToFuture1Year, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+      })
+      .then(response => {
+        setNFTData(response.data)
+      })
+  }
+
   const site = useSiteMetadata()
-  const postTitle = currentCategory || site.postTitle
 
   console.log("Data", NFTData)
 
@@ -201,7 +259,10 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
-          <Filter />
+          <Filter
+            fetchPremint={FetchPremint}
+            fetchPast30DaysFuture1Year={FetchAssetsPast30DaysToFuture1Year}
+          />
           {/* <button onClick={signInGoogle}>Sign In</button> */}
           {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />
           <PostTitle>{postTitle}</PostTitle> */}
@@ -231,17 +292,6 @@ const Content = styled.div`
   @media (max-width: ${({ theme }) => theme.device.sm}) {
     padding-top: var(--grid-gap-lg);
     width: 87.5%;
-  }
-`
-
-const PostTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: var(--font-weight-extra-bold);
-  margin-bottom: var(--sizing-md);
-  line-height: 1.21875;
-
-  @media (max-width: ${({ theme }) => theme.device.sm}) {
-    font-size: 1.75rem;
   }
 `
 

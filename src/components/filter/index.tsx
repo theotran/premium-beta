@@ -2,21 +2,27 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import Conversion from "../../images/conversion.png"
 
-const Filter = () => {
+const Filter = ({ fetchPremint, fetchPast30DaysFuture1Year }) => {
   const [activeFilter, setActiveFilter] = useState("premint")
 
   return (
     <Container>
       <Option
         active={activeFilter === "premint"}
-        onClick={() => setActiveFilter("premint")}
+        onClick={() => {
+          setActiveFilter("premint")
+          fetchPremint()
+        }}
       >
         <img src={Conversion} />
         <OptionCategory>Premint Calendar</OptionCategory>
       </Option>
       <Option
         active={activeFilter === "live"}
-        onClick={() => setActiveFilter("live")}
+        onClick={() => {
+          setActiveFilter("live")
+          fetchPast30DaysFuture1Year()
+        }}
       >
         <OptionCategory>Live Asset Tracker</OptionCategory>
         <img src={Conversion} />
