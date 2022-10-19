@@ -109,7 +109,7 @@ const Home = ({
     "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-assets/_search/?size=10000"
 
   const urlAssetAggregation =
-    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?size=1000"
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?size=10"
 
   const [NFTData, setNFTData] = useState(null)
 

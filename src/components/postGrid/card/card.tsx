@@ -1,10 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-
+import moment from "moment"
 import type Post from "Types/Post"
-import Category from "Styles/category"
-import DateTime from "Styles/dateTime"
-import CenteredImg from "./centeredImg"
+
 import ManipulationImage from "../../../images/Manipulation.png"
 import Active from "../../../images/active.png"
 import Conversion from "../../../images/conversion.png"
@@ -32,9 +30,13 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
     impressions,
     voices,
     created_date,
+    website,
+    twitter,
+    discord,
+    magiceden,
   } = nft._source
 
-  // console.log("NFT in card ", nft._source)
+  console.log("NFT in card ", nft._source)
 
   const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
 
@@ -61,10 +63,18 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
           </p>
           <p className="mintDate">{`Minting ${Date(created_date)}`}</p>
           <SocialLinks>
-            <img src={Link} />
-            <img src={Twitter} />
-            <img src={Discord} />
-            <img src={Search} />
+            <a href={website || ""} target="__blank">
+              <img src={Link} />
+            </a>
+            <a href={twitter || ""} target="__blank">
+              <img src={Twitter} />
+            </a>
+            <a href={discord || ""} target="__blank">
+              <img src={Discord} />
+            </a>
+            <a href={magiceden || ""} target="__blank">
+              <img src={Search} />
+            </a>
             <img src={Download} />
           </SocialLinks>
         </CardProjectDetails>
@@ -73,23 +83,23 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
             <img src={Market} />
             <StatTitle>Market Sentiment</StatTitle>
             <SentimentValue>{Math.ceil(sentiment * 100) || "0"}</SentimentValue>
-            <SentimentValueAvg>avg 26</SentimentValueAvg>
+            <SentimentValueAvg>avg</SentimentValueAvg>
           </StatBlock>{" "}
           <StatBlock>
             <img src={ManipulationImage} />
             <StatTitle>Manipulation</StatTitle>
             <ManipulationValue>
               {manipulation && typeof manipulation === "number"
-                ? `${Number(manipulation).toFixed(6)}`
-                : "0"}
+                ? `${Number(manipulation * 100).toFixed(4)}%`
+                : "0%"}
             </ManipulationValue>
             <Promotion>Promotion</Promotion>
-          </StatBlock>{" "}
+          </StatBlock>
           <StatBlock>
             <img src={Active} />
             <StatTitle>Active Public</StatTitle>
             <ActivePublicValue>{voices || "0"}</ActivePublicValue>
-          </StatBlock>{" "}
+          </StatBlock>
           <StatBlock>
             <img src={Conversion} />
             <StatTitle>Conversion</StatTitle>
