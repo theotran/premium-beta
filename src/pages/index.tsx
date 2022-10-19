@@ -20,6 +20,7 @@ import Layout from "Layouts/layout"
 import SEO from "Components/seo"
 import PostGrid from "Components/postGrid"
 import CategoryFilter from "Components/catetgoryFilter"
+import Filter from "Components/filter"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -200,6 +201,7 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
+          <Filter />
           {/* <button onClick={signInGoogle}>Sign In</button> */}
           {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />
           <PostTitle>{postTitle}</PostTitle> */}
@@ -224,6 +226,7 @@ const Content = styled.div`
   padding-bottom: var(--sizing-lg);
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
 
   @media (max-width: ${({ theme }) => theme.device.sm}) {
     padding-top: var(--grid-gap-lg);
