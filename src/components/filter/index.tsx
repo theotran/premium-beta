@@ -48,7 +48,7 @@ const Container = styled.div`
 
 const Option = styled.div`
   background: ${props => (props.active ? "#fff" : "transparent")};
-  border: ${props => (props.active ? "3px solid #000000" : "0")};
+  border: ${props => (props.active ? "3px solid #000" : "0")};
   p {
     color: ${props => (props.active ? "#232323" : "#fff")};
   }
@@ -61,6 +61,7 @@ const Option = styled.div`
   justify-content: space-between;
   padding: 7px 25px;
   cursor: pointer;
+  transition: ;
 `
 
 const OptionCategory = styled.p`
