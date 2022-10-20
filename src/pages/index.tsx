@@ -103,12 +103,6 @@ const Home = ({
     })
   }, [currentCategory, postData])
 
-  const baseURL =
-    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-twentyfour/_search"
-
-  const baseURLWithAssets =
-    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-assets/_search/?size=10000"
-
   const urlAssetAggregation =
     "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?size=10"
 
@@ -117,6 +111,9 @@ const Home = ({
 
   const assets30DaysToFuture1Year =
     "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-assets/_search"
+
+  const ultimateURL =
+    "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search"
 
   const [NFTData, setNFTData] = useState(null)
 
@@ -199,7 +196,7 @@ const Home = ({
 
   const FetchPremint = () => {
     axios
-      .get(preMintURL, {
+      .get(ultimateURL, {
         auth: {
           username: `${process.env.GATSBY_API_USERNAME}`,
           password: `${process.env.GATSBY_API_PASSWORD}`,
@@ -270,7 +267,7 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
-          <button onClick={() => SortByVoices()}>Sort Voices</button>
+          {/* <button onClick={() => SortByVoices()}>Sort Voices</button> */}
           <Filter
             fetchPremint={FetchPremint}
             fetchPast30DaysFuture1Year={FetchAssetsPast30DaysToFuture1Year}

@@ -61,7 +61,9 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
             {name || ""}
             <br />
           </p>
-          <p className="mintDate">{`Minting ${Date(created_date)}`}</p>
+          <p className="mintDate">{`Minting ${moment(created_date).format(
+            "MMMM Do YYYY, h:mm:ss a"
+          )}`}</p>
           <SocialLinks>
             <a href={website || ""} target="__blank">
               <img src={Link} />
@@ -90,10 +92,12 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
             <StatTitle>Manipulation</StatTitle>
             <ManipulationValue>
               {manipulation && typeof manipulation === "number"
-                ? `${Number(manipulation * 100).toFixed(4)}%`
+                ? `${Number(100 - manipulation * 100).toFixed()}%`
                 : "0%"}
             </ManipulationValue>
-            <Promotion>Promotion</Promotion>
+            <Promotion>{`Promotion ${Number(
+              manipulation * 100
+            ).toFixed()}%`}</Promotion>
           </StatBlock>
           <StatBlock>
             <img src={Active} />
