@@ -125,6 +125,10 @@ const Home = ({
           password: `${process.env.GATSBY_API_PASSWORD}`,
         },
         data: {
+          from: "0",
+          size: "1000",
+          track_total_hits: "true",
+          sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
           query: {
             bool: {
               filter: [
@@ -136,8 +140,7 @@ const Home = ({
                       lte: "now+1y",
                     },
                   },
-                }, // for Premint Calendar
-                // {"range": {"created_date": {"format": "strict_date_optional_time","gte": "now-1y","lte": "now"}}} // for Live Asset Tracker
+                },
               ],
             },
           },
@@ -203,6 +206,10 @@ const Home = ({
           password: `${process.env.GATSBY_API_PASSWORD}`,
         },
         data: {
+          from: "0",
+          size: "1000",
+          track_total_hits: "true",
+          sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
           query: {
             bool: {
               filter: [
@@ -233,6 +240,10 @@ const Home = ({
           password: `${process.env.GATSBY_API_PASSWORD}`,
         },
         data: {
+          from: "0",
+          size: "1000",
+          track_total_hits: "true",
+          sort: [{ created_date: { order: "desc", unmapped_type: "boolean" } }],
           query: {
             bool: {
               filter: [
@@ -244,7 +255,7 @@ const Home = ({
                       lte: "now",
                     },
                   },
-                }, // for Live Asset Tracker
+                },
               ],
             },
           },
