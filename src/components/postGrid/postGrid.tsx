@@ -12,13 +12,7 @@ interface PostGridProps {
 }
 
 const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
-  const scrollEdgeRef = useRef<HTMLDivElement>(null)
-  // const currentList = useInfiniteScroll({
-  //   posts,
-  //   scrollEdgeRef,
-  //   maxPostNum: 10,
-  //   offsetY: 200,
-  // })
+  // const scrollEdgeRef = useRef<HTMLDivElement>(null)
 
   // console.log("NFTS in PostGrid", nfts)
 
@@ -37,7 +31,7 @@ const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
             // </List>
           )
         })}
-      <div ref={scrollEdgeRef} />
+      {/* <div ref={scrollEdgeRef} /> */}
     </Grid>
   )
 }
