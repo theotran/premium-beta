@@ -95,9 +95,11 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
                 ? `${Number(100 - manipulation * 100).toFixed()}%`
                 : "0%"}
             </ManipulationValue>
-            <Promotion>{`Promotion ${Number(
-              manipulation * 100
-            ).toFixed()}%`}</Promotion>
+            <Promotion>
+              {manipulation && typeof manipulation === "number"
+                ? `Promotion ${Number(manipulation * 100).toFixed()}%`
+                : "Promotion 0%"}
+            </Promotion>
           </StatBlock>
           <StatBlock>
             <img src={Active} />
