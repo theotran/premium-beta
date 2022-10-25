@@ -106,7 +106,7 @@ const Home = ({
   const urlAssetAggregation =
     "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?size=10"
 
-  const preMintURL =
+  const nftAssetsURL =
     "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets/_search"
 
   const assets30DaysToFuture1Year =
@@ -119,7 +119,7 @@ const Home = ({
 
   useEffect(() => {
     axios
-      .get(urlAssetAggregation, {
+      .get(nftAssetsURL, {
         auth: {
           username: `${process.env.GATSBY_API_USERNAME}`,
           password: `${process.env.GATSBY_API_PASSWORD}`,
@@ -130,13 +130,14 @@ const Home = ({
               filter: [
                 {
                   range: {
-                    updated: {
+                    created_date: {
                       format: "strict_date_optional_time",
-                      gte: "now-24h",
-                      lte: "now",
+                      gte: "now-1d",
+                      lte: "now+1y",
                     },
                   },
-                },
+                }, // for Premint Calendar
+                // {"range": {"created_date": {"format": "strict_date_optional_time","gte": "now-1y","lte": "now"}}} // for Live Asset Tracker
               ],
             },
           },
@@ -196,22 +197,12 @@ const Home = ({
 
   const FetchPremint = () => {
     axios
-      .get(ultimateURL, {
+      .get(nftAssetsURL, {
         auth: {
           username: `${process.env.GATSBY_API_USERNAME}`,
           password: `${process.env.GATSBY_API_PASSWORD}`,
         },
         data: {
-          from: 0,
-          size: 20,
-          track_total_hits: "true",
-          _source: "false",
-          sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
-          fields: [
-            { field: "created_date", format: "strict_date_optional_time" },
-            { field: "asset_id", include_unmapped: "false" },
-            { field: "pretium", include_unmapped: "false" },
-          ],
           query: {
             bool: {
               filter: [
@@ -220,7 +211,7 @@ const Home = ({
                     created_date: {
                       format: "strict_date_optional_time",
                       gte: "now-1d",
-                      lte: "now+7d",
+                      lte: "now+1y",
                     },
                   },
                 },
@@ -234,12 +225,29 @@ const Home = ({
       })
   }
 
-  const FetchAssetsPast30DaysToFuture1Year = () => {
+  const FetchLiveAssets = () => {
     axios
-      .get(assets30DaysToFuture1Year, {
+      .get(nftAssetsURL, {
         auth: {
           username: `${process.env.GATSBY_API_USERNAME}`,
           password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        data: {
+          query: {
+            bool: {
+              filter: [
+                {
+                  range: {
+                    created_date: {
+                      format: "strict_date_optional_time",
+                      gte: "now-1y",
+                      lte: "now",
+                    },
+                  },
+                }, // for Live Asset Tracker
+              ],
+            },
+          },
         },
       })
       .then(response => {
@@ -270,7 +278,7 @@ const Home = ({
           {/* <button onClick={() => SortByVoices()}>Sort Voices</button> */}
           <Filter
             fetchPremint={FetchPremint}
-            fetchPast30DaysFuture1Year={FetchAssetsPast30DaysToFuture1Year}
+            fetchLiveAssets={FetchLiveAssets}
           />
           {/* <button onClick={signInGoogle}>Sign In</button> */}
           {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />

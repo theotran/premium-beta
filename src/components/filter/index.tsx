@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import Conversion from "../../images/conversion.png"
 
-const Filter = ({ fetchPremint, fetchPast30DaysFuture1Year }) => {
+const Filter = ({ fetchPremint, fetchLiveAssets }) => {
   const [activeFilter, setActiveFilter] = useState("premint")
 
   return (
@@ -21,7 +21,7 @@ const Filter = ({ fetchPremint, fetchPast30DaysFuture1Year }) => {
         active={activeFilter === "live"}
         onClick={() => {
           setActiveFilter("live")
-          fetchPast30DaysFuture1Year()
+          fetchLiveAssets()
         }}
       >
         <OptionCategory>Live Asset Tracker</OptionCategory>
