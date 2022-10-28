@@ -36,8 +36,6 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
     magiceden,
   } = nft._source
 
-  // console.log("NFT in card ", nft._source)
-
   const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
 
   const c = colors[Math.floor(Math.random() * 3)]

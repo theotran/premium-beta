@@ -14,8 +14,6 @@ interface PostGridProps {
 const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
   // const scrollEdgeRef = useRef<HTMLDivElement>(null)
 
-  // console.log("NFTS in PostGrid", nfts)
-
   return (
     <Grid role="list">
       {nfts &&
