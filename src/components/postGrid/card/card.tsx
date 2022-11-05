@@ -46,38 +46,40 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
         <p>new</p>
       </CardTheme>
       <CardContainer>
-        <CardThumbnail>
-          {image_url ? (
-            <NFTImage src={image_url} />
-          ) : (
-            <DefaultImage src={Brand} />
-          )}
-        </CardThumbnail>
-        <CardProjectDetails>
-          <p className="projectName">Project Name:</p>
-          <p className="name">
-            {name || ""}
-            <br />
-          </p>
-          <p className="mintDate">{`Minting ${moment(created_date).format(
-            "MMMM Do YYYY, h:mm:ss a"
-          )}`}</p>
-          <SocialLinks>
-            <a href={website || ""} target="__blank">
-              <img src={Link} />
-            </a>
-            <a href={twitter || ""} target="__blank">
-              <img src={Twitter} />
-            </a>
-            <a href={discord || ""} target="__blank">
-              <img src={Discord} />
-            </a>
-            <a href={magiceden || ""} target="__blank">
-              <img src={Search} />
-            </a>
-            <img src={Download} />
-          </SocialLinks>
-        </CardProjectDetails>
+        <CardBlockLeft>
+          <CardThumbnail>
+            {image_url ? (
+              <NFTImage src={image_url} />
+            ) : (
+              <DefaultImage src={Brand} />
+            )}
+          </CardThumbnail>
+          <CardProjectDetails>
+            <p className="projectName">Project Name:</p>
+            <p className="name">
+              {name || ""}
+              <br />
+            </p>
+            <p className="mintDate">{`Minting ${moment(created_date).format(
+              "MMMM Do YYYY, h:mm:ss a"
+            )}`}</p>
+            <SocialLinks>
+              <a href={website || ""} target="__blank">
+                <img src={Link} />
+              </a>
+              <a href={twitter || ""} target="__blank">
+                <img src={Twitter} />
+              </a>
+              <a href={discord || ""} target="__blank">
+                <img src={Discord} />
+              </a>
+              <a href={magiceden || ""} target="__blank">
+                <img src={Search} />
+              </a>
+              <img src={Download} />
+            </SocialLinks>
+          </CardProjectDetails>
+        </CardBlockLeft>
         <NFTStats>
           <StatBlock>
             <img src={Market} />
@@ -137,7 +139,8 @@ const CardTheme = styled.div`
   align-items: start;
   background: #4ea8de;
   border-radius: 30px;
-  padding: 13px 19px;
+  // padding: 13px 19px;
+  padding: 0 19px;
   z-index: 1;
 
   img {
@@ -161,13 +164,18 @@ const CardContainer = styled.div`
   align-items: center;
   background: #f4f4f4;
   border-radius: 30px;
-  padding: 13px 19px;
+
   z-index: 2;
+`
+
+const CardBlockLeft = styled.div`
+  display: flex;
+  padding: 13px 19px;
 `
 
 const CardThumbnail = styled.div`
   width: 141px;
-  height: 100%;
+  height: 141px;
   border: 1px solid #282828;
   border-radius: 19px;
   background: #d9e021;
@@ -198,6 +206,7 @@ const CardProjectDetails = styled.div`
   align-items: flex-start;
   min-height: 100%;
   padding: 0 25px;
+
   width: 300px;
 
   .projectName {
@@ -225,9 +234,11 @@ const NFTStats = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 40px;
-  height: 100%;
-  padding: 5px 20px;
+  // height: 100%;
+  // padding: 5px 20px;
+  padding: 13px 39px;
   border-left: 5px solid #ffffff;
+  height: -webkit-fill-available;
   width: 50%;
 `
 

@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled, { ThemeProvider } from "styled-components"
+import WebFont from "webfontloader"
 
 import ThemeContext from "Stores/themeContext"
 import useTheme from "Hooks/useTheme"
@@ -15,6 +16,14 @@ const Layout: React.FC = ({ children }) => {
   const { theme, themeToggler } = useTheme()
   const { title, author } = useSiteMetadata()
   const copyrightStr = `Copyright © ${author}. Built with `
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["MarkOT", "Chilanka"],
+      },
+    })
+  }, [])
 
   return (
     <ThemeProvider theme={styledTheme}>

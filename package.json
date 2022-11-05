@@ -43,7 +43,8 @@
     "styled-components": "^5.3.3",
     "styled-reset": "^4.3.4",
     "typography": "^0.16.21",
-    "vscode-theme-github-light": "github:chuling/vscode-theme-github-light"
+    "vscode-theme-github-light": "github:chuling/vscode-theme-github-light",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.3.1",
