@@ -1,35 +1,45 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import Conversion from "../../images/conversion.png"
+import SubFilter from "./subFilter"
 
 const Filter = ({ fetchPremint, fetchLiveAssets }) => {
   const [activeFilter, setActiveFilter] = useState("premint")
 
   return (
-    <Container>
-      <Option
-        active={activeFilter === "premint"}
-        onClick={() => {
-          setActiveFilter("premint")
-          fetchPremint()
-        }}
-      >
-        <img src={Conversion} />
-        <OptionCategory>Premint Calendar</OptionCategory>
-      </Option>
-      <Option
-        active={activeFilter === "live"}
-        onClick={() => {
-          setActiveFilter("live")
-          fetchLiveAssets()
-        }}
-      >
-        <OptionCategory>Live Asset Tracker</OptionCategory>
-        <img src={Conversion} />
-      </Option>
-    </Container>
+    <Wrapper>
+      <Container>
+        <Option
+          active={activeFilter === "premint"}
+          onClick={() => {
+            setActiveFilter("premint")
+            fetchPremint()
+          }}
+        >
+          <img src={Conversion} />
+          <OptionCategory>Premint Calendar</OptionCategory>
+        </Option>
+        <Option
+          active={activeFilter === "live"}
+          onClick={() => {
+            setActiveFilter("live")
+            fetchLiveAssets()
+          }}
+        >
+          <OptionCategory>Live Asset Tracker</OptionCategory>
+          <img src={Conversion} />
+        </Option>
+      </Container>
+      <SubFilter fetchLiveAssets={fetchLiveAssets} />
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const Container = styled.div`
   background: transparent
