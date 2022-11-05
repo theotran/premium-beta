@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import styled, { ThemeProvider } from "styled-components"
-import WebFont from "webfontloader"
 
 import ThemeContext from "Stores/themeContext"
 import useTheme from "Hooks/useTheme"
@@ -20,6 +19,7 @@ const Layout: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!isServer()) {
+      const WebFont = require("webfontloader")
       WebFont.load({
         google: {
           families: ["MarkOT"],
