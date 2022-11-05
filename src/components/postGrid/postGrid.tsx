@@ -37,7 +37,7 @@ const PostGrid: React.FC<PostGridProps> = ({ nfts }) => {
 const Grid = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 20px;
   width: 100%;
 
   // @media (max-width: ${({ theme }) => theme.device.sm}) {
