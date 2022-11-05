@@ -9,6 +9,7 @@ import NavBar from "Components/navBar/navBar"
 import styledTheme from "Styles/styledTheme"
 import GlobalStyle from "Styles/globalStyle"
 import packageJSON from "../../package.json"
+const isServer = () => typeof window === "undefined"
 
 const { name, homepage } = packageJSON
 
@@ -18,11 +19,13 @@ const Layout: React.FC = ({ children }) => {
   const copyrightStr = `Copyright © ${author}. Built with `
 
   useEffect(() => {
-    WebFont.load({
-      google: {
-        families: ["MarkOT", "Chilanka"],
-      },
-    })
+    if (!isServer()) {
+      WebFont.load({
+        google: {
+          families: ["MarkOT"],
+        },
+      })
+    }
   }, [])
 
   return (
