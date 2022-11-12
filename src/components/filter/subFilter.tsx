@@ -2,24 +2,42 @@ import React, { useState } from "react"
 import styled from "styled-components"
 
 const SubFilter = ({
+  activeFilter,
   activeSort,
   setActiveSort,
+  sortPremintCreatedDateAsc,
+  sortPremintCreatedDateDesc,
   sortLiveCreatedDateAsc,
   sortLiveCreatedDateDesc,
 }) => {
   const SortTimeHandler = () => {
-    if (activeSort === "time") {
-      sortLiveCreatedDateDesc()
-    } else {
-      setActiveSort("time")
-      sortLiveCreatedDateAsc()
+    if (activeFilter === "live") {
+      if (activeSort === "time-asc") {
+        setActiveSort("time-desc")
+        sortLiveCreatedDateDesc()
+      } else {
+        setActiveSort("time-asc")
+        sortLiveCreatedDateAsc()
+      }
+    }
+    if (activeFilter === "premint") {
+      if (activeSort === "time-asc") {
+        setActiveSort("time-desc")
+        sortPremintCreatedDateDesc()
+      } else {
+        setActiveSort("time-asc")
+        sortPremintCreatedDateAsc()
+      }
     }
   }
 
   return (
     <Container>
       <p>Filter By</p>
-      <SortButton active={activeSort === "time"} onClick={SortTimeHandler}>
+      <SortButton
+        active={activeSort === "time-asc" || activeSort === "time-desc"}
+        onClick={SortTimeHandler}
+      >
         Time
       </SortButton>
       <SortButton onClick={e => fetchLiveAssets()}>Market Sentiment</SortButton>
