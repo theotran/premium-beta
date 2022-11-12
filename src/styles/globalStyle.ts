@@ -4,6 +4,13 @@ import reset from "styled-reset"
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
+  @font-face {
+    font-family: "MarkOT";
+    src: local("MarkOT"),
+    url("../fonts/MarkOT-Medium.otf") format("truetype");
+    font-weight: bold;
+  }
+
   :root {
     font-size: 100%;
 
@@ -182,6 +189,7 @@ const GlobalStyle = createGlobalStyle`
     clip: rect(1px, 1px, 1px, 1px);
     white-space: no-wrap;
   }
+
 `
 
 export default GlobalStyle

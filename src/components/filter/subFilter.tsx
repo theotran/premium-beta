@@ -1,17 +1,31 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-const SubFilter = ({ fetchPremint, fetchLiveAssets }) => {
-  const [activeFilter, setActiveFilter] = useState("premint")
+const SubFilter = ({
+  activeSort,
+  setActiveSort,
+  sortLiveCreatedDateAsc,
+  sortLiveCreatedDateDesc,
+}) => {
+  const SortTimeHandler = () => {
+    if (activeSort === "time") {
+      sortLiveCreatedDateDesc()
+    } else {
+      setActiveSort("time")
+      sortLiveCreatedDateAsc()
+    }
+  }
 
   return (
     <Container>
       <p>Filter By</p>
-      <button onClick={e => fetchLiveAssets()}>Time</button>
-      <button onClick={e => fetchLiveAssets()}>Market Sentiment</button>
-      <button onClick={e => fetchLiveAssets()}>Manipulation</button>
-      <button onClick={e => fetchLiveAssets()}>Active Public</button>
-      <button onClick={e => fetchLiveAssets()}>Conversion</button>
+      <SortButton active={activeSort === "time"} onClick={SortTimeHandler}>
+        Time
+      </SortButton>
+      <SortButton onClick={e => fetchLiveAssets()}>Market Sentiment</SortButton>
+      <SortButton onClick={e => fetchLiveAssets()}>Manipulation</SortButton>
+      <SortButton onClick={e => fetchLiveAssets()}>Active Public</SortButton>
+      <SortButton onClick={e => fetchLiveAssets()}>Conversion</SortButton>
     </Container>
   )
 }
@@ -23,11 +37,16 @@ const Container = styled.div`
   justify-content: center;
   width: 80%;
   margin-bottom: 30px;
+`
 
-  button {
-    cursor: pointer;
-    background: none;
-    border: 0;
+const SortButton = styled.button`
+  cursor: pointer;
+  background: ${props => (props.active ? "#e2e2e2" : "transparent")};
+  border: 0;
+  padding: 8px;
+  border-radius: 10px;
+  :hover {
+    background: #e2e2e2;
   }
 `
 

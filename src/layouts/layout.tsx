@@ -9,6 +9,7 @@ import styledTheme from "Styles/styledTheme"
 import GlobalStyle from "Styles/globalStyle"
 import packageJSON from "../../package.json"
 const isServer = () => typeof window === "undefined"
+import "../fonts/MarkOT-Medium.otf"
 
 const { name, homepage } = packageJSON
 
@@ -17,16 +18,16 @@ const Layout: React.FC = ({ children }) => {
   const { title, author } = useSiteMetadata()
   const copyrightStr = `Copyright © ${author}. Built with `
 
-  useEffect(() => {
-    if (!isServer()) {
-      const WebFont = require("webfontloader")
-      WebFont.load({
-        google: {
-          families: ["MarkOT"],
-        },
-      })
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!isServer()) {
+  //     const WebFont = require("webfontloader")
+  //     WebFont.load({
+  //       google: {
+  //         families: ["MarkOT"],
+  //       },
+  //     })
+  //   }
+  // }, [])
 
   return (
     <ThemeProvider theme={styledTheme}>

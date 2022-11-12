@@ -102,12 +102,6 @@ const Home = ({
     })
   }, [currentCategory, postData])
 
-  // const urlAssetAggregation =
-  //   "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?size=10"
-
-  // const ultimateURL =
-  //   "https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search"
-
   const [NFTData, setNFTData] = useState(null)
 
   useEffect(() => {
@@ -233,6 +227,7 @@ const Home = ({
 
   const FetchLiveAssets = () => {
     const query = {
+      sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
       query: {
         bool: {
           filter: [
@@ -268,15 +263,80 @@ const Home = ({
       .catch(err => console.warn(err))
   }
 
-  const SortByVoices = () => {
-    const data = NFTData
-
-    if (data) {
-      const dataSortedByVoices = [...data].sort((a, b) => {
-        return a?._source?.voices - b?._source?.voices
-      })
-      setNFTData(dataSortedByVoices)
+  const SortLiveAssetsByCreatedDateAsc = () => {
+    const query = {
+      sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
+      query: {
+        bool: {
+          filter: [
+            {
+              range: {
+                created_date: {
+                  format: "strict_date_optional_time",
+                  gte: "now-1y",
+                  lte: "now",
+                },
+              },
+            },
+          ],
+        },
+      },
     }
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000&sort=created_date:desc`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        console.log("Response ", response)
+        setNFTData(response.data?.hits?.hits)
+      })
+      .catch(err => console.warn(err))
+  }
+
+  const SortLiveAssetsByCreatedDateDesc = () => {
+    const query = {
+      sort: [{ created_date: { order: "desc", unmapped_type: "boolean" } }],
+      query: {
+        bool: {
+          filter: [
+            {
+              range: {
+                created_date: {
+                  format: "strict_date_optional_time",
+                  gte: "now-1y",
+                  lte: "now",
+                },
+              },
+            },
+          ],
+        },
+      },
+    }
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000&sort=created_date:desc`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        console.log("Response ", response)
+        setNFTData(response.data?.hits?.hits)
+      })
+      .catch(err => console.warn(err))
   }
 
   const site = useSiteMetadata()
@@ -286,10 +346,11 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
-          {/* <button onClick={() => SortByVoices()}>Sort Voices</button> */}
           <Filter
             fetchPremint={FetchPremint}
             fetchLiveAssets={FetchLiveAssets}
+            sortLiveCreatedDateAsc={SortLiveAssetsByCreatedDateAsc}
+            sortLiveCreatedDateDesc={SortLiveAssetsByCreatedDateDesc}
           />
           {/* <button onClick={signInGoogle}>Sign In</button> */}
           {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />

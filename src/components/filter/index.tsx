@@ -3,8 +3,14 @@ import styled from "styled-components"
 import Conversion from "../../images/conversion.png"
 import SubFilter from "./subFilter"
 
-const Filter = ({ fetchPremint, fetchLiveAssets }) => {
+const Filter = ({
+  fetchPremint,
+  fetchLiveAssets,
+  sortLiveCreatedDateAsc,
+  sortLiveCreatedDateDesc,
+}) => {
   const [activeFilter, setActiveFilter] = useState("premint")
+  const [activeSort, setActiveSort] = useState(null)
 
   return (
     <Wrapper>
@@ -30,7 +36,12 @@ const Filter = ({ fetchPremint, fetchLiveAssets }) => {
           <img src={Conversion} />
         </Option>
       </Container>
-      <SubFilter fetchLiveAssets={fetchLiveAssets} />
+      <SubFilter
+        activeSort={activeSort}
+        setActiveSort={setActiveSort}
+        sortLiveCreatedDateAsc={sortLiveCreatedDateAsc}
+        sortLiveCreatedDateDesc={sortLiveCreatedDateDesc}
+      />
     </Wrapper>
   )
 }
