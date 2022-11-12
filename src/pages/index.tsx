@@ -244,7 +244,7 @@ const Home = ({
         },
       },
     }
-    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000&sort=created_date:asc`
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000`
     axios
       .get(nftAssetsURL, {
         auth: {
@@ -282,7 +282,7 @@ const Home = ({
         },
       },
     }
-    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000&sort=created_date:asc`
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000`
     axios
       .get(nftAssetsURL, {
         auth: {
@@ -303,7 +303,6 @@ const Home = ({
 
   const FetchLiveAssets = () => {
     const query = {
-      sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
       query: {
         bool: {
           filter: [
@@ -358,7 +357,7 @@ const Home = ({
         },
       },
     }
-    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000&sort=created_date:desc`
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000`
     axios
       .get(nftAssetsURL, {
         auth: {
@@ -396,7 +395,7 @@ const Home = ({
         },
       },
     }
-    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000&sort=created_date:desc`
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000`
     axios
       .get(nftAssetsURL, {
         auth: {
