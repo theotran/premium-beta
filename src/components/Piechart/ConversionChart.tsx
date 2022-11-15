@@ -43,6 +43,10 @@ const ConversionChart = () => {
     },
   }
 
+  if (typeof window === "undefined") {
+    return <h2>Loading...</h2>
+  }
+
   return (
     <Wrapper>
       <TitleContainer>
