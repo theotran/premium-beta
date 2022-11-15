@@ -2,11 +2,19 @@ import React, { useEffect, useRef, useState } from "react"
 import * as d3 from "d3"
 import styled from "styled-components"
 import Conversion from "../../images/conversion.png"
-import Chart from "react-apexcharts"
+// import Chart from "react-apexcharts"
 const isBrowser = () => typeof window !== "undefined"
 // import "./DataQualityIndex.css"
 
 const ConversionChart = () => {
+  let Chart = ""
+
+  useEffect(() => {
+    if (isBrowser()) {
+      Chart = require("react-apexcharts")
+    }
+  }, [])
+
   const chartState = {
     series: [40, 30],
     chartOptions: {

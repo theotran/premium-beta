@@ -1,10 +1,18 @@
 import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import ManipulationImage from "../../images/Manipulation.png"
-import Chart from "react-apexcharts"
+// import Chart from "react-apexcharts"
 const isBrowser = () => typeof window !== "undefined"
 
 const ManipulationChart = () => {
+  let Chart = ""
+
+  useEffect(() => {
+    if (isBrowser()) {
+      Chart = require("react-apexcharts")
+    }
+  }, [])
+
   const chartState = {
     series: [70, 20],
     chartOptions: {
