@@ -1,18 +1,11 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState, lazy, Suspense } from "react"
 import styled from "styled-components"
 import ManipulationImage from "../../images/Manipulation.png"
 // import Chart from "react-apexcharts"
+const Chart = lazy(() => import("react-apexcharts"))
 const isBrowser = () => typeof window !== "undefined"
 
 const ManipulationChart = () => {
-  let Chart = ""
-
-  useEffect(() => {
-    if (isBrowser()) {
-      Chart = require("react-apexcharts")
-    }
-  }, [])
-
   const chartState = {
     series: [70, 20],
     chartOptions: {
@@ -56,13 +49,15 @@ const ManipulationChart = () => {
         <h3>Manipulation</h3>
       </TitleContainer>
       {isBrowser() && (
-        <Chart
-          options={chartState.options}
-          series={chartState.series}
-          labels={chartState.chartOptions.labels}
-          type="donut"
-          width="220"
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Chart
+            options={chartState.options}
+            series={chartState.series}
+            labels={chartState.chartOptions.labels}
+            type="donut"
+            width="220"
+          />
+        </Suspense>
       )}
       <Description>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam

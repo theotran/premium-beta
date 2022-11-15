@@ -1,20 +1,14 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState, lazy, Suspense } from "react"
 import * as d3 from "d3"
 import styled from "styled-components"
 import Conversion from "../../images/conversion.png"
 // import Chart from "react-apexcharts"
+const Chart = lazy(() => import("react-apexcharts"))
+
 const isBrowser = () => typeof window !== "undefined"
 // import "./DataQualityIndex.css"
 
 const ConversionChart = () => {
-  let Chart = ""
-
-  useEffect(() => {
-    if (isBrowser()) {
-      Chart = require("react-apexcharts")
-    }
-  }, [])
-
   const chartState = {
     series: [40, 30],
     chartOptions: {
@@ -58,13 +52,15 @@ const ConversionChart = () => {
         <h3>Conversion</h3>
       </TitleContainer>
       {isBrowser() && (
-        <Chart
-          options={chartState.options}
-          series={chartState.series}
-          labels={chartState.chartOptions.labels}
-          type="donut"
-          width="220"
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Chart
+            options={chartState.options}
+            series={chartState.series}
+            labels={chartState.chartOptions.labels}
+            type="donut"
+            width="220"
+          />
+        </Suspense>
       )}
       <Description>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
