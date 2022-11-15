@@ -16,6 +16,7 @@
     "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "d3": "^7.6.1",
     "dark-theme-github": "github:remorses/dark-github-theme",
     "firebase": "^9.10.0",
     "gatsby": "^4.5.4",
