@@ -54,7 +54,7 @@ const ConversionChart = () => {
         series={chartState.series}
         labels={chartState.chartOptions.labels}
         type="donut"
-        width="262"
+        width="220"
       />
       <Description>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
@@ -72,7 +72,7 @@ const Wrapper = styled.div`
   .apexcharts-legend {
     display: none;
   }
-  max-width: 352px;
+  max-width: 300px;
 `
 
 const TitleContainer = styled.div`

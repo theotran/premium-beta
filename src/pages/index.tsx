@@ -21,6 +21,7 @@ import Filter from "Components/filter"
 import Linechart from "Components/Linechart/Linechart"
 import ManipulationChart from "Components/Piechart/ManipulationChart"
 import ConversionChart from "Components/Piechart/ConversionChart"
+import MarketSnapshot from "Components/MarketSnapshot/MarketSnapshot"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -420,13 +421,14 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
-          <MarketSnapshot>
+          <MarketSnapshotContainer>
+            <MarketSnapshot />
             <ChartsWrapper>
               <Linechart />
               <ManipulationChart />
               <ConversionChart />
             </ChartsWrapper>
-          </MarketSnapshot>
+          </MarketSnapshotContainer>
           <Filter
             fetchPremint={FetchPremint}
             fetchLiveAssets={FetchLiveAssets}
@@ -467,7 +469,7 @@ const Content = styled.div`
   }
 `
 
-const MarketSnapshot = styled.div`
+const MarketSnapshotContainer = styled.div`
   display: flex;
   border-radius: 23px;
   overflow: hidden;

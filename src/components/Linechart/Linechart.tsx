@@ -144,11 +144,11 @@ export default LineChart
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 352px;
+  max-width: 300px;
 `
 
 const ChartContainer = styled.div`
-  height: 262px;
+  height: 200px;
 `
 
 const TitleContainer = styled.div`
