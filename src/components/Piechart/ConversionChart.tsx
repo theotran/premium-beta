@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react"
 import * as d3 from "d3"
 import styled from "styled-components"
 import Conversion from "../../images/conversion.png"
-
 import Chart from "react-apexcharts"
+const isBrowser = () => typeof window !== "undefined"
 // import "./DataQualityIndex.css"
 
 const ConversionChart = () => {
@@ -43,23 +43,21 @@ const ConversionChart = () => {
     },
   }
 
-  if (typeof window === "undefined") {
-    return <h2>Loading...</h2>
-  }
-
   return (
     <Wrapper>
       <TitleContainer>
         <img src={Conversion} />
         <h3>Conversion</h3>
       </TitleContainer>
-      <Chart
-        options={chartState.options}
-        series={chartState.series}
-        labels={chartState.chartOptions.labels}
-        type="donut"
-        width="220"
-      />
+      {isBrowser() && (
+        <Chart
+          options={chartState.options}
+          series={chartState.series}
+          labels={chartState.chartOptions.labels}
+          type="donut"
+          width="220"
+        />
+      )}
       <Description>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
         nonummy nibh euismod

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import ManipulationImage from "../../images/Manipulation.png"
 import Chart from "react-apexcharts"
-// import "./DataQualityIndex.css"
+const isBrowser = () => typeof window !== "undefined"
 
 const ManipulationChart = () => {
   const chartState = {
@@ -41,23 +41,21 @@ const ManipulationChart = () => {
     },
   }
 
-  if (typeof window === "undefined") {
-    return <h2>Loading...</h2>
-  }
-
   return (
     <Wrapper>
       <TitleContainer>
         <img src={ManipulationImage} />
         <h3>Manipulation</h3>
       </TitleContainer>
-      <Chart
-        options={chartState.options}
-        series={chartState.series}
-        labels={chartState.chartOptions.labels}
-        type="donut"
-        width="220"
-      />
+      {isBrowser() && (
+        <Chart
+          options={chartState.options}
+          series={chartState.series}
+          labels={chartState.chartOptions.labels}
+          type="donut"
+          width="220"
+        />
+      )}
       <Description>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
         nonummy nibh euismod
