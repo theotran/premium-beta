@@ -1,5 +1,4 @@
 import React, { useState, useLayoutEffect, useEffect } from "react"
-import qs from "qs"
 import { initializeApp } from "firebase/app"
 import {
   getAuth,
@@ -8,8 +7,6 @@ import {
   getRedirectResult,
   signInWithPopup,
 } from "firebase/auth"
-import { getAnalytics } from "firebase/analytics"
-import dotenv from "dotenv"
 import type { PageProps } from "gatsby"
 import { graphql } from "gatsby"
 import styled from "styled-components"
@@ -20,8 +17,9 @@ import useSiteMetadata from "Hooks/useSiteMetadata"
 import Layout from "Layouts/layout"
 import SEO from "Components/seo"
 import PostGrid from "Components/postGrid"
-import CategoryFilter from "Components/catetgoryFilter"
 import Filter from "Components/filter"
+import Linechart from "Components/Linechart/Linechart"
+import Piechart from "Components/Piechart/Piechart"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -421,6 +419,12 @@ const Home = ({
       <SEO title="Home" />
       <Main>
         <Content>
+          <MarketSnapshot>
+            <ChartsWrapper>
+              <Linechart />
+              <Piechart />
+            </ChartsWrapper>
+          </MarketSnapshot>
           <Filter
             fetchPremint={FetchPremint}
             fetchLiveAssets={FetchLiveAssets}
@@ -459,6 +463,20 @@ const Content = styled.div`
     padding-top: var(--grid-gap-lg);
     width: 87.5%;
   }
+`
+
+const MarketSnapshot = styled.div`
+  display: flex;
+  border-radius: 23px;
+  overflow: hidden;
+  background: #f4f4f4;
+`
+
+const ChartsWrapper = styled.div`
+  background: #f4f4f4;
+  display: flex;
+  padding: 24px;
+  gap: 24px;
 `
 
 export const query = graphql`
