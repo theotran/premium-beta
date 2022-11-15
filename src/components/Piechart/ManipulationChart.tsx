@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
-import * as d3 from "d3"
 import styled from "styled-components"
 import ManipulationImage from "../../images/Manipulation.png"
-
 import Chart from "react-apexcharts"
 // import "./DataQualityIndex.css"
 
