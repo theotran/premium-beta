@@ -19,7 +19,8 @@ import SEO from "Components/seo"
 import PostGrid from "Components/postGrid"
 import Filter from "Components/filter"
 import Linechart from "Components/Linechart/Linechart"
-import Piechart from "Components/Piechart/Piechart"
+import ManipulationChart from "Components/Piechart/ManipulationChart"
+import ConversionChart from "Components/Piechart/ConversionChart"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -422,7 +423,8 @@ const Home = ({
           <MarketSnapshot>
             <ChartsWrapper>
               <Linechart />
-              <Piechart />
+              <ManipulationChart />
+              <ConversionChart />
             </ChartsWrapper>
           </MarketSnapshot>
           <Filter
@@ -476,7 +478,7 @@ const ChartsWrapper = styled.div`
   background: #f4f4f4;
   display: flex;
   padding: 24px;
-  gap: 24px;
+  justify-content: space-between;
 `
 
 export const query = graphql`

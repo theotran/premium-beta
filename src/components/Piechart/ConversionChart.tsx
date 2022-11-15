@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from "react"
 import * as d3 from "d3"
 import styled from "styled-components"
-import ManipulationImage from "../../images/Manipulation.png"
+import Conversion from "../../images/conversion.png"
 
 import Chart from "react-apexcharts"
 // import "./DataQualityIndex.css"
 
-const Piechart = () => {
+const ConversionChart = () => {
   const chartState = {
-    series: [70, 20],
+    series: [40, 30],
     chartOptions: {
       labels: [],
     },
     options: {
-      colors: ["#fff", "#FF7BAC"],
+      colors: ["#fff", "#77C7E6"],
       chart: {
         type: "donut",
       },
@@ -21,7 +21,7 @@ const Piechart = () => {
         enabled: false,
       },
       fill: {
-        colors: ["#fff", "#FF7BAC"],
+        colors: ["#fff", "#77C7E6"],
       },
       plotOptions: {
         pie: {
@@ -46,8 +46,8 @@ const Piechart = () => {
   return (
     <Wrapper>
       <TitleContainer>
-        <img src={ManipulationImage} />
-        <h3>Manipulation</h3>
+        <img src={Conversion} />
+        <h3>Conversion</h3>
       </TitleContainer>
       <Chart
         options={chartState.options}
@@ -64,7 +64,7 @@ const Piechart = () => {
   )
 }
 
-export default Piechart
+export default ConversionChart
 
 const Wrapper = styled.div`
   display: flex;
@@ -73,11 +73,6 @@ const Wrapper = styled.div`
     display: none;
   }
   max-width: 352px;
-`
-
-const ChartContainer = styled.div`
-  width: 352px;
-  height: 352px;
 `
 
 const TitleContainer = styled.div`
