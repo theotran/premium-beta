@@ -135,7 +135,6 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response ", response)
         setNFTData(response.data?.hits?.hits)
       })
       .catch(err => console.warn(err))
@@ -219,7 +218,6 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response ", response)
         setNFTData(response.data?.hits?.hits)
       })
       .catch(err => console.warn(err))
@@ -257,7 +255,6 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response ", response)
         setNFTData(response.data?.hits?.hits)
       })
       .catch(err => console.warn(err))
@@ -295,7 +292,6 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response ", response)
         setNFTData(response.data?.hits?.hits)
       })
       .catch(err => console.warn(err))
@@ -332,7 +328,6 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response ", response)
         setNFTData(response.data?.hits?.hits)
       })
       .catch(err => console.warn(err))
@@ -370,7 +365,6 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response ", response)
         setNFTData(response.data?.hits?.hits)
       })
       .catch(err => console.warn(err))
@@ -408,7 +402,6 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response ", response)
         setNFTData(response.data?.hits?.hits)
       })
       .catch(err => console.warn(err))
