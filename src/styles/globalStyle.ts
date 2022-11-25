@@ -70,7 +70,7 @@ const GlobalStyle = createGlobalStyle`
       --color-text-3: #696969;
       --color-white: #ffffff;
       --color-nav-bar: rgba(255, 255, 255, 0.7);
-      --color-nav-border: rgba(200, 200, 200, 0.7);
+      --color-nav-border: transparent;
       --color-category-button: #f2f2f2;
       --color-background: #ffffff;
       --color-post-background: #ffffff;
@@ -105,7 +105,7 @@ const GlobalStyle = createGlobalStyle`
       --color-text-3: #8c8c8c;
       --color-white: #e6e6e6;
       --color-nav-bar: #ffffff;
-      --color-nav-border: rgba(200, 200, 200, 0.7);
+      --color-nav-border: transparent;
       --color-category-button: #484848;
       --color-background: #ffffff;
       --color-post-background: #ffffff;

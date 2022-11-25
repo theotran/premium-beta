@@ -97,7 +97,7 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
             </ManipulationValue>
             <Promotion>
               {manipulation && typeof manipulation === "number"
-                ? `Promotion ${Number(manipulation * 100).toFixed()}%`
+                ? `Promotion ${Number(manipulation * 100).toFixed()}% Organic`
                 : "Promotion 0%"}
             </Promotion>
           </StatBlock>
@@ -124,7 +124,7 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 164px;
+  min-height: 164px;
 `
 
 const CardTheme = styled.div`
@@ -170,7 +170,8 @@ const CardContainer = styled.div`
 
 const CardBlockLeft = styled.div`
   display: flex;
-  padding: 13px 19px;
+  padding: 19px 19px;
+  border-right: 5px solid #ffffff;
 `
 
 const CardThumbnail = styled.div`
@@ -207,7 +208,7 @@ const CardProjectDetails = styled.div`
   min-height: 100%;
   padding: 0 25px;
 
-  width: 300px;
+  width: 230px;
 
   .projectName {
     font-size: 10px;
@@ -226,7 +227,7 @@ const CardProjectDetails = styled.div`
     font-size: 13px;
     text-align: left;
     color: #000000;
-    margin: 15px 0;
+    margin-top: auto;
   }
 `
 
@@ -234,10 +235,7 @@ const NFTStats = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 40px;
-  // height: 100%;
-  // padding: 5px 20px;
   padding: 13px 39px;
-  border-left: 5px solid #ffffff;
   height: -webkit-fill-available;
   width: 50%;
 `
@@ -307,7 +305,7 @@ const SocialLinks = styled.div`
   display: flex;
   gap: 15px;
   width: 100%;
-  margin-top: auto;
+  margin-top: 19px;
 `
 
 export default React.memo(Card)

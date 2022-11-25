@@ -16,7 +16,7 @@ const Filter = ({
 
   return (
     <Wrapper>
-      <Container>
+      <Container activeFilter={activeFilter}>
         <Option
           active={activeFilter === "premint"}
           onClick={() => {
@@ -78,6 +78,22 @@ const Container = styled.div`
   width: 100%;
   min-height: 94px;
   margin: 30px 0;
+
+  background: ${props =>
+    props.activeFilter === "live"
+      ? `transparent linear-gradient(90deg, #f9a745 0%, #f43f58 100%) 0% 0%
+    no-repeat padding-box;`
+      : `transparent
+    linear-gradient(
+      90deg,
+      #5ea6ee 0%,
+      #60a9ed 23%,
+      #69b4ea 44%,
+      #77c7e6 65%,
+      #8ce1e1 85%,
+      #a0fbdc 100%
+    )
+    0% 0% no-repeat padding-box;`};
 `
 
 const Option = styled.div`

@@ -66,7 +66,7 @@ type Toggleable = Pick<UseMenuReturnType, "toggle">
 
 const Nav = styled.nav`
   min-width: var(--min-width);
-  position: sticky;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -82,7 +82,7 @@ const Content = styled.div`
   box-sizing: content-box;
   position: relative;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1480px;
   padding: 0 var(--padding-lg);
   height: 100%;
   z-index: 2;

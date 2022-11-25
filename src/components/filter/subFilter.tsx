@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import Select from "../Select/Select"
+import Input from "../Input/Input"
 
 const SubFilter = ({
   activeFilter,
@@ -32,21 +34,36 @@ const SubFilter = ({
   }
 
   return (
-    <Container>
-      <p>Filter By</p>
-      <SortButton
-        active={activeSort === "time-asc" || activeSort === "time-desc"}
-        onClick={SortTimeHandler}
-      >
-        Time
-      </SortButton>
-      <SortButton onClick={e => fetchLiveAssets()}>Market Sentiment</SortButton>
-      <SortButton onClick={e => fetchLiveAssets()}>Manipulation</SortButton>
-      <SortButton onClick={e => fetchLiveAssets()}>Active Public</SortButton>
-      <SortButton onClick={e => fetchLiveAssets()}>Conversion</SortButton>
-    </Container>
+    <Wrapper>
+      {/* <Container>
+        <p>Filter By</p>
+        <SortButton
+          active={activeSort === "time-asc" || activeSort === "time-desc"}
+          onClick={SortTimeHandler}
+        >
+          Time
+        </SortButton>
+        <SortButton onClick={e => fetchLiveAssets()}>
+          Market Sentiment
+        </SortButton>
+        <SortButton onClick={e => fetchLiveAssets()}>Manipulation</SortButton>
+        <SortButton onClick={e => fetchLiveAssets()}>Active Public</SortButton>
+        <SortButton onClick={e => fetchLiveAssets()}>Conversion</SortButton>
+      </Container> */}
+      <Select />
+      <Input />
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 30px;
+`
 
 const Container = styled.div`
   display: flex;

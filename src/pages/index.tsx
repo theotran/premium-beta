@@ -448,8 +448,8 @@ const Main = styled.main`
 
 const Content = styled.div`
   box-sizing: content-box;
-  width: 87.5%;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1480px;
   padding-top: var(--sizing-lg);
   padding-bottom: var(--sizing-lg);
   margin: 0 auto;
