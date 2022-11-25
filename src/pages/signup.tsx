@@ -4,6 +4,9 @@ import styled from "styled-components"
 import Layout from "Layouts/layout"
 import SEO from "Components/seo"
 import KoatLogo from "../images/koat-white.png"
+import Mail from "../images/mail-white.png"
+import Twitter from "../images/twitter-white.png"
+import DiscordWhite from "../images/discord-white.png"
 
 const Signup = () => {
   return (
@@ -23,6 +26,11 @@ const Signup = () => {
         <FooterMenu>
           <a>Contact</a>
           <a>Support</a>
+          <Logos>
+            <img src={DiscordWhite} />
+            <img src={Mail} />
+            <img src={Twitter} />
+          </Logos>
           <a>Terms of Use</a>
           <a>Faq</a>
         </FooterMenu>
@@ -113,10 +121,10 @@ const FooterMenu = styled.div`
   display: flex;
   padding: 0 80px 80px;
   justify-content: space-between;
-  gap: 35px;
+  gap: 45px;
   border-bottom: 4px solid #ffffff;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-bottom: 80px;
   a {
     font-size: 26px;
@@ -126,6 +134,14 @@ const FooterMenu = styled.div`
     color: #ffffff;
     cursor: pointer;
   }
+`
+
+const Logos = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 52px;
+  margin-top: -10px;
 `
 
 export default Signup
