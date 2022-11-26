@@ -1,12 +1,30 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-const Select = () => {
+const Select = ({ activeFilter, activeSort, sortLiveAssetsDynamic }) => {
+  const HandleSelectChange = e => {
+    if (activeFilter === "live") {
+      sortLiveAssetsDynamic(JSON.parse(e.target.value))
+    }
+  }
   return (
     <Wrapper>
       <Label>Filter By</Label>
-      <select>
-        <option value="1">Time</option>
+      <select onChange={e => HandleSelectChange(e)}>
+        <option
+          value={JSON.stringify({
+            created_date: { order: "asc", unmapped_type: "boolean" },
+          })}
+        >
+          Time Asc
+        </option>
+        <option
+          value={JSON.stringify({
+            created_date: { order: "desc", unmapped_type: "boolean" },
+          })}
+        >
+          Time Desc
+        </option>
         <option value="2">Market Sentiment</option>
         <option value="3">Manipulation</option>
         <option value="4">Active Public</option>

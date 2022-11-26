@@ -11,8 +11,9 @@ const SubFilter = ({
   sortPremintCreatedDateDesc,
   sortLiveCreatedDateAsc,
   sortLiveCreatedDateDesc,
+  sortLiveAssetsDynamic,
 }) => {
-  const SortTimeHandler = () => {
+  const SortHandler = e => {
     if (activeFilter === "live") {
       if (activeSort === "time-asc") {
         setActiveSort("time-desc")
@@ -50,7 +51,11 @@ const SubFilter = ({
         <SortButton onClick={e => fetchLiveAssets()}>Active Public</SortButton>
         <SortButton onClick={e => fetchLiveAssets()}>Conversion</SortButton>
       </Container> */}
-      <Select />
+      <Select
+        activeFilter={activeFilter}
+        activeSort={activeSort}
+        sortLiveAssetsDynamic={sortLiveAssetsDynamic}
+      />
       <Input />
     </Wrapper>
   )

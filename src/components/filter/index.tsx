@@ -10,6 +10,7 @@ const Filter = ({
   sortPremintCreatedDateDesc,
   sortLiveCreatedDateAsc,
   sortLiveCreatedDateDesc,
+  sortLiveAssetsDynamic,
 }) => {
   const [activeFilter, setActiveFilter] = useState("premint")
   const [activeSort, setActiveSort] = useState(null)
@@ -48,6 +49,7 @@ const Filter = ({
         sortPremintCreatedDateDesc={sortPremintCreatedDateDesc}
         sortLiveCreatedDateAsc={sortLiveCreatedDateAsc}
         sortLiveCreatedDateDesc={sortLiveCreatedDateDesc}
+        sortLiveAssetsDynamic={sortLiveAssetsDynamic}
       />
     </Wrapper>
   )
