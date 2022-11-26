@@ -92,12 +92,12 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
             <StatTitle>Manipulation</StatTitle>
             <ManipulationValue>
               {manipulation && typeof manipulation === "number"
-                ? `${Number(100 - manipulation * 100).toFixed()}%`
-                : "0%"}
+                ? `${Number(100 - manipulation * 100).toFixed()}% Organic`
+                : "0% Organic"}
             </ManipulationValue>
             <Promotion>
               {manipulation && typeof manipulation === "number"
-                ? `Promotion ${Number(manipulation * 100).toFixed()}% Organic`
+                ? `Promotion ${Number(manipulation * 100).toFixed()}%`
                 : "Promotion 0%"}
             </Promotion>
           </StatBlock>
@@ -270,7 +270,7 @@ const SentimentValue = styled.p`
 
 const ManipulationValue = styled.p`
   color: #40c3ea;
-  font-size: 32px;
+  font-size: 16px;
   margin: 5px 0;
 `
 
