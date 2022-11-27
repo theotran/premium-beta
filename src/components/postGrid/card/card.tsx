@@ -209,7 +209,7 @@ const ModalContent = styled.div`
 const ModalContentTop = styled.div`
   display: flex;
   align-items: end;
-  padding-bottom: 23px;
+  padding-bottom: 45px;
 `
 
 const Wrapper = styled.div`

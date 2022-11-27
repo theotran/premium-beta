@@ -131,10 +131,10 @@ const LineChart = () => {
       <ChartContainer id="d3Linechart">
         <svg ref={d3Chart}></svg>
       </ChartContainer>
-      <Description>
+      {/* <Description>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
         nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-      </Description>
+      </Description> */}
     </Wrapper>
   )
 }

@@ -59,10 +59,10 @@ const ManipulationChart = () => {
           />
         </Suspense>
       )}
-      <Description>
+      {/* <Description>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
         nonummy nibh euismod
-      </Description>
+      </Description> */}
     </Wrapper>
   )
 }
