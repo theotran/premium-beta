@@ -12,6 +12,7 @@ const SubFilter = ({
   sortLiveCreatedDateAsc,
   sortLiveCreatedDateDesc,
   sortLiveAssetsDynamic,
+  searchLiveAssetsByInput,
 }) => {
   const SortHandler = e => {
     if (activeFilter === "live") {
@@ -56,7 +57,10 @@ const SubFilter = ({
         activeSort={activeSort}
         sortLiveAssetsDynamic={sortLiveAssetsDynamic}
       />
-      <Input />
+      <Input
+        activeFilter={activeFilter}
+        searchLiveAssetsByInput={searchLiveAssetsByInput}
+      />
     </Wrapper>
   )
 }
