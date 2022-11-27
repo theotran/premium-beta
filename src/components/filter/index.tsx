@@ -6,15 +6,13 @@ import SubFilter from "./subFilter"
 const Filter = ({
   fetchPremint,
   fetchLiveAssets,
-  sortPremintCreatedDateAsc,
-  sortPremintCreatedDateDesc,
-  sortLiveCreatedDateAsc,
-  sortLiveCreatedDateDesc,
   sortLiveAssetsDynamic,
+  sortPremintDynamic,
   searchLiveAssetsByInput,
 }) => {
   const [activeFilter, setActiveFilter] = useState("premint")
   const [activeSort, setActiveSort] = useState(null)
+  const [searchValue, setSearchValue] = useState("")
 
   return (
     <Wrapper>
@@ -24,6 +22,7 @@ const Filter = ({
           onClick={() => {
             setActiveFilter("premint")
             setActiveSort(null)
+            setSearchValue("")
             fetchPremint()
           }}
         >
@@ -35,6 +34,7 @@ const Filter = ({
           onClick={() => {
             setActiveFilter("live")
             setActiveSort(null)
+            setSearchValue("")
             fetchLiveAssets()
           }}
         >
@@ -46,12 +46,11 @@ const Filter = ({
         activeFilter={activeFilter}
         activeSort={activeSort}
         setActiveSort={setActiveSort}
-        sortPremintCreatedDateAsc={sortPremintCreatedDateAsc}
-        sortPremintCreatedDateDesc={sortPremintCreatedDateDesc}
-        sortLiveCreatedDateAsc={sortLiveCreatedDateAsc}
-        sortLiveCreatedDateDesc={sortLiveCreatedDateDesc}
         sortLiveAssetsDynamic={sortLiveAssetsDynamic}
+        sortPremintDynamic={sortPremintDynamic}
         searchLiveAssetsByInput={searchLiveAssetsByInput}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
     </Wrapper>
   )

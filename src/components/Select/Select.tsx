@@ -1,12 +1,24 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-const Select = ({ activeFilter, activeSort, sortLiveAssetsDynamic }) => {
+const Select = ({
+  activeFilter,
+  activeSort,
+  sortLiveAssetsDynamic,
+  sortPremintDynamic,
+  searchValue,
+  setSearchValue,
+}) => {
   const HandleSelectChange = e => {
     if (activeFilter === "live") {
       sortLiveAssetsDynamic(JSON.parse(e.target.value))
     }
+    if (activeFilter === "premint") {
+      sortPremintDynamic(JSON.parse(e.target.value))
+    }
+    setSearchValue("")
   }
+  //Sort options created_date/name/voices/sentiment/manipulation asc/desc
   return (
     <Wrapper>
       <Label>Filter By</Label>
@@ -25,10 +37,62 @@ const Select = ({ activeFilter, activeSort, sortLiveAssetsDynamic }) => {
         >
           Time Desc
         </option>
-        <option value="2">Market Sentiment</option>
-        <option value="3">Manipulation</option>
-        <option value="4">Active Public</option>
-        <option value="5">Conversion</option>
+        <option
+          value={JSON.stringify({
+            sentiment: { order: "asc", unmapped_type: "boolean" },
+          })}
+        >
+          Market Sentiment Asc
+        </option>
+        <option
+          value={JSON.stringify({
+            sentiment: { order: "desc", unmapped_type: "boolean" },
+          })}
+        >
+          Market Sentiment Desc
+        </option>
+        <option
+          value={JSON.stringify({
+            manipulation: { order: "asc", unmapped_type: "boolean" },
+          })}
+        >
+          Manipulation Asc
+        </option>
+        <option
+          value={JSON.stringify({
+            manipulation: { order: "desc", unmapped_type: "boolean" },
+          })}
+        >
+          Manipulation Desc
+        </option>
+        <option
+          value={JSON.stringify({
+            voices: { order: "asc", unmapped_type: "boolean" },
+          })}
+        >
+          Active Public Asc
+        </option>
+        <option
+          value={JSON.stringify({
+            voices: { order: "desc", unmapped_type: "boolean" },
+          })}
+        >
+          Active Public Desc
+        </option>
+        <option
+          value={JSON.stringify({
+            name: { order: "asc", unmapped_type: "boolean" },
+          })}
+        >
+          Name Asc
+        </option>
+        <option
+          value={JSON.stringify({
+            name: { order: "desc", unmapped_type: "boolean" },
+          })}
+        >
+          Name Desc
+        </option>
       </select>
     </Wrapper>
   )

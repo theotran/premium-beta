@@ -7,59 +7,27 @@ const SubFilter = ({
   activeFilter,
   activeSort,
   setActiveSort,
-  sortPremintCreatedDateAsc,
-  sortPremintCreatedDateDesc,
-  sortLiveCreatedDateAsc,
-  sortLiveCreatedDateDesc,
   sortLiveAssetsDynamic,
+  sortPremintDynamic,
   searchLiveAssetsByInput,
+  searchValue,
+  setSearchValue,
 }) => {
-  const SortHandler = e => {
-    if (activeFilter === "live") {
-      if (activeSort === "time-asc") {
-        setActiveSort("time-desc")
-        sortLiveCreatedDateDesc()
-      } else {
-        setActiveSort("time-asc")
-        sortLiveCreatedDateAsc()
-      }
-    }
-    if (activeFilter === "premint") {
-      if (activeSort === "time-asc") {
-        setActiveSort("time-desc")
-        sortPremintCreatedDateDesc()
-      } else {
-        setActiveSort("time-asc")
-        sortPremintCreatedDateAsc()
-      }
-    }
-  }
-
   return (
     <Wrapper>
-      {/* <Container>
-        <p>Filter By</p>
-        <SortButton
-          active={activeSort === "time-asc" || activeSort === "time-desc"}
-          onClick={SortTimeHandler}
-        >
-          Time
-        </SortButton>
-        <SortButton onClick={e => fetchLiveAssets()}>
-          Market Sentiment
-        </SortButton>
-        <SortButton onClick={e => fetchLiveAssets()}>Manipulation</SortButton>
-        <SortButton onClick={e => fetchLiveAssets()}>Active Public</SortButton>
-        <SortButton onClick={e => fetchLiveAssets()}>Conversion</SortButton>
-      </Container> */}
       <Select
         activeFilter={activeFilter}
         activeSort={activeSort}
         sortLiveAssetsDynamic={sortLiveAssetsDynamic}
+        sortPremintDynamic={sortPremintDynamic}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
       <Input
         activeFilter={activeFilter}
         searchLiveAssetsByInput={searchLiveAssetsByInput}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
     </Wrapper>
   )

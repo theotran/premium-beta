@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-const Input = ({ activeFilter, searchLiveAssetsByInput }) => {
-  const [searchValue, setSearchValue] = useState("")
-
+const Input = ({
+  activeFilter,
+  searchLiveAssetsByInput,
+  searchValue,
+  setSearchValue,
+}) => {
   const HandleInputChange = e => {
     setSearchValue(e.target.value)
   }
@@ -15,7 +18,7 @@ const Input = ({ activeFilter, searchLiveAssetsByInput }) => {
         placeholder="Search..."
         onChange={e => HandleInputChange(e)}
         onBlur={e => {
-          if (activeFilter === "live" && searchValue) {
+          if (searchValue) {
             searchLiveAssetsByInput(searchValue)
           }
         }}
