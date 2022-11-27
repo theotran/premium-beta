@@ -8,6 +8,7 @@ import {
   signInWithPopup,
 } from "firebase/auth"
 import type { PageProps } from "gatsby"
+import ReactModal from "react-modal"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import axios from "axios"
@@ -21,6 +22,7 @@ import Filter from "Components/filter"
 import Linechart from "Components/Linechart/Linechart"
 import ManipulationChart from "Components/Piechart/ManipulationChart"
 import ConversionChart from "Components/Piechart/ConversionChart"
+import BarChart from "Components/Barchart/Barchart"
 import MarketSnapshot from "Components/MarketSnapshot/MarketSnapshot"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -40,6 +42,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 
 const provider = new GoogleAuthProvider()
+
+ReactModal.setAppElement("#___gatsby")
+ReactModal.defaultStyles.overlay.backgroundColor =
+  "linear-gradient(90deg, rgba(94, 166, 238, 1) 0%, rgba(96, 169, 237, 1) 23%, rgba(105, 180, 234, 1) 44%, rgba(119, 199, 230, 1) 65%, rgba(140, 225, 225, 1) 85%, rgba(160, 251, 220, 1) 100%) 0% 0%"
 
 // export const auth = getAuth(app)
 
@@ -485,6 +491,7 @@ const Home = ({
             <MarketSnapshot />
             <ChartsWrapper>
               <Linechart />
+              {/* <BarChart /> */}
               <ManipulationChart />
               <ConversionChart />
             </ChartsWrapper>

@@ -11,6 +11,10 @@ const GlobalStyle = createGlobalStyle`
     font-weight: bold;
   }
 
+  .ReactModal__Overlay {
+    background: linear-gradient(90deg, rgba(94, 166, 238, 0.6) 0%, rgba(96, 169, 237, 0.6) 23%, rgba(105, 180, 234, 0.6) 44%, rgba(119, 199, 230, 0.6) 65%, rgba(140, 225, 225, 0.6) 85%, rgba(160, 251, 220, 0.6) 100%) 0% 0%;
+  }
+
   :root {
     font-size: 100%;
 

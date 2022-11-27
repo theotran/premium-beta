@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import moment from "moment"
+import Modal from "react-modal"
 import type Post from "Types/Post"
 
 import ManipulationImage from "../../../images/Manipulation.png"
@@ -14,6 +15,8 @@ import Twitter from "../../../images/twitter.png"
 import Link from "../../../images/link.png"
 import Brand from "../../../images/pretium-brand-logo.png"
 import Star from "../../../images/star.png"
+import ManipulationChart from "Components/Piechart/ManipulationChart"
+import ConversionChart from "Components/Piechart/ConversionChart"
 
 type CardProps = Pick<
   Post,
@@ -39,13 +42,39 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
   const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
 
   const c = colors[Math.floor(Math.random() * 3)]
+
+  const customStyles = {
+    content: {
+      zIndex: 3,
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      height: "80%",
+      width: "80%",
+      borderRadius: "27px",
+    },
+  }
+
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const openModal = () => {
+    setModalIsOpen(true)
+  }
+
+  const closeModal = e => {
+    setModalIsOpen(false)
+    console.log("trigger", modalIsOpen)
+  }
   return (
     <Wrapper>
       <CardTheme style={{ background: c }}>
         <img src={Star} />
         <p>new</p>
       </CardTheme>
-      <CardContainer>
+      <CardContainer onClick={e => openModal()}>
         <CardBlockLeft>
           <CardThumbnail>
             {image_url ? (
@@ -117,9 +146,71 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
           </StatBlock>
         </NFTStats>
       </CardContainer>
+      <Modal
+        isOpen={modalIsOpen}
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        {/* <button onClick={closeModal}>close</button> */}
+        <ModalContent>
+          <ModalContentTop>
+            <CardThumbnailModal>
+              {image_url ? (
+                <NFTImage src={image_url} />
+              ) : (
+                <DefaultImage src={Brand} />
+              )}
+            </CardThumbnailModal>
+            <CardProjectDetailsModal>
+              <p className="projectName">Project Name:</p>
+              <p className="name">
+                {name || ""}
+                <br />
+              </p>
+              <p className="mintDate">{`Minting ${moment(created_date).format(
+                "MMMM Do YYYY, h:mm:ss a"
+              )}`}</p>
+              <SocialLinks>
+                <a href={website || ""} target="__blank">
+                  <img src={Link} />
+                </a>
+                <a href={twitter || ""} target="__blank">
+                  <img src={Twitter} />
+                </a>
+                <a href={discord || ""} target="__blank">
+                  <img src={Discord} />
+                </a>
+                <a href={magiceden || ""} target="__blank">
+                  <img src={Search} />
+                </a>
+                <img src={Download} />
+              </SocialLinks>
+            </CardProjectDetailsModal>
+          </ModalContentTop>
+          <ModalContentTop>
+            <ManipulationChart />
+            <ConversionChart />
+          </ModalContentTop>
+        </ModalContent>
+      </Modal>
     </Wrapper>
   )
 }
+
+const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // padding: 23px;
+`
+
+const ModalContentTop = styled.div`
+  display: flex;
+  align-items: end;
+  padding-bottom: 23px;
+`
 
 const Wrapper = styled.div`
   position: relative;
@@ -128,9 +219,9 @@ const Wrapper = styled.div`
 `
 
 const CardTheme = styled.div`
+  position: absolute;
   top: 0;
   left: -50px;
-  position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
@@ -141,7 +232,7 @@ const CardTheme = styled.div`
   border-radius: 30px;
   // padding: 13px 19px;
   padding: 0 19px;
-  z-index: 1;
+  // z-index: 1;
 
   img {
     position: relative;
@@ -164,8 +255,9 @@ const CardContainer = styled.div`
   align-items: center;
   background: #f4f4f4;
   border-radius: 30px;
+  cursor: pointer;
 
-  z-index: 2;
+  // z-index: 2;
 `
 
 const CardBlockLeft = styled.div`
@@ -186,6 +278,11 @@ const CardThumbnail = styled.div`
 
   postion: relative;
   overflow: hidden;
+`
+
+const CardThumbnailModal = styled(CardThumbnail)`
+  width: 364px;
+  height: 364px;
 `
 
 const NFTImage = styled.img`
@@ -228,6 +325,36 @@ const CardProjectDetails = styled.div`
     text-align: left;
     color: #000000;
     margin-top: auto;
+  }
+`
+
+const CardProjectDetailsModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding 0 24px;
+
+  .projectName {
+    font-size: 19px;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #000000;
+  }
+
+  .name {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    color: #000000;
+    margin: 3px 0;
+  }
+
+  .mintDate {
+    font-size: 24px;
+    text-align: left;
+    color: #000000;
+    margin-top: 45px;
   }
 `
 

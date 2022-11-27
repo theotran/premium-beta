@@ -15,7 +15,7 @@ const ConversionChart = () => {
       labels: [],
     },
     options: {
-      colors: ["#fff", "#77C7E6"],
+      colors: ["#64DFDF", "#77C7E6"],
       chart: {
         type: "donut",
       },
@@ -23,7 +23,7 @@ const ConversionChart = () => {
         enabled: false,
       },
       fill: {
-        colors: ["#fff", "#77C7E6"],
+        colors: ["#64DFDF", "#77C7E6"],
       },
       plotOptions: {
         pie: {

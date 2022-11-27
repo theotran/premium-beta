@@ -12,7 +12,7 @@ const ManipulationChart = () => {
       labels: [],
     },
     options: {
-      colors: ["#fff", "#FF7BAC"],
+      colors: ["#69B4EA", "#FF7BAC"],
       chart: {
         type: "donut",
       },
@@ -20,7 +20,7 @@ const ManipulationChart = () => {
         enabled: false,
       },
       fill: {
-        colors: ["#fff", "#FF7BAC"],
+        colors: ["#69B4EA", "#FF7BAC"],
       },
       plotOptions: {
         pie: {
