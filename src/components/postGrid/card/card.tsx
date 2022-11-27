@@ -17,13 +17,14 @@ import Brand from "../../../images/pretium-brand-logo.png"
 import Star from "../../../images/star.png"
 import ManipulationChart from "Components/Piechart/ManipulationChart"
 import ConversionChart from "Components/Piechart/ConversionChart"
+import HeartBlue from "../../../images/heart-blue.png"
 
 type CardProps = Pick<
   Post,
   "thumbnail" | "alt" | "category" | "title" | "desc" | "date"
 >
 
-const Card: React.FC<CardProps> = ({ posts, nft }) => {
+const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
   const {
     "@timestamp": timestamp,
     name,
@@ -37,6 +38,7 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
     twitter,
     discord,
     magiceden,
+    asset_id,
   } = nft._source
 
   const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
@@ -68,15 +70,26 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
     setModalIsOpen(false)
     console.log("trigger", modalIsOpen)
   }
+
+  const addFavoriteToList = () => {
+    if (!favoriteList.find(node => node._id === asset_id)) {
+      let newFavoriteList = favoriteList
+      newFavoriteList.push(nft)
+      setFavoriteList(newFavoriteList)
+    } else {
+      console.log("Did not add favorite to list")
+    }
+  }
+
   return (
     <Wrapper>
       <CardTheme style={{ background: c }}>
         <img src={Star} />
         <p>new</p>
       </CardTheme>
-      <CardContainer onClick={e => openModal()}>
+      <CardContainer>
         <CardBlockLeft>
-          <CardThumbnail>
+          <CardThumbnail onClick={e => openModal()}>
             {image_url ? (
               <NFTImage src={image_url} />
             ) : (
@@ -105,7 +118,15 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
               <a href={magiceden || ""} target="__blank">
                 <img src={Search} />
               </a>
-              <img src={Download} />
+              <FavoriteButton
+                active={
+                  favoriteList.length > 0 &&
+                  favoriteList.find(node => node._id === asset_id)
+                }
+                onClick={e => addFavoriteToList()}
+              >
+                <img src={HeartBlue} />
+              </FavoriteButton>
             </SocialLinks>
           </CardProjectDetails>
         </CardBlockLeft>
@@ -182,10 +203,9 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
                 <a href={discord || ""} target="__blank">
                   <img src={Discord} />
                 </a>
-                <a href={magiceden || ""} target="__blank">
-                  <img src={Search} />
-                </a>
-                <img src={Download} />
+                <FavoriteButton onClick>
+                  <img src={HeartBlue} />
+                </FavoriteButton>
               </SocialLinks>
             </CardProjectDetailsModal>
           </ModalContentTop>
@@ -198,6 +218,27 @@ const Card: React.FC<CardProps> = ({ posts, nft }) => {
     </Wrapper>
   )
 }
+
+const FavoriteButton = styled.div`
+  width: 35px;
+  height: 35px;
+  display: flex;
+  background: ${props => (props.active ? "#ff7bac" : "#fff")};
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  :hover {
+    background: #ff7bac;
+  }
+
+  img {
+    height: 18px;
+    width: 18px;
+    object-fit: contain;
+  }
+`
 
 const ModalContent = styled.div`
   display: flex;
@@ -255,7 +296,6 @@ const CardContainer = styled.div`
   align-items: center;
   background: #f4f4f4;
   border-radius: 30px;
-  cursor: pointer;
 
   // z-index: 2;
 `
@@ -275,9 +315,14 @@ const CardThumbnail = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
-  postion: relative;
+  position: relative;
   overflow: hidden;
+
+  :hover {
+    border: 1px solid #ff7bac;
+  }
 `
 
 const CardThumbnailModal = styled(CardThumbnail)`

@@ -18,6 +18,7 @@ import useSiteMetadata from "Hooks/useSiteMetadata"
 import Layout from "Layouts/layout"
 import SEO from "Components/seo"
 import PostGrid from "Components/postGrid"
+import FavoriteList from "Components/postGrid/favoriteList"
 import Filter from "Components/filter"
 import Linechart from "Components/Linechart/Linechart"
 import ManipulationChart from "Components/Piechart/ManipulationChart"
@@ -109,6 +110,8 @@ const Home = ({
   }, [currentCategory, postData])
 
   const [NFTData, setNFTData] = useState(null)
+
+  const [favoriteList, setFavoriteList] = useState([])
 
   useEffect(() => {
     const query = {
@@ -480,8 +483,6 @@ const Home = ({
       .catch(err => console.warn(err))
   }
 
-  const site = useSiteMetadata()
-
   return (
     <Layout>
       <SEO title="Home" />
@@ -491,7 +492,7 @@ const Home = ({
             <MarketSnapshot />
             <ChartsWrapper>
               <Linechart />
-              {/* <BarChart /> */}
+              <BarChart />
               <ManipulationChart />
               <ConversionChart />
             </ChartsWrapper>
@@ -502,11 +503,19 @@ const Home = ({
             sortLiveAssetsDynamic={SortLiveAssetsDynamic}
             sortPremintDynamic={SortPremintDynamic}
             searchLiveAssetsByInput={SearchLiveAssetsByInput}
+            favoriteList={favoriteList}
+            setNFTData={setNFTData}
           />
           {/* <button onClick={signInGoogle}>Sign In</button> */}
           {/* <CategoryFilter categoryList={data.allMarkdownRemark.group} />
           <PostTitle>{postTitle}</PostTitle> */}
-          <PostGrid posts={posts} nfts={NFTData} />
+          {/* {favoriteList && <FavoriteList nfts={favoriteList} />} */}
+          <PostGrid
+            posts={posts}
+            nfts={NFTData}
+            favoriteList={favoriteList}
+            setFavoriteList={setFavoriteList}
+          />
         </Content>
       </Main>
     </Layout>

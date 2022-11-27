@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import Select from "../Select/Select"
 import Input from "../Input/Input"
+import HeartCircleBlue from "../../images/heart-circle-blue.png"
 
 const SubFilter = ({
   activeFilter,
@@ -12,6 +13,8 @@ const SubFilter = ({
   searchLiveAssetsByInput,
   searchValue,
   setSearchValue,
+  favoriteList,
+  setNFTData,
 }) => {
   return (
     <Wrapper>
@@ -29,9 +32,31 @@ const SubFilter = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
+      <ShowFavoritesButton
+        onClick={e => {
+          if (favoriteList.length > 0) {
+            setNFTData(favoriteList)
+          }
+        }}
+      >
+        <img src={HeartCircleBlue} />
+      </ShowFavoritesButton>
     </Wrapper>
   )
 }
+
+const ShowFavoritesButton = styled.div`
+  display: flex;
+  background: #fff;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  :hover {
+    background: #ff7bac;
+  }
+`
 
 const Wrapper = styled.div`
   display: flex;

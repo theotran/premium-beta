@@ -9,6 +9,8 @@ const Filter = ({
   sortLiveAssetsDynamic,
   sortPremintDynamic,
   searchLiveAssetsByInput,
+  favoriteList,
+  setNFTData,
 }) => {
   const [activeFilter, setActiveFilter] = useState("premint")
   const [activeSort, setActiveSort] = useState(null)
@@ -51,6 +53,8 @@ const Filter = ({
         searchLiveAssetsByInput={searchLiveAssetsByInput}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        favoriteList={favoriteList}
+        setNFTData={setNFTData}
       />
     </Wrapper>
   )

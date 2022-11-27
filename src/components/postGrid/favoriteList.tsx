@@ -4,11 +4,11 @@ import styled from "styled-components"
 import Card from "./card"
 import useInfiniteScroll from "./useInfiniteScroll"
 
-interface PostGridProps {
+interface FavoriteListProps {
   nfts: []
 }
 
-const PostGrid: React.FC<PostGridProps> = ({
+const FavoriteList: React.FC<FavoriteListProps> = ({
   nfts,
   favoriteList,
   setFavoriteList,
@@ -39,10 +39,11 @@ const Grid = styled.ul`
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  margin-bottom: 24px;
 
   // @media (max-width: ${({ theme }) => theme.device.sm}) {
   //   grid-gap: var(--grid-gap-xl);
   // }
 `
 
-export default PostGrid
+export default FavoriteList
