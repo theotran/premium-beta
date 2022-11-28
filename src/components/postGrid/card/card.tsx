@@ -15,8 +15,9 @@ import Twitter from "../../../images/twitter.png"
 import Link from "../../../images/link.png"
 import Brand from "../../../images/pretium-brand-logo.png"
 import Star from "../../../images/star.png"
-import ManipulationChart from "Components/Piechart/ManipulationChart"
-import ConversionChart from "Components/Piechart/ConversionChart"
+import ManipulationChartModal from "Components/Piechart/ManipulationChartModal"
+import ConversionChartModal from "Components/Piechart/ConversionChartModal"
+import MixedChart from "Components/Linechart/Mixedchart"
 import HeartBlue from "../../../images/heart-blue.png"
 
 type CardProps = Pick<
@@ -203,15 +204,16 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
                 <a href={discord || ""} target="__blank">
                   <img src={Discord} />
                 </a>
-                <FavoriteButton onClick>
+                {/* <FavoriteButton>
                   <img src={HeartBlue} />
-                </FavoriteButton>
+                </FavoriteButton> */}
               </SocialLinks>
             </CardProjectDetailsModal>
           </ModalContentTop>
+          <MixedChart />
           <ModalContentTop>
-            <ManipulationChart />
-            <ConversionChart />
+            <ManipulationChartModal manipulation={manipulation} />
+            <ConversionChartModal />
           </ModalContentTop>
         </ModalContent>
       </Modal>
@@ -244,13 +246,14 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 24px;
   // padding: 23px;
 `
 
 const ModalContentTop = styled.div`
   display: flex;
   align-items: end;
-  padding-bottom: 45px;
+  // padding: 24px 0;
 `
 
 const Wrapper = styled.div`
@@ -440,7 +443,7 @@ const SentimentValue = styled.p`
   font-size: 32px;
 `
 
-const ManipulationValue = styled.p`
+export const ManipulationValue = styled.p`
   color: #40c3ea;
   font-size: 16px;
   margin: 5px 0;

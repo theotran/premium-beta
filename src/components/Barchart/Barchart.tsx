@@ -6,7 +6,6 @@ import Active from "../../images/active.png"
 const Chart = lazy(() => import("react-apexcharts"))
 
 const isBrowser = () => typeof window !== "undefined"
-// import "./DataQualityIndex.css"
 
 const BarChart = () => {
   const chartState = {
@@ -70,24 +69,138 @@ const BarChart = () => {
                 },
               ],
             },
+            {
+              x: "",
+              y: 7,
+              goals: [
+                {
+                  name: "Expected",
+                  value: "6",
+                  strokeHeight: 13,
+                  strokeWidth: 0,
+                  strokeLineCap: "round",
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
+            {
+              x: "",
+              y: 7,
+              goals: [
+                {
+                  name: "Expected",
+                  value: "6",
+                  strokeHeight: 13,
+                  strokeWidth: 0,
+                  strokeLineCap: "round",
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
+            {
+              x: "",
+              y: 8,
+              goals: [
+                {
+                  name: "Expected",
+                  value: "10",
+                  strokeHeight: 5,
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
+            {
+              x: "",
+              y: 7,
+              goals: [
+                {
+                  name: "Expected",
+                  value: 8.7,
+                  strokeHeight: 5,
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
+            {
+              x: "",
+              y: 12,
+              goals: [
+                {
+                  name: "Expected",
+                  value: 10,
+                  strokeHeight: 2,
+                  strokeDashArray: 2,
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
+            {
+              x: "",
+              y: 8,
+              goals: [
+                {
+                  name: "Expected",
+                  value: "10",
+                  strokeHeight: 5,
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
+            {
+              x: "",
+              y: 7,
+              goals: [
+                {
+                  name: "Expected",
+                  value: 8.7,
+                  strokeHeight: 5,
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
+            {
+              x: "",
+              y: 12,
+              goals: [
+                {
+                  name: "Expected",
+                  value: 10,
+                  strokeHeight: 2,
+                  strokeDashArray: 2,
+                  strokeColor: "#56AFF1",
+                },
+              ],
+            },
           ],
         },
       ],
       chart: {
-        height: "130%",
+        height: 500,
         type: "bar",
       },
       plotOptions: {
         bar: {
-          columnWidth: "60%",
+          columnWidth: "90%",
         },
       },
+      // fill: {
+      //   type: "gradient",
+      //   gradient: {
+      //     shade: "light",
+      //     gradientToColors: ["#FF7BAC"],
+      //     shadeIntensity: 0.8,
+      //     // type: "horizontal",
+      //     opacityFrom: 1,
+      //     opacityTo: 1,
+      //     stops: [0, 30],
+      //   },
+      // },
       colors: ["#2FE1FB"],
-      dataLabels: {
-        enabled: false,
-      },
+      // dataLabels: {
+      //   enabled: false,
+      // },
       legend: {
-        show: true,
+        show: false,
         showForSingleSeries: true,
         customLegendItems: ["Actual", "Expected"],
         markers: {
@@ -109,6 +222,7 @@ const BarChart = () => {
             options={chartState.options}
             series={chartState.options.series}
             type="bar"
+            height={220}
             // width="220"
           />
         </Suspense>
@@ -129,6 +243,7 @@ const Wrapper = styled.div`
   .apexcharts-legend {
     display: none;
   }
+  min-width: 220px;
   max-width: 400px;
   margin-right: 24px;
 `

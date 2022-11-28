@@ -21,6 +21,7 @@ import PostGrid from "Components/postGrid"
 import FavoriteList from "Components/postGrid/favoriteList"
 import Filter from "Components/filter"
 import Linechart from "Components/Linechart/Linechart"
+import LinechartV2 from "Components/Linechart/Linechart-v2"
 import ManipulationChart from "Components/Piechart/ManipulationChart"
 import ConversionChart from "Components/Piechart/ConversionChart"
 import BarChart from "Components/Barchart/Barchart"
@@ -491,7 +492,8 @@ const Home = ({
           <MarketSnapshotContainer>
             <MarketSnapshot />
             <ChartsWrapper>
-              <Linechart />
+              {/* <Linechart /> */}
+              <LinechartV2 />
               <BarChart />
               <ManipulationChart />
               <ConversionChart />
@@ -556,6 +558,11 @@ const ChartsWrapper = styled.div`
   display: flex;
   padding: 24px;
   justify-content: space-between;
+  width: 100%;
+
+  .apexcharts-toolbar {
+    display: none;
+  }
 `
 
 export const query = graphql`
