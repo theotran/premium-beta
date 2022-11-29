@@ -114,6 +114,11 @@ const Home = ({
 
   const [favoriteList, setFavoriteList] = useState([])
 
+  const [marketSentimentLineGraphData, setMarketSentimentLineGraphData] =
+    useState(null)
+
+  console.log("Market Sentiment Line Graph Data", marketSentimentLineGraphData)
+
   useEffect(() => {
     const query = {
       query: {
@@ -484,6 +489,58 @@ const Home = ({
       .catch(err => console.warn(err))
   }
 
+  useEffect(() => {
+    const query = {
+      sort: [{ datetime: { order: "asc", unmapped_type: "boolean" } }],
+      query: {
+        bool: {
+          should: [
+            {
+              bool: {
+                filter: [
+                  {
+                    range: {
+                      datetime: {
+                        format: "strict_date_optional_time",
+                        gte: "now-30d",
+                        lte: "now",
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    }
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-nft-sixty/_search`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        let _data = []
+
+        response.data?.hits?.hits.forEach(n => {
+          if (!n._source.sentiment || n._source.sentiment === null) {
+            _data.push(0)
+          }
+          // _data.push(Math.ceil(n._source.sentiment * 100))
+          _data.push(Math.ceil(n._source.sentiment * 100))
+        })
+        setMarketSentimentLineGraphData(_data)
+      })
+      .catch(err => console.warn(err))
+  }, [])
+
   return (
     <Layout>
       <SEO title="Home" />
@@ -493,7 +550,9 @@ const Home = ({
             <MarketSnapshot />
             <ChartsWrapper>
               {/* <Linechart /> */}
-              <LinechartV2 />
+              {marketSentimentLineGraphData && (
+                <LinechartV2 data={marketSentimentLineGraphData} />
+              )}
               <BarChart />
               <ManipulationChart />
               <ConversionChart />

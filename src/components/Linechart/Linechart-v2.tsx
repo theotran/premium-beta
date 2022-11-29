@@ -8,7 +8,7 @@ const Chart = lazy(() => import("react-apexcharts"))
 const isBrowser = () => typeof window !== "undefined"
 // import "./DataQualityIndex.css"
 
-const LineChartV2 = () => {
+const LineChartV2 = ({ data }) => {
   const chartState = {
     chartOptions: {
       labels: [],
@@ -17,7 +17,8 @@ const LineChartV2 = () => {
       series: [
         {
           name: "Value",
-          data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5],
+          // data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5],
+          data: data,
         },
       ],
       chart: {
