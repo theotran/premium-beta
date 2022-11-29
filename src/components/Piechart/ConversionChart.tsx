@@ -8,11 +8,12 @@ const Chart = lazy(() => import("react-apexcharts"))
 const isBrowser = () => typeof window !== "undefined"
 // import "./DataQualityIndex.css"
 
-const ConversionChart = () => {
+const ConversionChart = ({ data }) => {
+  const remainder = 100 - data
   const chartState = {
-    series: [40, 30],
+    series: [data, remainder],
     chartOptions: {
-      labels: [],
+      labels: [`${Number(data).toFixed()}%`, `${Number(remainder).toFixed()}%`],
     },
     options: {
       colors: ["#64DFDF", "#77C7E6"],
@@ -53,13 +54,16 @@ const ConversionChart = () => {
       </TitleContainer>
       {isBrowser() && (
         <Suspense fallback={<div>Loading...</div>}>
-          <Chart
-            options={chartState.options}
-            series={chartState.series}
-            labels={chartState.chartOptions.labels}
-            type="donut"
-            width="220"
-          />
+          <ChartWrapper>
+            <Chart
+              options={chartState.options}
+              series={chartState.series}
+              labels={chartState.chartOptions.labels}
+              type="donut"
+              width="220"
+            />
+            <ChartValue>{`${data}%`}</ChartValue>
+          </ChartWrapper>
         </Suspense>
       )}
       {/* <Description>
@@ -71,6 +75,18 @@ const ConversionChart = () => {
 }
 
 export default ConversionChart
+
+const ChartWrapper = styled.div`
+  position: relative;
+`
+
+const ChartValue = styled.p`
+  position: absolute;
+  bottom: 74px;
+  left: 38%;
+  font-size: 30px;
+  color: #64dfdf;
+`
 
 const Wrapper = styled.div`
   display: flex;

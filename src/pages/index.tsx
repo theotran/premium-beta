@@ -73,6 +73,53 @@ const auth = getAuth()
 //     // ...
 //   })
 
+// useEffect(() => {
+//   getRedirectResult(auth)
+//     .then(result => {
+//       // This gives you a Google Access Token. You can use it to access Google APIs.
+//       const credential = GoogleAuthProvider.credentialFromResult(result)
+//       const token = credential.accessToken
+
+//       // The signed-in user info.
+//       const user = result.user
+//       console.log("USER ", user)
+//     })
+//     .catch(error => {
+//       // Handle Errors here.
+//       const errorCode = error.code
+//       const errorMessage = error.message
+//       // The email of the user's account used.
+//       const email = error?.customData?.email
+//       // The AuthCredential type that was used.
+//       const credential = GoogleAuthProvider.credentialFromError(error)
+//       // ...
+
+//       console.log("ERROR ", error)
+//     })
+// })
+
+// const signInGoogle = e => {
+//   signInWithRedirect(auth, provider)
+//     .then(result => {
+//       // This gives you a Google Access Token. You can use it to access the Google API.
+//       const credential = GoogleAuthProvider.credentialFromResult(result)
+//       const token = credential.accessToken
+//       // The signed-in user info.
+//       const user = result.user
+//       // ...
+//     })
+//     .catch(error => {
+//       // Handle Errors here.
+//       const errorCode = error.code
+//       const errorMessage = error.message
+//       // The email of the user's account used.
+//       const email = error?.customData?.email
+//       // The AuthCredential type that was used.
+//       const credential = GoogleAuthProvider.credentialFromError(error)
+//       // ...
+//     })
+// }
+
 const Home = ({
   pageContext,
   data,
@@ -117,7 +164,11 @@ const Home = ({
   const [marketSentimentLineGraphData, setMarketSentimentLineGraphData] =
     useState(null)
 
-  console.log("Market Sentiment Line Graph Data", marketSentimentLineGraphData)
+  const [activePublicGraphData, setActivePublicGraphData] = useState(null)
+
+  const [conversionChartData, setConversionChartData] = useState(null)
+
+  const [manipulationChartData, setManipulationChartData] = useState(null)
 
   useEffect(() => {
     const query = {
@@ -155,53 +206,6 @@ const Home = ({
       .catch(err => console.warn(err))
   }, [])
 
-  // useEffect(() => {
-  //   getRedirectResult(auth)
-  //     .then(result => {
-  //       // This gives you a Google Access Token. You can use it to access Google APIs.
-  //       const credential = GoogleAuthProvider.credentialFromResult(result)
-  //       const token = credential.accessToken
-
-  //       // The signed-in user info.
-  //       const user = result.user
-  //       console.log("USER ", user)
-  //     })
-  //     .catch(error => {
-  //       // Handle Errors here.
-  //       const errorCode = error.code
-  //       const errorMessage = error.message
-  //       // The email of the user's account used.
-  //       const email = error?.customData?.email
-  //       // The AuthCredential type that was used.
-  //       const credential = GoogleAuthProvider.credentialFromError(error)
-  //       // ...
-
-  //       console.log("ERROR ", error)
-  //     })
-  // })
-
-  // const signInGoogle = e => {
-  //   signInWithRedirect(auth, provider)
-  //     .then(result => {
-  //       // This gives you a Google Access Token. You can use it to access the Google API.
-  //       const credential = GoogleAuthProvider.credentialFromResult(result)
-  //       const token = credential.accessToken
-  //       // The signed-in user info.
-  //       const user = result.user
-  //       // ...
-  //     })
-  //     .catch(error => {
-  //       // Handle Errors here.
-  //       const errorCode = error.code
-  //       const errorMessage = error.message
-  //       // The email of the user's account used.
-  //       const email = error?.customData?.email
-  //       // The AuthCredential type that was used.
-  //       const credential = GoogleAuthProvider.credentialFromError(error)
-  //       // ...
-  //     })
-  // }
-
   const FetchPremint = () => {
     const query = {
       query: {
@@ -238,43 +242,6 @@ const Home = ({
       .catch(err => console.warn(err))
   }
 
-  // const SortPremintByCreatedDateAsc = () => {
-  //   const query = {
-  //     sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
-  //     query: {
-  //       bool: {
-  //         filter: [
-  //           {
-  //             range: {
-  //               created_date: {
-  //                 format: "strict_date_optional_time",
-  //                 gte: "now-1d",
-  //                 lte: "now+1y",
-  //               },
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   }
-  //   const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000`
-  //   axios
-  //     .get(nftAssetsURL, {
-  //       auth: {
-  //         username: `${process.env.GATSBY_API_USERNAME}`,
-  //         password: `${process.env.GATSBY_API_PASSWORD}`,
-  //       },
-  //       params: {
-  //         source: JSON.stringify(query),
-  //         source_content_type: "application/json",
-  //       },
-  //     })
-  //     .then(response => {
-  //       setNFTData(response.data?.hits?.hits)
-  //     })
-  //     .catch(err => console.warn(err))
-  // }
-
   const FetchLiveAssets = () => {
     const query = {
       query: {
@@ -310,80 +277,6 @@ const Home = ({
       })
       .catch(err => console.warn(err))
   }
-
-  // const SortLiveAssetsByCreatedDateAsc = () => {
-  //   const query = {
-  //     sort: [{ created_date: { order: "asc", unmapped_type: "boolean" } }],
-  //     query: {
-  //       bool: {
-  //         filter: [
-  //           {
-  //             range: {
-  //               created_date: {
-  //                 format: "strict_date_optional_time",
-  //                 gte: "now-1y",
-  //                 lte: "now",
-  //               },
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   }
-  //   const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000`
-  //   axios
-  //     .get(nftAssetsURL, {
-  //       auth: {
-  //         username: `${process.env.GATSBY_API_USERNAME}`,
-  //         password: `${process.env.GATSBY_API_PASSWORD}`,
-  //       },
-  //       params: {
-  //         source: JSON.stringify(query),
-  //         source_content_type: "application/json",
-  //       },
-  //     })
-  //     .then(response => {
-  //       setNFTData(response.data?.hits?.hits)
-  //     })
-  //     .catch(err => console.warn(err))
-  // }
-
-  // const SortLiveAssetsByCreatedDateDesc = () => {
-  //   const query = {
-  //     sort: [{ created_date: { order: "desc", unmapped_type: "boolean" } }],
-  //     query: {
-  //       bool: {
-  //         filter: [
-  //           {
-  //             range: {
-  //               created_date: {
-  //                 format: "strict_date_optional_time",
-  //                 gte: "now-1y",
-  //                 lte: "now",
-  //               },
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   }
-  //   const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-aggregation/_search?from=0&size=1000`
-  //   axios
-  //     .get(nftAssetsURL, {
-  //       auth: {
-  //         username: `${process.env.GATSBY_API_USERNAME}`,
-  //         password: `${process.env.GATSBY_API_PASSWORD}`,
-  //       },
-  //       params: {
-  //         source: JSON.stringify(query),
-  //         source_content_type: "application/json",
-  //       },
-  //     })
-  //     .then(response => {
-  //       setNFTData(response.data?.hits?.hits)
-  //     })
-  //     .catch(err => console.warn(err))
-  // }
 
   const SortLiveAssetsDynamic = obj => {
     const query = {
@@ -527,19 +420,124 @@ const Home = ({
         },
       })
       .then(response => {
-        let _data = []
+        let sentimentLineGraphData = []
 
         response.data?.hits?.hits.forEach(n => {
           if (!n._source.sentiment || n._source.sentiment === null) {
-            _data.push(0)
+            sentimentLineGraphData.push(0)
           }
-          // _data.push(Math.ceil(n._source.sentiment * 100))
-          _data.push(Math.ceil(n._source.sentiment * 100))
+          // sentimentLineGraphData.push(Math.ceil(n._source.sentiment * 100))
+          sentimentLineGraphData.push(Math.ceil(n._source.sentiment * 100))
         })
-        setMarketSentimentLineGraphData(_data)
+        setMarketSentimentLineGraphData(sentimentLineGraphData)
+
+        let _activePublicGraphData = []
+
+        response.data?.hits?.hits.forEach(n => {
+          if (!n._source.voices || n._source.voices === null) {
+            _activePublicGraphData.push(0)
+          }
+          _activePublicGraphData.push(Math.ceil(n._source.voices * 100))
+        })
+        setActivePublicGraphData(_activePublicGraphData)
       })
       .catch(err => console.warn(err))
   }, [])
+
+  useEffect(() => {
+    const query = {
+      aggs: { "0": { avg: { field: "conversion" } } },
+      size: 0,
+      fields: [{ field: "datetime", format: "date_time" }],
+      query: {
+        bool: {
+          should: [
+            {
+              bool: {
+                filter: [
+                  {
+                    range: {
+                      datetime: {
+                        format: "strict_date_optional_time",
+                        gte: "now-30d",
+                        lte: "now",
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    }
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-nft-sixty/_search`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        const value = Math.ceil(response.data.aggregations[0].value * 100)
+        setConversionChartData(value)
+      })
+      .catch(err => console.warn(err))
+  }, [])
+
+  useEffect(() => {
+    const query = {
+      aggs: { "0": { avg: { field: "manipulation" } } },
+      size: 0,
+      fields: [{ field: "datetime", format: "date_time" }],
+      query: {
+        bool: {
+          should: [
+            {
+              bool: {
+                filter: [
+                  {
+                    range: {
+                      datetime: {
+                        format: "strict_date_optional_time",
+                        gte: "now-30d",
+                        lte: "now",
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    }
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-nft-sixty/_search`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        const value = Math.ceil(response.data.aggregations[0].value * 100)
+        setManipulationChartData(value)
+      })
+      .catch(err => console.warn(err))
+  }, [])
+
+  console.log("Conversion Pie ", conversionChartData)
+  console.log("Manipulation Pie ", manipulationChartData)
 
   return (
     <Layout>
@@ -553,9 +551,17 @@ const Home = ({
               {marketSentimentLineGraphData && (
                 <LinechartV2 data={marketSentimentLineGraphData} />
               )}
-              <BarChart />
-              <ManipulationChart />
-              <ConversionChart />
+              {activePublicGraphData && (
+                <BarChart data={activePublicGraphData} />
+              )}
+
+              {manipulationChartData && (
+                <ManipulationChart data={manipulationChartData} />
+              )}
+
+              {conversionChartData && (
+                <ConversionChart data={conversionChartData} />
+              )}
             </ChartsWrapper>
           </MarketSnapshotContainer>
           <Filter

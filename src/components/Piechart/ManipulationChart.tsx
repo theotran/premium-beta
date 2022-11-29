@@ -5,9 +5,10 @@ import ManipulationImage from "../../images/Manipulation.png"
 const Chart = lazy(() => import("react-apexcharts"))
 const isBrowser = () => typeof window !== "undefined"
 
-const ManipulationChart = () => {
+const ManipulationChart = ({ data }) => {
+  const remainder = 100 - data
   const chartState = {
-    series: [70, 20],
+    series: [data, remainder],
     chartOptions: {
       labels: [],
     },
@@ -50,13 +51,19 @@ const ManipulationChart = () => {
       </TitleContainer>
       {isBrowser() && (
         <Suspense fallback={<div>Loading...</div>}>
-          <Chart
-            options={chartState.options}
-            series={chartState.series}
-            labels={chartState.chartOptions.labels}
-            type="donut"
-            width="220"
-          />
+          <ChartWrapper>
+            <Chart
+              options={chartState.options}
+              series={chartState.series}
+              labels={chartState.chartOptions.labels}
+              type="donut"
+              width="220"
+            />
+            <ChartValueContainer>
+              <ChartValue>{`${data}%`}</ChartValue>
+              <ChartPromotionValue>{`${remainder}% Organic`}</ChartPromotionValue>
+            </ChartValueContainer>
+          </ChartWrapper>
         </Suspense>
       )}
       {/* <Description>
@@ -68,6 +75,29 @@ const ManipulationChart = () => {
 }
 
 export default ManipulationChart
+
+const ChartWrapper = styled.div`
+  position: relative;
+`
+
+const ChartValueContainer = styled.div`
+  position: absolute;
+  bottom: 74px;
+  left: 34%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+`
+
+const ChartValue = styled.p`
+  font-size: 16px;
+  color: #69b4ea;
+`
+const ChartPromotionValue = styled.p`
+  font-size: 11px;
+  color: #ff7bac;
+`
 
 const Wrapper = styled.div`
   display: flex;

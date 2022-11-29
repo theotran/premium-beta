@@ -7,171 +7,72 @@ const Chart = lazy(() => import("react-apexcharts"))
 
 const isBrowser = () => typeof window !== "undefined"
 
-const BarChart = () => {
+// [
+//   {
+//     x: "",
+//     y: 7,
+//     goals: [
+//       {
+//         name: "Expected",
+//         value: 8.7,
+//         strokeHeight: 5,
+//         strokeColor: "#56AFF1",
+//       },
+//     ],
+//   },
+//   {
+//     x: "",
+//     y: 12,
+//     goals: [
+//       {
+//         name: "Expected",
+//         value: 10,
+//         strokeHeight: 2,
+//         strokeDashArray: 2,
+//         strokeColor: "#56AFF1",
+//       },
+//     ],
+//   },
+//   {
+//     x: "",
+//     y: 7,
+//     goals: [
+//       {
+//         name: "Expected",
+//         value: "6",
+//         strokeHeight: 13,
+//         strokeWidth: 0,
+//         strokeLineCap: "round",
+//         strokeColor: "#56AFF1",
+//       },
+//     ],
+//   },
+//   {
+//     x: "",
+//     y: 7,
+//     goals: [
+//       {
+//         name: "Expected",
+//         value: "6",
+//         strokeHeight: 13,
+//         strokeWidth: 0,
+//         strokeLineCap: "round",
+//         strokeColor: "#56AFF1",
+//       },
+//     ],
+//   },
+// ]
+
+const BarChart = ({ data }) => {
   const chartState = {
-    // series: [40, 30],
     chartOptions: {
       labels: [],
     },
     options: {
       series: [
         {
-          name: "Actual",
-          data: [
-            {
-              x: "",
-              y: 7,
-              goals: [
-                {
-                  name: "Expected",
-                  value: "6",
-                  strokeHeight: 13,
-                  strokeWidth: 0,
-                  strokeLineCap: "round",
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 8,
-              goals: [
-                {
-                  name: "Expected",
-                  value: "10",
-                  strokeHeight: 5,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 7,
-              goals: [
-                {
-                  name: "Expected",
-                  value: 8.7,
-                  strokeHeight: 5,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 12,
-              goals: [
-                {
-                  name: "Expected",
-                  value: 10,
-                  strokeHeight: 2,
-                  strokeDashArray: 2,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 7,
-              goals: [
-                {
-                  name: "Expected",
-                  value: "6",
-                  strokeHeight: 13,
-                  strokeWidth: 0,
-                  strokeLineCap: "round",
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 7,
-              goals: [
-                {
-                  name: "Expected",
-                  value: "6",
-                  strokeHeight: 13,
-                  strokeWidth: 0,
-                  strokeLineCap: "round",
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 8,
-              goals: [
-                {
-                  name: "Expected",
-                  value: "10",
-                  strokeHeight: 5,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 7,
-              goals: [
-                {
-                  name: "Expected",
-                  value: 8.7,
-                  strokeHeight: 5,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 12,
-              goals: [
-                {
-                  name: "Expected",
-                  value: 10,
-                  strokeHeight: 2,
-                  strokeDashArray: 2,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 8,
-              goals: [
-                {
-                  name: "Expected",
-                  value: "10",
-                  strokeHeight: 5,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 7,
-              goals: [
-                {
-                  name: "Expected",
-                  value: 8.7,
-                  strokeHeight: 5,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-            {
-              x: "",
-              y: 12,
-              goals: [
-                {
-                  name: "Expected",
-                  value: 10,
-                  strokeHeight: 2,
-                  strokeDashArray: 2,
-                  strokeColor: "#56AFF1",
-                },
-              ],
-            },
-          ],
+          name: "Voices",
+          data: data,
         },
       ],
       chart: {
@@ -181,6 +82,16 @@ const BarChart = () => {
       plotOptions: {
         bar: {
           columnWidth: "90%",
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        type: "category",
+        categories: [],
+        labels: {
+          show: false,
         },
       },
       // fill: {
@@ -222,7 +133,7 @@ const BarChart = () => {
             options={chartState.options}
             series={chartState.options.series}
             type="bar"
-            height={220}
+            height={200}
             // width="220"
           />
         </Suspense>
