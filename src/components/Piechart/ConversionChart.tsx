@@ -13,7 +13,7 @@ const ConversionChart = ({ data }) => {
   const chartState = {
     series: [data, remainder],
     chartOptions: {
-      labels: [`${Number(data).toFixed()}%`, `${Number(remainder).toFixed()}%`],
+      labels: [],
     },
     options: {
       colors: ["#64DFDF", "#77C7E6"],
@@ -83,9 +83,11 @@ const ChartWrapper = styled.div`
 const ChartValue = styled.p`
   position: absolute;
   bottom: 74px;
-  left: 38%;
+  left: 0%;
   font-size: 30px;
   color: #64dfdf;
+  width: 100%;
+  text-align: center;
 `
 
 const Wrapper = styled.div`

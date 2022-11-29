@@ -69,8 +69,8 @@ const LineChartV2 = ({ data }) => {
         },
       },
       yaxis: {
-        min: -100,
-        max: 100,
+        min: 0,
+        max: 1,
         show: true,
         tickAmount: 4,
       },

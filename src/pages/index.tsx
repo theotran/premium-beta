@@ -424,10 +424,10 @@ const Home = ({
 
         response.data?.hits?.hits.forEach(n => {
           if (!n._source.sentiment || n._source.sentiment === null) {
-            sentimentLineGraphData.push(0)
+            sentimentLineGraphData.push("0")
           }
           // sentimentLineGraphData.push(Math.ceil(n._source.sentiment * 100))
-          sentimentLineGraphData.push(Math.ceil(n._source.sentiment * 100))
+          sentimentLineGraphData.push(Number(n._source.sentiment).toFixed(4))
         })
         setMarketSentimentLineGraphData(sentimentLineGraphData)
 
@@ -484,7 +484,8 @@ const Home = ({
         },
       })
       .then(response => {
-        const value = Math.ceil(response.data.aggregations[0].value * 100)
+        const value = +response.data.aggregations[0].value.toFixed(2)
+
         setConversionChartData(value)
       })
       .catch(err => console.warn(err))
@@ -535,9 +536,6 @@ const Home = ({
       })
       .catch(err => console.warn(err))
   }, [])
-
-  console.log("Conversion Pie ", conversionChartData)
-  console.log("Manipulation Pie ", manipulationChartData)
 
   return (
     <Layout>
