@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import moment from "moment"
 import Modal from "react-modal"
@@ -25,7 +25,12 @@ type CardProps = Pick<
   "thumbnail" | "alt" | "category" | "title" | "desc" | "date"
 >
 
-const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
+const Card: React.FC<CardProps> = ({
+  nft,
+  favoriteList,
+  setFavoriteList,
+  getAssetData,
+}) => {
   const {
     "@timestamp": timestamp,
     name,
@@ -40,6 +45,7 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
     discord,
     magiceden,
     asset_id,
+    pretium,
   } = nft._source
 
   const colors = ["#4EA8DE", "#ED1E79", "#6930C3"]
@@ -81,7 +87,11 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
     }
   }
 
-  console.log("NFT in Card ", nft)
+  // useEffect(() => {
+  //   getAssetData(pretium)
+  // }, [])
+
+  // console.log("NFT in Card ", nft)
 
   return (
     <Wrapper>

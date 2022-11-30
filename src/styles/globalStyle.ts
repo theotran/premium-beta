@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   tspan {
+    font-size: 13px;
+    font-weight: 600;
     font-family: "MarkOT";
     src: local("MarkOT"),
     url("../fonts/MarkOT-Medium.otf") format("truetype");

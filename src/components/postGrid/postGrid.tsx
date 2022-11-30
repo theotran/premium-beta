@@ -12,6 +12,7 @@ const PostGrid: React.FC<PostGridProps> = ({
   nfts,
   favoriteList,
   setFavoriteList,
+  getAssetData,
 }) => {
   // const scrollEdgeRef = useRef<HTMLDivElement>(null)
 
@@ -26,6 +27,7 @@ const PostGrid: React.FC<PostGridProps> = ({
               nft={data}
               favoriteList={favoriteList}
               setFavoriteList={setFavoriteList}
+              getAssetData={getAssetData}
             />
           )
         })}

@@ -570,7 +570,7 @@ const Home = ({
         },
       })
       .then(response => {
-        console.log("Response", response)
+        // console.log("Response", response)
       })
       .catch(err => console.warn(err))
   }
@@ -618,6 +618,7 @@ const Home = ({
             nfts={NFTData}
             favoriteList={favoriteList}
             setFavoriteList={setFavoriteList}
+            getAssetData={GetAssetData}
           />
         </Content>
       </Main>
