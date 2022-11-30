@@ -61,8 +61,8 @@ const Card: React.FC<CardProps> = ({
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      height: "80%",
-      width: "80%",
+      height: "90%",
+      width: "90%",
       borderRadius: "27px",
     },
   }
@@ -271,6 +271,10 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   min-height: 164px;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    margin: 0 0 0 24px;
+  }
 `
 
 const CardTheme = styled.div`
@@ -311,13 +315,21 @@ const CardContainer = styled.div`
   background: #f4f4f4;
   border-radius: 30px;
 
-  // z-index: 2;
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
 `
 
 const CardBlockLeft = styled.div`
   display: flex;
   padding: 19px 19px;
   border-right: 5px solid #ffffff;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    border: 0;
+  }
 `
 
 const CardThumbnail = styled.div`
@@ -427,6 +439,10 @@ const NFTStats = styled.div`
   padding: 13px 39px;
   height: -webkit-fill-available;
   width: 50%;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    padding: 13px 39px 24px;
+  }
 `
 
 const StatBlock = styled.div`
