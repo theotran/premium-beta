@@ -89,7 +89,7 @@ const LineChartV2 = ({ data }) => {
             options={chartState.options}
             series={chartState.options.series}
             type="line"
-            // width="220"
+            // width="22"
           />
         </Suspense>
       )}
@@ -110,8 +110,19 @@ const Wrapper = styled.div`
     display: none;
   }
   min-width: 220px;
-  max-width: 400px;
-  margin-right: 24px;
+  // max-width: 400px;
+  // margin-right: 24px;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: auto;
+    width: 100%;
+    // max-width: 100%;
+    padding: 0 24px;
+    margin: 0;
+  }
 `
 
 const TitleContainer = styled.div`

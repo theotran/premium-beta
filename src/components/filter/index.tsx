@@ -125,6 +125,11 @@ const OptionCategory = styled.p`
   font-size: 30px;
   color: #fff;
   font-weight: 900;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    font-size: 24px;
+    margin: 0 20px;
+  }
 `
 
 export default Filter

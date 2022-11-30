@@ -66,6 +66,11 @@ const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 30px;
   font-weight: 600;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 const Container = styled.div`

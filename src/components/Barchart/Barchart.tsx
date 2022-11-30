@@ -106,7 +106,17 @@ const BarChart = ({ data }) => {
       //     stops: [0, 30],
       //   },
       // },
-      colors: ["#2FE1FB"],
+      colors: ["#56AFF1"],
+      // fill: {
+      //   type: "gradient",
+      //   gradient: {
+      //     shadeIntensity: 1,
+      //     opacityFrom: 0.7,
+      //     opacityTo: 1,
+      //     stops: [0, 70, 100],
+      //   },
+      //   fillColors: ["#2FE1FB", "#56AFF1"],
+      // },
       // dataLabels: {
       //   enabled: false,
       // },

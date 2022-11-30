@@ -28,6 +28,15 @@ const Wrapper = styled.div`
   padding: 24px 34px;
   border-right: 5px solid #fff;
   max-width: 264px;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    // width: 100%;
+    max-width: 100%;
+    padding: 24px;
+  }
 `
 
 const TitleContainer = styled.div`

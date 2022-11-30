@@ -654,6 +654,11 @@ const MarketSnapshotContainer = styled.div`
   overflow: hidden;
   background: #f4f4f4;
   font-weight: 600;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const ChartsWrapper = styled.div`
@@ -666,6 +671,11 @@ const ChartsWrapper = styled.div`
 
   .apexcharts-toolbar {
     display: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    flex-direction: column;
+    align-items: center;
   }
 `
 
