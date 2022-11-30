@@ -69,7 +69,6 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
 
   const closeModal = e => {
     setModalIsOpen(false)
-    console.log("trigger", modalIsOpen)
   }
 
   const addFavoriteToList = () => {
@@ -81,6 +80,8 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
       console.log("Did not add favorite to list")
     }
   }
+
+  console.log("NFT in Card ", nft)
 
   return (
     <Wrapper>
@@ -247,7 +248,7 @@ const ModalContent = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 24px;
-  // padding: 23px;
+  font-weight: 600;
 `
 
 const ModalContentTop = styled.div`
@@ -360,12 +361,14 @@ const CardProjectDetails = styled.div`
     text-align: left;
     letter-spacing: 0px;
     color: #000000;
+    font-weight: 600;
   }
 
   .name {
     font-size: 16px;
     text-align: left;
     color: #000000;
+    font-weight: 800;
   }
 
   .mintDate {
@@ -373,6 +376,7 @@ const CardProjectDetails = styled.div`
     text-align: left;
     color: #000000;
     margin-top: auto;
+    font-weight: 800;
   }
 `
 
@@ -427,7 +431,8 @@ const StatBlock = styled.div`
 `
 
 const StatTitle = styled.p`
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 800;
   margin: 7px 0;
   // @media (max-width: ${({ theme }) => theme.device.md}) {
   //   font-size: 1.3125rem;
@@ -441,12 +446,14 @@ const StatTitle = styled.p`
 const SentimentValue = styled.p`
   color: #ff7bac;
   font-size: 32px;
+  font-weight: 600;
 `
 
 export const ManipulationValue = styled.p`
   color: #40c3ea;
   font-size: 16px;
   margin: 5px 0;
+  font-weight: 600;
 `
 
 const ActivePublicValue = styled.p`
@@ -456,11 +463,13 @@ const ActivePublicValue = styled.p`
 
 const SentimentValueAvg = styled.p`
   font-size: 9px;
+  font-weight: 600;
 `
 
 const Promotion = styled.p`
   font-size: 11px;
   color: #ff7bac;
+  font-weight: 600;
 `
 
 const Desc = styled.p`

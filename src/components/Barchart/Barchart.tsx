@@ -81,7 +81,7 @@ const BarChart = ({ data }) => {
       },
       plotOptions: {
         bar: {
-          columnWidth: "90%",
+          columnWidth: "70%",
         },
       },
       dataLabels: {

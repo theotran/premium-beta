@@ -65,6 +65,7 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 100%;
   margin-bottom: 30px;
+  font-weight: 600;
 `
 
 const Container = styled.div`

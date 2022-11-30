@@ -7,8 +7,13 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: "MarkOT";
     src: local("MarkOT"),
+    url("../fonts/MarkOT.otf") format("truetype");
+  }
+
+  tspan {
+    font-family: "MarkOT";
+    src: local("MarkOT"),
     url("../fonts/MarkOT-Medium.otf") format("truetype");
-    font-weight: bold;
   }
 
   .ReactModal__Overlay {
@@ -145,7 +150,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     
-    font-family: "MarkOT-Medium";
+    font-family: "MarkOT";
+    
 
     background-color: var(--color-post-background);
     -webkit-font-smoothing: antialiased;

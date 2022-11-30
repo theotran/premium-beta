@@ -407,7 +407,7 @@ const Home = ({
         },
       },
     }
-    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-nft-sixty/_search`
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-nft-sixty/_search?size=30`
     axios
       .get(nftAssetsURL, {
         auth: {
@@ -537,6 +537,44 @@ const Home = ({
       .catch(err => console.warn(err))
   }, [])
 
+  const GetAssetData = id => {
+    const query = {
+      query: {
+        bool: {
+          filter: [
+            { terms: { "pretium.keyword": [id] } },
+            {
+              range: {
+                "@timestamp": {
+                  format: "strict_date_optional_time",
+                  gte: "now-24h",
+                  lte: "now",
+                },
+              },
+            },
+          ],
+        },
+      },
+    }
+
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-nft-sixty/_search`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        console.log("Response", response)
+      })
+      .catch(err => console.warn(err))
+  }
+
   return (
     <Layout>
       <SEO title="Home" />
@@ -614,6 +652,7 @@ const MarketSnapshotContainer = styled.div`
   border-radius: 23px;
   overflow: hidden;
   background: #f4f4f4;
+  font-weight: 600;
 `
 
 const ChartsWrapper = styled.div`
@@ -622,6 +661,7 @@ const ChartsWrapper = styled.div`
   padding: 24px;
   justify-content: space-between;
   width: 100%;
+  font-weight: 600;
 
   .apexcharts-toolbar {
     display: none;

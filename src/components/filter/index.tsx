@@ -118,13 +118,13 @@ const Option = styled.div`
   justify-content: space-between;
   padding: 7px 25px;
   cursor: pointer;
-  transition: ;
 `
 
 const OptionCategory = styled.p`
   letter-spacing: 0px;
   font-size: 30px;
   color: #fff;
+  font-weight: 900;
 `
 
 export default Filter
