@@ -537,44 +537,6 @@ const Home = ({
       .catch(err => console.warn(err))
   }, [])
 
-  const GetAssetData = id => {
-    const query = {
-      query: {
-        bool: {
-          filter: [
-            { terms: { "pretium.keyword": [id] } },
-            {
-              range: {
-                "@timestamp": {
-                  format: "strict_date_optional_time",
-                  gte: "now-24h",
-                  lte: "now",
-                },
-              },
-            },
-          ],
-        },
-      },
-    }
-
-    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-nft-sixty/_search`
-    axios
-      .get(nftAssetsURL, {
-        auth: {
-          username: `${process.env.GATSBY_API_USERNAME}`,
-          password: `${process.env.GATSBY_API_PASSWORD}`,
-        },
-        params: {
-          source: JSON.stringify(query),
-          source_content_type: "application/json",
-        },
-      })
-      .then(response => {
-        // console.log("Response", response)
-      })
-      .catch(err => console.warn(err))
-  }
-
   return (
     <Layout>
       <SEO title="Home" />
@@ -618,7 +580,6 @@ const Home = ({
             nfts={NFTData}
             favoriteList={favoriteList}
             setFavoriteList={setFavoriteList}
-            getAssetData={GetAssetData}
           />
         </Content>
       </Main>

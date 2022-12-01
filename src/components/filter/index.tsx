@@ -127,7 +127,7 @@ const OptionCategory = styled.p`
   font-weight: 900;
 
   @media (max-width: ${({ theme }) => theme.device.md}) {
-    font-size: 24px;
+    font-size: 20px;
     margin: 0 20px;
   }
 `

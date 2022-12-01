@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
+import axios from "axios"
 import moment from "moment"
 import Modal from "react-modal"
 import type Post from "Types/Post"
@@ -25,12 +26,7 @@ type CardProps = Pick<
   "thumbnail" | "alt" | "category" | "title" | "desc" | "date"
 >
 
-const Card: React.FC<CardProps> = ({
-  nft,
-  favoriteList,
-  setFavoriteList,
-  getAssetData,
-}) => {
+const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
   const {
     "@timestamp": timestamp,
     name,
@@ -87,11 +83,52 @@ const Card: React.FC<CardProps> = ({
     }
   }
 
-  // useEffect(() => {
-  //   getAssetData(pretium)
-  // }, [])
+  const [assetData, setAssetData] = useState([])
 
-  // console.log("NFT in Card ", nft)
+  useEffect(() => {
+    // console.log("pretium in function ", pretium)
+    const query = {
+      size: 24,
+      query: {
+        bool: {
+          filter: [
+            { terms: { "pretium.keyword": [pretium] } },
+            {
+              range: {
+                "@timestamp": {
+                  format: "strict_date_optional_time",
+                  gte: "now-24h",
+                  lte: "now",
+                },
+              },
+            },
+          ],
+        },
+      },
+    }
+
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-day/_search?size=24`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        // console.log("Response", response?.data?.hits?.hits)
+        if (response?.data?.hits?.hits) {
+          setAssetData(response?.data?.hits?.hits)
+        }
+      })
+      .catch(err => console.warn(err))
+  }, [])
+
+  // console.log("assetData in Card ", assetData)
 
   return (
     <Wrapper>
@@ -155,7 +192,7 @@ const Card: React.FC<CardProps> = ({
             <ManipulationValue>
               {manipulation && typeof manipulation === "number"
                 ? `${Number(100 - manipulation * 100).toFixed()}% Organic`
-                : "0% Organic"}
+                : "100% Organic"}
             </ManipulationValue>
             <Promotion>
               {manipulation && typeof manipulation === "number"
@@ -269,19 +306,20 @@ const ModalContentTop = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  width: 100%;
+  width: calc(100% - 50px);
   min-height: 164px;
+  margin: 0 24px 0 48px;
 
-  @media (max-width: ${({ theme }) => theme.device.md}) {
-    margin: 0 0 0 24px;
-  }
+  // @media (max-width: ${({ theme }) => theme.device.md}) {
+  //   margin: 0 24px 0 48px;
+  // }
 `
 
 const CardTheme = styled.div`
   position: absolute;
   top: 0;
   left: -50px;
-  width: 100%;
+  width: calc(100% - 50px);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -324,8 +362,17 @@ const CardContainer = styled.div`
 
 const CardBlockLeft = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: space-between;
   padding: 19px 19px;
   border-right: 5px solid #ffffff;
+
+  @media (max-width: ${({ theme }) => theme.device.sm}) {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+  }
 
   @media (max-width: ${({ theme }) => theme.device.md}) {
     border: 0;
@@ -400,6 +447,11 @@ const CardProjectDetails = styled.div`
     margin-top: auto;
     font-weight: 800;
   }
+
+  @media (max-width: ${({ theme }) => theme.device.sm}) {
+    margin: 24px 0 0 0;
+    padding: 0;
+  }
 `
 
 const CardProjectDetailsModal = styled.div`
@@ -440,8 +492,15 @@ const NFTStats = styled.div`
   height: -webkit-fill-available;
   width: 50%;
 
+  @media (max-width: ${({ theme }) => theme.device.sm}) {
+    padding: 24px;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+  }
+
   @media (max-width: ${({ theme }) => theme.device.md}) {
-    padding: 13px 39px 24px;
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `
 
@@ -460,19 +519,20 @@ const StatTitle = styled.p`
   font-size: 13px;
   font-weight: 800;
   margin: 7px 0;
-  // @media (max-width: ${({ theme }) => theme.device.md}) {
-  //   font-size: 1.3125rem;
-  // }
 
-  // @media (max-width: ${({ theme }) => theme.device.sm}) {
-  //   font-size: var(--text-md);
-  // }
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    font-size: 13px;
+  }
 `
 
 const SentimentValue = styled.p`
   color: #ff7bac;
   font-size: 32px;
   font-weight: 600;
+
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    font-size: 16px;
+  }
 `
 
 export const ManipulationValue = styled.p`
