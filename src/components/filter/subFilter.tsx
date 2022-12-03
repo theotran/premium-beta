@@ -65,7 +65,7 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 100%;
   margin-bottom: 30px;
-  font-weight: 600;
+  font-weight: 500;
 
   @media (max-width: ${({ theme }) => theme.device.md}) {
     display: flex;

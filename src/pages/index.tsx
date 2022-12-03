@@ -614,7 +614,7 @@ const MarketSnapshotContainer = styled.div`
   border-radius: 23px;
   overflow: hidden;
   background: #f4f4f4;
-  font-weight: 600;
+  font-weight: 500;
 
   @media (max-width: ${({ theme }) => theme.device.md}) {
     flex-direction: column;
@@ -628,7 +628,7 @@ const ChartsWrapper = styled.div`
   padding: 24px;
   justify-content: space-between;
   width: 100%;
-  font-weight: 600;
+  font-weight: 500;
 
   .apexcharts-toolbar {
     display: none;

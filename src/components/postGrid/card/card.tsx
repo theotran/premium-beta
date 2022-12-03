@@ -295,7 +295,6 @@ const ModalContent = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 24px;
-  font-weight: 600;
 `
 
 const ModalContentTop = styled.div`
@@ -307,12 +306,16 @@ const ModalContentTop = styled.div`
 const Wrapper = styled.div`
   position: relative;
   width: calc(100% - 50px);
-  min-height: 164px;
   margin: 0 24px 0 48px;
+  display: flex;
+  // max-height: 170px;
+  height: 170px;
+  align-items: center;
+  justify-content: center;
 
-  // @media (max-width: ${({ theme }) => theme.device.md}) {
-  //   margin: 0 24px 0 48px;
-  // }
+  @media (max-width: ${({ theme }) => theme.device.md}) {
+    height: auto;
+  }
 `
 
 const CardTheme = styled.div`
@@ -347,7 +350,7 @@ const CardTheme = styled.div`
 const CardContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+
   display: flex;
   align-items: center;
   background: #f4f4f4;
@@ -430,14 +433,13 @@ const CardProjectDetails = styled.div`
     text-align: left;
     letter-spacing: 0px;
     color: #000000;
-    font-weight: 600;
   }
 
   .name {
     font-size: 16px;
     text-align: left;
     color: #000000;
-    font-weight: 800;
+    font-weight: 500;
   }
 
   .mintDate {
@@ -445,7 +447,7 @@ const CardProjectDetails = styled.div`
     text-align: left;
     color: #000000;
     margin-top: auto;
-    font-weight: 800;
+    font-weight: 400;
   }
 
   @media (max-width: ${({ theme }) => theme.device.sm}) {
@@ -470,7 +472,6 @@ const CardProjectDetailsModal = styled.div`
 
   .name {
     font-size: 30px;
-    font-weight: bold;
     text-align: left;
     color: #000000;
     margin: 3px 0;
@@ -489,7 +490,6 @@ const NFTStats = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 40px;
   padding: 13px 39px;
-  height: -webkit-fill-available;
   width: 50%;
 
   @media (max-width: ${({ theme }) => theme.device.sm}) {
@@ -517,7 +517,7 @@ const StatBlock = styled.div`
 
 const StatTitle = styled.p`
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 500;
   margin: 7px 0;
 
   @media (max-width: ${({ theme }) => theme.device.md}) {
@@ -528,7 +528,6 @@ const StatTitle = styled.p`
 const SentimentValue = styled.p`
   color: #ff7bac;
   font-size: 32px;
-  font-weight: 600;
 
   @media (max-width: ${({ theme }) => theme.device.md}) {
     font-size: 16px;
@@ -539,7 +538,6 @@ export const ManipulationValue = styled.p`
   color: #40c3ea;
   font-size: 16px;
   margin: 5px 0;
-  font-weight: 600;
 `
 
 const ActivePublicValue = styled.p`
@@ -549,13 +547,11 @@ const ActivePublicValue = styled.p`
 
 const SentimentValueAvg = styled.p`
   font-size: 9px;
-  font-weight: 600;
 `
 
 const Promotion = styled.p`
   font-size: 11px;
   color: #ff7bac;
-  font-weight: 600;
 `
 
 const Desc = styled.p`
