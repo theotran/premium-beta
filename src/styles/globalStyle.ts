@@ -4,20 +4,6 @@ import reset from "styled-reset"
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
-  // @font-face {
-  //   font-family: "MarkOT";
-  //   src: local("../fonts/MarkOT-medium.woff")
-  //   url("../fonts/MarkOT-Medium.woff");
-  // }
-
-  // tspan {
-  //   font-size: 13px;
-  //   font-weight: 600;
-  //   font-family: "MarkOT";
-  //   src: local("MarkOT"),
-  //   url("../fonts/MarkOT-Medium.otf") format("truetype");
-  // }
-
   .ReactModal__Overlay {
     background: linear-gradient(90deg, rgba(94, 166, 238, 0.6) 0%, rgba(96, 169, 237, 0.6) 23%, rgba(105, 180, 234, 0.6) 44%, rgba(119, 199, 230, 0.6) 65%, rgba(140, 225, 225, 0.6) 85%, rgba(160, 251, 220, 0.6) 100%) 0% 0%;
   }
