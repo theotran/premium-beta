@@ -10,69 +10,83 @@ const isBrowser = () => typeof window !== "undefined"
 
 const MixedChart = () => {
   const chartState = {
-    chartOptions: {
-      labels: [],
-    },
+    series: [
+      {
+        name: "ONE",
+        type: "column",
+        data: [
+          440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160, 352, 752,
+          320, 257, 160,
+        ],
+      },
+      {
+        name: "TWO",
+        type: "line",
+        data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
+      },
+    ],
     options: {
-      series: [
-        {
-          name: "Value",
-          data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5],
-        },
-      ],
       chart: {
-        height: 200,
+        height: 500,
         type: "line",
       },
-      dataLabels: {
-        enabled: false,
-      },
-      // forecastDataPoints: {
-      //   count: 7,
-      // },
       stroke: {
-        width: 5,
-        curve: "smooth",
+        width: [1, 2],
+        // curve: "smooth",
       },
-      xaxis: {
-        type: "category",
-        categories: [],
-        labels: {
-          show: false,
+      colors: ["#69B4EA", "#FF7BAC"],
+      plotOptions: {
+        bar: {
+          columnWidth: "80%",
         },
-        // tickAmount: 2,
-        // labels: {
-        //   formatter: function (value, timestamp, opts) {
-        //     return opts.dateFormatter(new Date(timestamp), "dd MMM")
-        //   },
-        // },
       },
-      // title: {
-      //   text: "Forecast",
-      //   align: "left",
-      //   style: {
-      //     fontSize: "16px",
-      //     color: "#666",
+      // fill: {
+      //   type: "gradient",
+      //   colors: ["#69B4EA", "#FF7BAC"],
+      //   gradient: {
+      //     shade: "dark",
+      //     gradientToColors: ["#69B4EA", "#FF7BAC"],
+      //     shadeIntensity: 1,
+      //     // type: "horizontal",
+      //     opacityFrom: 1,
+      //     opacityTo: 1,
+      //     stops: [0, 100, 100, 100],
       //   },
       // },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "dark",
-          gradientToColors: ["#FF7BAC"],
-          shadeIntensity: 1,
-          type: "horizontal",
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 100, 100, 100],
+      dataLabels: {
+        enabled: false,
+        enabledOnSeries: [1],
+      },
+      labels: [
+        "01 Jan 2001",
+        "02 Jan 2001",
+        "03 Jan 2001",
+        "04 Jan 2001",
+        "05 Jan 2001",
+        "06 Jan 2001",
+        "07 Jan 2001",
+        "08 Jan 2001",
+        "09 Jan 2001",
+        "10 Jan 2001",
+        "11 Jan 2001",
+        "12 Jan 2001",
+      ],
+      xaxis: {
+        type: "datetime",
+      },
+      yaxis: [
+        {
+          title: {
+            text: "ONE",
+          },
         },
-      },
-      yaxis: {
-        min: -100,
-        max: 100,
-        show: true,
-        tickAmount: 4,
-      },
+        {
+          opposite: true,
+          title: {
+            text: "TWO",
+          },
+        },
+      ],
     },
   }
 
@@ -86,16 +100,12 @@ const MixedChart = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Chart
             options={chartState.options}
-            series={chartState.options.series}
+            series={chartState.series}
             type="line"
-            width="700"
+            width={600}
           />
         </Suspense>
       )}
-      {/* <Description>
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-        nonummy nibh euismod
-      </Description> */}
     </Wrapper>
   )
 }

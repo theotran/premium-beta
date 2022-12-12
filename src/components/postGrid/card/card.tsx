@@ -128,7 +128,13 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
       .catch(err => console.warn(err))
   }, [])
 
-  // console.log("assetData in Card ", assetData)
+  console.log("assetData in Card ", assetData)
+
+  const publicSentiment = assetData.filter(
+    a => a._source?.public_sentiment && a._source?.public_sentiment
+  )
+
+  console.log("Public sentiment ", publicSentiment)
 
   return (
     <Wrapper>
@@ -155,18 +161,26 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
               "MMMM Do YYYY, h:mm:ss a"
             )}`}</p>
             <SocialLinks>
-              <a href={website || ""} target="__blank">
-                <img src={Link} />
-              </a>
-              <a href={twitter || ""} target="__blank">
-                <img src={Twitter} />
-              </a>
-              <a href={discord || ""} target="__blank">
-                <img src={Discord} />
-              </a>
-              <a href={magiceden || ""} target="__blank">
-                <img src={Search} />
-              </a>
+              {website && (
+                <a href={website} target="__blank">
+                  <img src={Link} />
+                </a>
+              )}
+              {twitter && (
+                <a href={twitter} target="__blank">
+                  <img src={Twitter} />
+                </a>
+              )}
+              {discord && (
+                <a href={discord} target="__blank">
+                  <img src={Discord} />
+                </a>
+              )}
+              {magiceden && (
+                <a href={magiceden} target="__blank">
+                  <img src={Search} />
+                </a>
+              )}
               <FavoriteButton
                 active={
                   favoriteList.length > 0 &&
@@ -236,22 +250,28 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
             <CardProjectDetailsModal>
               <p className="projectName">Project Name:</p>
               <p className="name">
-                {name || ""}
+                {name}
                 <br />
               </p>
               <p className="mintDate">{`Minting ${moment(created_date).format(
                 "MMMM Do YYYY, h:mm:ss a"
               )}`}</p>
               <SocialLinks>
-                <a href={website || ""} target="__blank">
-                  <img src={Link} />
-                </a>
-                <a href={twitter || ""} target="__blank">
-                  <img src={Twitter} />
-                </a>
-                <a href={discord || ""} target="__blank">
-                  <img src={Discord} />
-                </a>
+                {website && (
+                  <a href={website} target="__blank">
+                    <img src={Link} />
+                  </a>
+                )}
+                {twitter && (
+                  <a href={twitter} target="__blank">
+                    <img src={Twitter} />
+                  </a>
+                )}
+                {discord && (
+                  <a href={discord} target="__blank">
+                    <img src={Discord} />
+                  </a>
+                )}
                 {/* <FavoriteButton>
                   <img src={HeartBlue} />
                 </FavoriteButton> */}
