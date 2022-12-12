@@ -37,7 +37,7 @@ const MixedChart = () => {
       colors: ["#69B4EA", "#FF7BAC"],
       plotOptions: {
         bar: {
-          columnWidth: "80%",
+          columnWidth: "85%",
         },
       },
       // fill: {
@@ -98,12 +98,14 @@ const MixedChart = () => {
       </TitleContainer>
       {isBrowser() && (
         <Suspense fallback={<div>Loading...</div>}>
-          <Chart
-            options={chartState.options}
-            series={chartState.series}
-            type="line"
-            width={600}
-          />
+          <ChartWrapper>
+            <Chart
+              options={chartState.options}
+              series={chartState.series}
+              type="line"
+              width={"100%"}
+            />
+          </ChartWrapper>
         </Suspense>
       )}
     </Wrapper>
@@ -123,6 +125,11 @@ const Wrapper = styled.div`
     display: none;
   }
   width: 100%;
+`
+
+const ChartWrapper = styled.div`
+  width: 100%;
+  max-width: 700px;
 `
 
 const TitleContainer = styled.div`
