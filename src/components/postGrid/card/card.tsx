@@ -88,6 +88,7 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
   useEffect(() => {
     // console.log("pretium in function ", pretium)
     const query = {
+      // aggs: { "0": { avg: { field: "manipulation" } } },
       size: 24,
       query: {
         bool: {
@@ -134,7 +135,11 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
     a => a._source?.public_sentiment && a._source?.public_sentiment
   )
 
-  console.log("Public sentiment ", publicSentiment)
+  const score = assetData.filter(a => a._source?.score && a._source?.score)
+
+  console.log("Score ", score)
+
+  //TODO run separate queries for the avg manipulation and conversion data
 
   return (
     <Wrapper>
@@ -278,7 +283,9 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
               </SocialLinks>
             </CardProjectDetailsModal>
           </ModalContentTop>
-          <MixedChart />
+          {publicSentiment && score && (
+            <MixedChart publicSentiment={publicSentiment} score={score} />
+          )}
           <ModalContentTop>
             <ManipulationChartModal manipulation={manipulation} />
             <ConversionChartModal />

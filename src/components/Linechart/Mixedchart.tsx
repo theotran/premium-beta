@@ -8,30 +8,27 @@ const Chart = lazy(() => import("react-apexcharts"))
 const isBrowser = () => typeof window !== "undefined"
 // import "./DataQualityIndex.css"
 
-const MixedChart = () => {
+const MixedChart = ({ publicSentiment, score }) => {
   const chartState = {
     series: [
       {
-        name: "ONE",
+        name: "Market Sentiment Score",
         type: "column",
-        data: [
-          440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160, 352, 752,
-          320, 257, 160,
-        ],
+        data: score.map(s => s._source.score),
       },
       {
-        name: "TWO",
+        name: "Public Sentiment",
         type: "line",
-        data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16],
+        data: publicSentiment.map(p => p._source.public_sentiment.toFixed(4)),
       },
     ],
     options: {
       chart: {
-        height: 500,
+        height: 200,
         type: "line",
       },
       stroke: {
-        width: [1, 2],
+        width: [2, 2],
         // curve: "smooth",
       },
       colors: ["#69B4EA", "#FF7BAC"],
@@ -55,35 +52,35 @@ const MixedChart = () => {
       // },
       dataLabels: {
         enabled: false,
-        enabledOnSeries: [1],
+        // enabledOnSeries: [1],
       },
-      labels: [
-        "01 Jan 2001",
-        "02 Jan 2001",
-        "03 Jan 2001",
-        "04 Jan 2001",
-        "05 Jan 2001",
-        "06 Jan 2001",
-        "07 Jan 2001",
-        "08 Jan 2001",
-        "09 Jan 2001",
-        "10 Jan 2001",
-        "11 Jan 2001",
-        "12 Jan 2001",
-      ],
+      // labels: [
+      //   "01 Jan 2001",
+      //   "02 Jan 2001",
+      //   "03 Jan 2001",
+      //   "04 Jan 2001",
+      //   "05 Jan 2001",
+      //   "06 Jan 2001",
+      //   "07 Jan 2001",
+      //   "08 Jan 2001",
+      //   "09 Jan 2001",
+      //   "10 Jan 2001",
+      //   "11 Jan 2001",
+      //   "12 Jan 2001",
+      // ],
       xaxis: {
-        type: "datetime",
+        type: "category",
       },
       yaxis: [
         {
           title: {
-            text: "ONE",
+            text: "Market Sentiment Score",
           },
         },
         {
           opposite: true,
           title: {
-            text: "TWO",
+            text: "Public Sentiment",
           },
         },
       ],
