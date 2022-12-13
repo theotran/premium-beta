@@ -85,10 +85,13 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
 
   const [assetData, setAssetData] = useState([])
 
+  const [manipulationAvg, setManipulationAvg] = useState(null)
+  const [conversionAvg, setConversionAvg] = useState(null)
+
+  //Get All Asset Data
   useEffect(() => {
-    // console.log("pretium in function ", pretium)
     const query = {
-      // aggs: { "0": { avg: { field: "manipulation" } } },
+      // aggs: { "1": { avg: { field: "manipulation" } } },
       size: 24,
       query: {
         bool: {
@@ -140,6 +143,100 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
   console.log("Score ", score)
 
   //TODO run separate queries for the avg manipulation and conversion data
+  // useEffect(() => {
+  //   const query = {
+  //     aggs: { "1": { avg: { field: "manipulation" } } },
+  //     size: 1,
+  //     query: {
+  //       bool: {
+  //         filter: [
+  //           { terms: { "pretium.keyword": [pretium] } },
+  //           {
+  //             range: {
+  //               "@timestamp": {
+  //                 format: "strict_date_optional_time",
+  //                 gte: "now-24h",
+  //                 lte: "now",
+  //               },
+  //             },
+  //           },
+  //         ],
+  //       },
+  //     },
+  //   }
+
+  //   const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-day/_search`
+  //   axios
+  //     .get(nftAssetsURL, {
+  //       auth: {
+  //         username: `${process.env.GATSBY_API_USERNAME}`,
+  //         password: `${process.env.GATSBY_API_PASSWORD}`,
+  //       },
+  //       params: {
+  //         source: JSON.stringify(query),
+  //         source_content_type: "application/json",
+  //       },
+  //     })
+  //     .then(response => {
+  //       // console.log("Response", response?.data?.hits?.hits)
+  //       if (response?.data?.hits?.hits) {
+  //         setManipulationAvg(response?.data?.hits?.hits)
+  //       }
+  //     })
+  //     .catch(err => console.warn(err))
+  // }, [])
+
+  useEffect(() => {
+    const query = {
+      aggs: {
+        manipulation: { avg: { field: "manipulation" } },
+        conversion: { avg: { field: "conversion" } },
+      },
+      size: 0,
+      query: {
+        bool: {
+          filter: [
+            { terms: { "pretium.keyword": [pretium] } },
+            {
+              range: {
+                "@timestamp": {
+                  format: "strict_date_optional_time",
+                  gte: "now-24h",
+                  lte: "now",
+                },
+              },
+            },
+          ],
+        },
+      },
+    }
+
+    const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-day/_search`
+    axios
+      .get(nftAssetsURL, {
+        auth: {
+          username: `${process.env.GATSBY_API_USERNAME}`,
+          password: `${process.env.GATSBY_API_PASSWORD}`,
+        },
+        params: {
+          source: JSON.stringify(query),
+          source_content_type: "application/json",
+        },
+      })
+      .then(response => {
+        // console.log("Response", response?.data?.aggregations?.conversion?.value)
+        if (response?.data?.aggregations?.conversion?.value) {
+          setConversionAvg(response?.data?.aggregations?.conversion?.value)
+        }
+        if (response?.data?.aggregations?.manipulation?.value) {
+          setManipulationAvg(response?.data?.aggregations?.manipulation?.value)
+        }
+      })
+      .catch(err => console.warn(err))
+  }, [])
+
+  console.log("conversion ", conversionAvg)
+  console.log("manipulation ", manipulationAvg)
 
   return (
     <Wrapper>
@@ -287,8 +384,8 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
             <MixedChart publicSentiment={publicSentiment} score={score} />
           )}
           <ModalContentTop>
-            <ManipulationChartModal manipulation={manipulation} />
-            <ConversionChartModal />
+            <ManipulationChartModal manipulation={manipulationAvg} />
+            <ConversionChartModal conversion={conversionAvg} />
           </ModalContentTop>
         </ModalContent>
       </Modal>
