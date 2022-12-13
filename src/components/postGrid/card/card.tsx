@@ -124,7 +124,6 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
         },
       })
       .then(response => {
-        // console.log("Response", response?.data?.hits?.hits)
         if (response?.data?.hits?.hits) {
           setAssetData(response?.data?.hits?.hits)
         }
@@ -132,59 +131,11 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
       .catch(err => console.warn(err))
   }, [])
 
-  console.log("assetData in Card ", assetData)
-
   const publicSentiment = assetData.filter(
     a => a._source?.public_sentiment && a._source?.public_sentiment
   )
 
   const score = assetData.filter(a => a._source?.score && a._source?.score)
-
-  console.log("Score ", score)
-
-  //TODO run separate queries for the avg manipulation and conversion data
-  // useEffect(() => {
-  //   const query = {
-  //     aggs: { "1": { avg: { field: "manipulation" } } },
-  //     size: 1,
-  //     query: {
-  //       bool: {
-  //         filter: [
-  //           { terms: { "pretium.keyword": [pretium] } },
-  //           {
-  //             range: {
-  //               "@timestamp": {
-  //                 format: "strict_date_optional_time",
-  //                 gte: "now-24h",
-  //                 lte: "now",
-  //               },
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   }
-
-  //   const nftAssetsURL = `https://enigmatic-river-67748.herokuapp.com/https://koat.es.us-east-1.aws.found.io:9243/p-pretium-assets-day/_search`
-  //   axios
-  //     .get(nftAssetsURL, {
-  //       auth: {
-  //         username: `${process.env.GATSBY_API_USERNAME}`,
-  //         password: `${process.env.GATSBY_API_PASSWORD}`,
-  //       },
-  //       params: {
-  //         source: JSON.stringify(query),
-  //         source_content_type: "application/json",
-  //       },
-  //     })
-  //     .then(response => {
-  //       // console.log("Response", response?.data?.hits?.hits)
-  //       if (response?.data?.hits?.hits) {
-  //         setManipulationAvg(response?.data?.hits?.hits)
-  //       }
-  //     })
-  //     .catch(err => console.warn(err))
-  // }, [])
 
   useEffect(() => {
     const query = {
@@ -234,9 +185,6 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
       })
       .catch(err => console.warn(err))
   }, [])
-
-  console.log("conversion ", conversionAvg)
-  console.log("manipulation ", manipulationAvg)
 
   return (
     <Wrapper>
@@ -384,8 +332,16 @@ const Card: React.FC<CardProps> = ({ nft, favoriteList, setFavoriteList }) => {
             <MixedChart publicSentiment={publicSentiment} score={score} />
           )}
           <ModalContentTop>
-            <ManipulationChartModal manipulation={manipulationAvg} />
-            <ConversionChartModal conversion={conversionAvg} />
+            {manipulationAvg && (
+              <ManipulationChartModal
+                manipulation={parseFloat(manipulationAvg.toFixed(2))}
+              />
+            )}
+            {conversionAvg && (
+              <ConversionChartModal
+                conversion={parseFloat(conversionAvg.toFixed(2))}
+              />
+            )}
           </ModalContentTop>
         </ModalContent>
       </Modal>

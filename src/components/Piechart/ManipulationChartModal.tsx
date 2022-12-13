@@ -7,8 +7,9 @@ const Chart = lazy(() => import("react-apexcharts"))
 const isBrowser = () => typeof window !== "undefined"
 
 const ManipulationChartModal = ({ manipulation }) => {
+  const remainder = 100 - manipulation
   const chartState = {
-    series: [70, 20],
+    series: [manipulation, remainder],
     chartOptions: {
       labels: [],
     },
@@ -45,15 +46,14 @@ const ManipulationChartModal = ({ manipulation }) => {
 
   return (
     <Wrapper>
-      <TitleContainer>
-        <img src={ManipulationImage} />
-        <h3>Manipulation</h3>
-        {/* <ManipulationValue>
-          {manipulation && typeof manipulation === "number"
-            ? `${Number(100 - manipulation * 100).toFixed()}% Organic`
-            : "0% Organic"}
-        </ManipulationValue> */}
-      </TitleContainer>
+      <CopyWrapper>
+        <TitleContainer>
+          <img src={ManipulationImage} />
+          <h3>Manipulation</h3>
+        </TitleContainer>
+        <Value>{`${remainder}% Organic`}</Value>
+        <Promotion>{`${manipulation}% Promotion`}</Promotion>
+      </CopyWrapper>
       {isBrowser() && (
         <Suspense fallback={<div>Loading...</div>}>
           <Chart
@@ -78,8 +78,26 @@ const Wrapper = styled.div`
   .apexcharts-legend {
     display: none;
   }
-  max-width: 300px;
   margin-right: 45px;
+`
+
+const CopyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Value = styled.p`
+  color: #40c3ea;
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 35px;
+`
+
+const Promotion = styled.p`
+  font-size: 12px;
+  color: #ff7bac;
+  font-weight: 600;
+  margin-left: 35px;
 `
 
 const TitleContainer = styled.div`
@@ -91,10 +109,11 @@ const TitleContainer = styled.div`
   }
 
   h3 {
-    font-size: 20px;
+    font-size: 14px;
     text-align: left;
     letter-spacing: 0px;
     color: #000000;
+    font-weight: 600;
   }
 `
 

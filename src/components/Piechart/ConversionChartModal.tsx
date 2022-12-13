@@ -8,9 +8,11 @@ const Chart = lazy(() => import("react-apexcharts"))
 const isBrowser = () => typeof window !== "undefined"
 // import "./DataQualityIndex.css"
 
-const ConversionChartModal = () => {
+const ConversionChartModal = ({ conversion }) => {
+  const remainder = 100 - conversion
+
   const chartState = {
-    series: [40, 30],
+    series: [conversion, remainder],
     chartOptions: {
       labels: [],
     },
@@ -47,10 +49,13 @@ const ConversionChartModal = () => {
 
   return (
     <Wrapper>
-      <TitleContainer>
-        <img src={Conversion} />
-        <h3>Conversion</h3>
-      </TitleContainer>
+      <CopyWrapper>
+        <TitleContainer>
+          <img src={Conversion} />
+          <h3>Conversion</h3>
+        </TitleContainer>
+        <Value>{`${conversion}%`}</Value>
+      </CopyWrapper>
       {isBrowser() && (
         <Suspense fallback={<div>Loading...</div>}>
           <Chart
@@ -82,6 +87,18 @@ const Wrapper = styled.div`
   max-width: 300px;
 `
 
+const CopyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Value = styled.p`
+  color: #4ea8de;
+  font-size: 31px;
+  font-weight: 600;
+  margin-left: 30px;
+`
+
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -91,18 +108,10 @@ const TitleContainer = styled.div`
   }
 
   h3 {
-    font-size: 20px;
+    font-size: 14px;
     text-align: left;
     letter-spacing: 0px;
     color: #000000;
+    font-weight: 600;
   }
-`
-
-const Description = styled.p`
-  font-size: 15px;
-  text-align: left;
-  letter-spacing: 0px;
-  color: #000000;
-  margin: 24px 0;
-  font-weight: 400;
 `
