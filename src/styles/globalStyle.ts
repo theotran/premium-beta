@@ -142,8 +142,8 @@ const GlobalStyle = createGlobalStyle`
     // font-family: 'Manrope', sans-serif;
     font-family: 'Comfortaa', sans-serif;
     font-weight: 500;
-    // letter-spacing: 0px;
-    line-height: 1.2;
+    letter-spacing: 0px;
+    // line-height: 1.2;
 
     background-color: var(--color-post-background);
     -webkit-font-smoothing: antialiased;
