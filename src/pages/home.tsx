@@ -95,6 +95,7 @@ const Landing = () => {
             <ConversionChart data={67} />
           </ChartsWrapper>
         </MarketSnapshotContainer>
+        <SignUpButton>Sign up for the beta</SignUpButton>
       </Container>
       <Footer />
     </Layout>
@@ -248,6 +249,19 @@ const BlueButton = styled(Button)`
 const OrangeButton = styled(Button)`
   background: transparent linear-gradient(90deg, #f9a745 0%, #f43f58 100%) 0% 0%
     no-repeat padding-box;
+`
+
+const SignUpButton = styled(Button)`
+  background: transparent linear-gradient(90deg, #56aff1 0%, #2fe1fb 100%) 0% 0%
+    no-repeat padding-box;
+  color: #fff;
+  justify-content: center;
+
+  @media (min-width: ${({ theme }) => theme.device.md}) {
+    font-size: 35px;
+    min-height: 119px;
+    margin-top: 30px;
+  }
 `
 
 const BottomHeroContainer = styled.div`
