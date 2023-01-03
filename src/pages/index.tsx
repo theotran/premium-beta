@@ -1,11 +1,11 @@
 import React, { useState, useLayoutEffect, useEffect } from "react"
 import { initializeApp } from "firebase/app"
+
 import {
   getAuth,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-  signInWithPopup,
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
 } from "firebase/auth"
 import type { PageProps } from "gatsby"
 import ReactModal from "react-modal"
@@ -34,6 +34,7 @@ import MarketSnapshot from "Components/MarketSnapshot/MarketSnapshot"
 const firebaseConfig = {
   apiKey: "AIzaSyBQ03S-Q_9AVwYgYbyZpSuNVc56jAf4nDQ",
   authDomain: "pretium-beta.firebaseapp.com",
+  databaseURL: "https://pretium-beta-default-rtdb.firebaseio.com",
   projectId: "pretium-beta",
   storageBucket: "pretium-beta.appspot.com",
   messagingSenderId: "665041649891",
@@ -46,96 +47,25 @@ const app = initializeApp(firebaseConfig)
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be in the authorized domains list in the Firebase Console.
-  url: "www.pretium-beta.web.app",
+  url: "http://localhost:8000/",
   // This must be true.
   handleCodeInApp: true,
-  // iOS: {
-  //   bundleId: 'com.example.ios'
-  // },
-  // android: {
-  //   packageName: 'com.example.android',
-  //   installApp: true,
-  //   minimumVersion: '12'
-  // },
-  dynamicLinkDomain: "www.pretium-beta.web.app",
+  iOS: {
+    bundleId: "https://pretium.page.link/email-sign-up",
+  },
+  android: {
+    packageName: "https://pretium.page.link/email-sign-up",
+    installApp: true,
+    minimumVersion: "12",
+  },
+  dynamicLinkDomain: "pretium.page.link",
 }
 
-const provider = new GoogleAuthProvider()
+const auth = getAuth()
 
 ReactModal.setAppElement("#___gatsby")
 ReactModal.defaultStyles.overlay.backgroundColor =
   "linear-gradient(90deg, rgba(94, 166, 238, 1) 0%, rgba(96, 169, 237, 1) 23%, rgba(105, 180, 234, 1) 44%, rgba(119, 199, 230, 1) 65%, rgba(140, 225, 225, 1) 85%, rgba(160, 251, 220, 1) 100%) 0% 0%"
-
-// export const auth = getAuth(app)
-
-const auth = getAuth()
-
-// signInWithPopup(auth, provider)
-//   .then(result => {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//     const credential = GoogleAuthProvider.credentialFromResult(result)
-//     const token = credential.accessToken
-//     // The signed-in user info.
-//     const user = result.user
-//     // ...
-//   })
-//   .catch(error => {
-//     // Handle Errors here.
-//     const errorCode = error.code
-//     const errorMessage = error.message
-//     // The email of the user's account used.
-//     const email = error.customData.email
-//     // The AuthCredential type that was used.
-//     const credential = GoogleAuthProvider.credentialFromError(error)
-//     // ...
-//   })
-
-// useEffect(() => {
-//   getRedirectResult(auth)
-//     .then(result => {
-//       // This gives you a Google Access Token. You can use it to access Google APIs.
-//       const credential = GoogleAuthProvider.credentialFromResult(result)
-//       const token = credential.accessToken
-
-//       // The signed-in user info.
-//       const user = result.user
-//       console.log("USER ", user)
-//     })
-//     .catch(error => {
-//       // Handle Errors here.
-//       const errorCode = error.code
-//       const errorMessage = error.message
-//       // The email of the user's account used.
-//       const email = error?.customData?.email
-//       // The AuthCredential type that was used.
-//       const credential = GoogleAuthProvider.credentialFromError(error)
-//       // ...
-
-//       console.log("ERROR ", error)
-//     })
-// })
-
-// const signInGoogle = e => {
-//   signInWithRedirect(auth, provider)
-//     .then(result => {
-//       // This gives you a Google Access Token. You can use it to access the Google API.
-//       const credential = GoogleAuthProvider.credentialFromResult(result)
-//       const token = credential.accessToken
-//       // The signed-in user info.
-//       const user = result.user
-//       // ...
-//     })
-//     .catch(error => {
-//       // Handle Errors here.
-//       const errorCode = error.code
-//       const errorMessage = error.message
-//       // The email of the user's account used.
-//       const email = error?.customData?.email
-//       // The AuthCredential type that was used.
-//       const credential = GoogleAuthProvider.credentialFromError(error)
-//       // ...
-//     })
-// }
 
 const Home = ({
   pageContext,
@@ -553,6 +483,57 @@ const Home = ({
       })
       .catch(err => console.warn(err))
   }, [])
+
+  useEffect(() => {
+    const email = "theotran@rocketmail.com"
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+      .then(() => {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        console.log("Success")
+        window.localStorage.setItem("emailForSignIn", email)
+        // ...
+      })
+      .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log("Error ", errorMessage)
+        // ...
+      })
+  }, [])
+
+  // Confirm the link is a sign-in with email link.
+  const auth = getAuth()
+  if (isSignInWithEmailLink(auth, window.location.href)) {
+    // Additional state parameters can also be passed via URL.
+    // This can be used to continue the user's intended action before triggering
+    // the sign-in operation.
+    // Get the email if available. This should be available if the user completes
+    // the flow on the same device where they started it.
+    let email = window.localStorage.getItem("emailForSignIn")
+    if (!email) {
+      // User opened the link on a different device. To prevent session fixation
+      // attacks, ask the user to provide the associated email again. For example:
+      email = window.prompt("Please provide your email for confirmation")
+    }
+    // The client SDK will parse the code from the link for you.
+    signInWithEmailLink(auth, email, window.location.href)
+      .then(result => {
+        // Clear email from storage.
+        window.localStorage.removeItem("emailForSignIn")
+        // You can access the new user via result.user
+        // Additional user info profile not available via:
+        // result.additionalUserInfo.profile == null
+        // You can check if the user is new or existing:
+        // result.additionalUserInfo.isNewUser
+        console.log("result ", result.user)
+      })
+      .catch(error => {
+        // Some error occurred, you can inspect the code: error.code
+        // Common errors could be invalid email and invalid or expired OTPs.
+      })
+  }
 
   return (
     <Layout>
