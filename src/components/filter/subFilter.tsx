@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import Select from "../Select/Select"
-import Input from "../Input/Input"
+import SearchInput from "../Input/SearchInput"
 import HeartCircleBlue from "../../images/heart-circle-blue.png"
 
 const SubFilter = ({
@@ -26,7 +26,7 @@ const SubFilter = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <Input
+      <SearchInput
         activeFilter={activeFilter}
         searchLiveAssetsByInput={searchLiveAssetsByInput}
         searchValue={searchValue}

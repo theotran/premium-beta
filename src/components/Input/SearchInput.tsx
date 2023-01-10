@@ -1,17 +1,27 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-const Input = ({ label, value, placeholder, setValueHandler }) => {
+const SearchInput = ({
+  activeFilter,
+  searchLiveAssetsByInput,
+  searchValue,
+  setSearchValue,
+}) => {
   const HandleInputChange = e => {
-    setValueHandler(e.target.value)
+    setSearchValue(e.target.value)
   }
   return (
     <Wrapper>
-      <Label>{label || ""}</Label>
+      <Label>Search</Label>
       <input
-        value={value || ""}
-        placeholder={placeholder || ""}
+        value={searchValue}
+        placeholder="Search..."
         onChange={e => HandleInputChange(e)}
+        onBlur={e => {
+          if (searchValue) {
+            searchLiveAssetsByInput(searchValue)
+          }
+        }}
       />
     </Wrapper>
   )
@@ -57,4 +67,4 @@ const Label = styled.div`
   margin-right: 20px;
 `
 
-export default Input
+export default SearchInput
