@@ -47,7 +47,8 @@ const app = initializeApp(firebaseConfig)
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be in the authorized domains list in the Firebase Console.
-  url: "http://localhost:8000/",
+  // url: "http://localhost:8000/",
+  url: "https://pretium-beta.web.app/",
   // This must be true.
   handleCodeInApp: true,
   iOS: {
@@ -329,6 +330,7 @@ const Home = ({
       .catch(err => console.warn(err))
   }
 
+  //Graph Data Hook, modularize this!
   useEffect(() => {
     const query = {
       sort: [{ datetime: { order: "asc", unmapped_type: "boolean" } }],
@@ -391,6 +393,7 @@ const Home = ({
       .catch(err => console.warn(err))
   }, [])
 
+  //Conversion data hook, modularize this!
   useEffect(() => {
     const query = {
       aggs: { "0": { avg: { field: "conversion" } } },
@@ -438,6 +441,7 @@ const Home = ({
       .catch(err => console.warn(err))
   }, [])
 
+  //Manipulation data hook, modularize this!
   useEffect(() => {
     const query = {
       aggs: { "0": { avg: { field: "manipulation" } } },
@@ -486,6 +490,7 @@ const Home = ({
 
   useEffect(() => {
     const email = "theotran@rocketmail.com"
+    // const [emailForSignupWithLink, setEmailForSignupWithLink] = useState(null)
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
       .then(() => {
         // The link was successfully sent. Inform the user.
