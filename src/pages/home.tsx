@@ -11,6 +11,7 @@ import ConversionChart from "Components/Piechart/ConversionChart"
 import BarChart from "Components/Barchart/Barchart"
 import MarketSnapshot from "Components/MarketSnapshot/MarketSnapshot"
 import SignUpModal from "Components/SignUpModal"
+import LandingPageCards from "Components/Landing/Cards"
 
 import { initializeApp } from "firebase/app"
 
@@ -133,6 +134,7 @@ const LandingPage = () => {
             </Buttons>
           </CTAContainer>
         </HeroContainer>
+        <LandingPageCards />
         <BottomHeroContainer>
           <BottomHero>
             <h2>

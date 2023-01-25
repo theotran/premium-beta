@@ -54,9 +54,9 @@ const LinkList: React.FC<LinkListProps> = ({ links, setToggle }) => {
       <li key={"Dashboard"}>
         <Link to={"/"}>Dashboard</Link>
       </li>
-      <li key={"Account"}>
+      {/* <li key={"Account"}>
         <Link to={"/account"}>Account</Link>
-      </li>
+      </li> */}
     </>
   )
 }
