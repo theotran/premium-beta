@@ -7,11 +7,11 @@ const Input = ({ label, value, placeholder, setValueHandler }) => {
   }
   return (
     <Wrapper>
-      <Label>{label || ""}</Label>
+      <label>{label || ""}</label>
       <input
         value={value || ""}
         placeholder={placeholder || ""}
-        onChange={e => HandleInputChange(e)}
+        onChange={onchange}
       />
     </Wrapper>
   )

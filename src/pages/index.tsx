@@ -2,11 +2,30 @@ import React, { useState, useLayoutEffect, useEffect } from "react"
 import { initializeApp } from "firebase/app"
 
 import {
-  getAuth,
+  // getAuth,
   sendSignInLinkToEmail,
   isSignInWithEmailLink,
   signInWithEmailLink,
 } from "firebase/auth"
+
+​​import {
+  ​​  GoogleAuthProvider,
+  ​​  getAuth,
+  ​​  signInWithPopup,
+  ​​  signInWithEmailAndPassword,
+  ​​  createUserWithEmailAndPassword,
+  ​​  sendPasswordResetEmail,
+  ​​  signOut,
+  ​​} from "firebase/auth";
+  ​​import {
+  ​​  getFirestore,
+  // ​​  query,
+  ​​  getDocs,
+  ​​  collection,
+  ​​  where,
+  ​​  addDoc,
+  ​​} from "firebase/firestore";
+
 import type { PageProps } from "gatsby"
 import ReactModal from "react-modal"
 import { graphql } from "gatsby"
@@ -42,7 +61,6 @@ const firebaseConfig = {
   measurementId: "G-H62NHRYFHM",
 }
 
-const app = initializeApp(firebaseConfig)
 
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
@@ -62,7 +80,10 @@ const actionCodeSettings = {
   dynamicLinkDomain: "pretium.page.link",
 }
 
-const auth = getAuth()
+// const auth = getAuth()
+const app = ​​initializeApp(firebaseConfig);
+​​const auth = getAuth(app);
+​​const db = getFirestore(app);
 
 ReactModal.setAppElement("#___gatsby")
 ReactModal.defaultStyles.overlay.backgroundColor =
@@ -486,7 +507,7 @@ const Home = ({
         setManipulationChartData(value)
       })
       .catch(err => console.warn(err))
-  }, [])
+  }, []) 
 
   useEffect(() => {
     const email = "theotran@rocketmail.com"

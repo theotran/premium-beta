@@ -1,12 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 import Layout from "Layouts/layout"
 import SEO from "Components/seo"
 import Footer from "Components/Footer/Footer"
-import Input from "Components/Input/SearchInput"
+import Input from "Components/Input/Input"
 
 const SignupEmailLink = () => {
+  const [email, setEmail] = useState(null)
   return (
     <Layout>
       <SEO title="Sign Up For Pretium" />
@@ -19,7 +20,7 @@ const SignupEmailLink = () => {
             </h2>
           </Hero>
           <SignInContainer>
-            <Input />
+            <Input value={email} />
             <SignInButton>Sign Up With Email Link</SignInButton>
           </SignInContainer>
         </HeroContainer>
