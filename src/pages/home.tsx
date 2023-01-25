@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, navigate, useStaticQuery } from "gatsby"
+import ReactModal from "react-modal"
 import styled from "styled-components"
 import Layout from "Layouts/layout"
 import SEO from "Components/seo"
@@ -9,6 +10,7 @@ import ManipulationChart from "Components/Piechart/ManipulationChart"
 import ConversionChart from "Components/Piechart/ConversionChart"
 import BarChart from "Components/Barchart/Barchart"
 import MarketSnapshot from "Components/MarketSnapshot/MarketSnapshot"
+import SignUpModal from "Components/SignUpModal"
 
 import { initializeApp } from "firebase/app"
 
@@ -54,8 +56,8 @@ const firebaseConfig = {
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be in the authorized domains list in the Firebase Console.
-  url: "http://localhost:8000/",
-  // url: "https://pretium-beta.web.app/",
+  // url: "http://localhost:8000/",
+  url: "https://pretium-beta.web.app/",
   // This must be true.
   handleCodeInApp: true,
   iOS: {
@@ -74,9 +76,15 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
-const Landing = () => {
-  useEffect(() => {
-    const email = "theo@koat.ai"
+ReactModal.setAppElement("#___gatsby")
+ReactModal.defaultStyles.overlay.backgroundColor =
+  "linear-gradient(90deg, rgba(94, 166, 238, 1) 0%, rgba(96, 169, 237, 1) 23%, rgba(105, 180, 234, 1) 44%, rgba(119, 199, 230, 1) 65%, rgba(140, 225, 225, 1) 85%, rgba(160, 251, 220, 1) 100%) 0% 0%"
+
+const LandingPage = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const SignUpWithEmailLink = email => {
+    // const email = "theo@koat.ai"
     // const [emailForSignupWithLink, setEmailForSignupWithLink] = useState(null)
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
       .then(() => {
@@ -86,6 +94,7 @@ const Landing = () => {
         console.log("Success")
         window.localStorage.setItem("emailForSignIn", email)
         // ...
+        navigate("/")
       })
       .catch(error => {
         const errorCode = error.code
@@ -93,11 +102,16 @@ const Landing = () => {
         console.log("Error ", errorMessage)
         // ...
       })
-  }, [])
+  }
   return (
     <Layout>
       <SEO title="Sign Up" />
       <Container>
+        <SignUpModal
+          modalIsOpen={modalIsOpen}
+          setModalIsOpen={setModalIsOpen}
+          signUpWithEmail={SignUpWithEmailLink}
+        />
         <HeroContainer>
           <Hero>
             <h2>
@@ -111,7 +125,9 @@ const Landing = () => {
               post mint assets.
             </CTAHeader>
             <Buttons>
-              <Button>Sign up for the beta</Button>
+              <Button onClick={e => setModalIsOpen(true)}>
+                Sign up for the beta
+              </Button>
               <BlueButton>Hot NFT's Coming Up For Mint</BlueButton>
               <OrangeButton>Top valued NFT’s</OrangeButton>
             </Buttons>
@@ -178,7 +194,9 @@ const Landing = () => {
             <ConversionChart data={67} />
           </ChartsWrapper>
         </MarketSnapshotContainer>
-        <SignUpButton>Sign up for the beta</SignUpButton>
+        <SignUpButton onClick={e => setModalIsOpen(true)}>
+          Sign up for the beta
+        </SignUpButton>
       </Container>
       <Footer />
     </Layout>
@@ -339,6 +357,7 @@ const SignUpButton = styled(Button)`
     no-repeat padding-box;
   color: #fff;
   justify-content: center;
+  margin-top: 30px;
 
   @media (min-width: ${({ theme }) => theme.device.md}) {
     font-size: 35px;
@@ -414,4 +433,4 @@ const BottomCTAContainer = styled.div`
   }
 `
 
-export default Landing
+export default LandingPage

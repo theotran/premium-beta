@@ -1,17 +1,14 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-const Input = ({ label, value, placeholder, setValueHandler }) => {
-  const HandleInputChange = e => {
-    setValueHandler(e.target.value)
-  }
+const Input = ({ label, value, placeholder, onChange }) => {
   return (
     <Wrapper>
       <label>{label || ""}</label>
       <input
         value={value || ""}
         placeholder={placeholder || ""}
-        onChange={onchange}
+        onChange={onChange}
       />
     </Wrapper>
   )
@@ -34,6 +31,7 @@ const Wrapper = styled.div`
     letter-spacing: 0px;
     color: #000000;
     font-size: 16px;
+    padding: 0 15px;
   }
 
   input:focus,
