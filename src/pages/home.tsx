@@ -134,7 +134,7 @@ const LandingPage = () => {
             </Buttons>
           </CTAContainer>
         </HeroContainer>
-        <LandingPageCards />
+        {/* <LandingPageCards /> */}
         <BottomHeroContainer>
           <BottomHero>
             <h2>
