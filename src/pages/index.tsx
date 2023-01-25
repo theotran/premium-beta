@@ -27,7 +27,7 @@ import {
   addDoc,
 } from "firebase/firestore"
 
-import type { PageProps } from "gatsby"
+import { navigate, PageProps } from "gatsby"
 import ReactModal from "react-modal"
 import { graphql } from "gatsby"
 import styled from "styled-components"
@@ -532,7 +532,6 @@ const Home = ({
   useEffect(() => {
     // Confirm the link is a sign-in with email link.
     const auth = getAuth()
-    console.log("Checking auth", auth)
     if (isSignInWithEmailLink(auth, window.location.href)) {
       // Additional state parameters can also be passed via URL.
       // This can be used to continue the user's intended action before triggering
