@@ -48,7 +48,17 @@ const LinkList: React.FC<LinkListProps> = ({ links, setToggle }) => {
     )
   }
 
-  return <>{links?.map(generateLink)}</>
+  // return <>{links?.map(generateLink)}</>
+  return (
+    <>
+      <li key={"Dashboard"}>
+        <Link to={"/"}>Dashboard</Link>
+      </li>
+      <li key={"Account"}>
+        <Link to={"/account"}>Account</Link>
+      </li>
+    </>
+  )
 }
 
 export default LinkList

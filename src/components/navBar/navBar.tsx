@@ -50,7 +50,7 @@ const NavBar: React.FC<NavBarProps> = ({ title, themeToggler }) => {
           <LinkContent>
             <MenuIcon toggle={toggle} handleClick={handleClick} />
             <LinkUl ref={listRef} toggle={toggle}>
-              {/* <LinkList links={menuLinks} setToggle={setToggle} /> */}
+              <LinkList links={menuLinks} setToggle={setToggle} />
               <li>
                 <ThemeToggleButton themeToggler={themeToggler} />
               </li>

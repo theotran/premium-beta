@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 import Layout from "Layouts/layout"
@@ -10,7 +10,90 @@ import ConversionChart from "Components/Piechart/ConversionChart"
 import BarChart from "Components/Barchart/Barchart"
 import MarketSnapshot from "Components/MarketSnapshot/MarketSnapshot"
 
+import { initializeApp } from "firebase/app"
+
+import {
+  // getAuth,
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
+} from "firebase/auth"
+
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from "firebase/auth"
+
+import {
+  getFirestore,
+  // ​​  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from "firebase/firestore"
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBQ03S-Q_9AVwYgYbyZpSuNVc56jAf4nDQ",
+  authDomain: "pretium-beta.firebaseapp.com",
+  databaseURL: "https://pretium-beta-default-rtdb.firebaseio.com",
+  projectId: "pretium-beta",
+  storageBucket: "pretium-beta.appspot.com",
+  messagingSenderId: "665041649891",
+  appId: "1:665041649891:web:923ccbe7763c80797845d6",
+  measurementId: "G-H62NHRYFHM",
+}
+
+const actionCodeSettings = {
+  // URL you want to redirect back to. The domain (www.example.com) for this
+  // URL must be in the authorized domains list in the Firebase Console.
+  url: "http://localhost:8000/",
+  // url: "https://pretium-beta.web.app/",
+  // This must be true.
+  handleCodeInApp: true,
+  iOS: {
+    bundleId: "https://pretium.page.link/email-sign-up",
+  },
+  android: {
+    packageName: "https://pretium.page.link/email-sign-up",
+    installApp: true,
+    minimumVersion: "12",
+  },
+  dynamicLinkDomain: "pretium.page.link",
+}
+
+// const auth = getAuth()
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
+const db = getFirestore(app)
+
 const Landing = () => {
+  useEffect(() => {
+    const email = "theo@koat.ai"
+    // const [emailForSignupWithLink, setEmailForSignupWithLink] = useState(null)
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+      .then(() => {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        console.log("Success")
+        window.localStorage.setItem("emailForSignIn", email)
+        // ...
+      })
+      .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log("Error ", errorMessage)
+        // ...
+      })
+  }, [])
   return (
     <Layout>
       <SEO title="Sign Up" />

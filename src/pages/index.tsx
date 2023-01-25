@@ -8,23 +8,24 @@ import {
   signInWithEmailLink,
 } from "firebase/auth"
 
-​​import {
-  ​​  GoogleAuthProvider,
-  ​​  getAuth,
-  ​​  signInWithPopup,
-  ​​  signInWithEmailAndPassword,
-  ​​  createUserWithEmailAndPassword,
-  ​​  sendPasswordResetEmail,
-  ​​  signOut,
-  ​​} from "firebase/auth";
-  ​​import {
-  ​​  getFirestore,
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from "firebase/auth"
+
+import {
+  getFirestore,
   // ​​  query,
-  ​​  getDocs,
-  ​​  collection,
-  ​​  where,
-  ​​  addDoc,
-  ​​} from "firebase/firestore";
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from "firebase/firestore"
 
 import type { PageProps } from "gatsby"
 import ReactModal from "react-modal"
@@ -61,12 +62,11 @@ const firebaseConfig = {
   measurementId: "G-H62NHRYFHM",
 }
 
-
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be in the authorized domains list in the Firebase Console.
-  // url: "http://localhost:8000/",
-  url: "https://pretium-beta.web.app/",
+  url: "http://localhost:8000/",
+  // url: "https://pretium-beta.web.app/",
   // This must be true.
   handleCodeInApp: true,
   iOS: {
@@ -81,9 +81,9 @@ const actionCodeSettings = {
 }
 
 // const auth = getAuth()
-const app = ​​initializeApp(firebaseConfig);
-​​const auth = getAuth(app);
-​​const db = getFirestore(app);
+const app = initializeApp(firebaseConfig)
+const auth = getAuth(app)
+const db = getFirestore(app)
 
 ReactModal.setAppElement("#___gatsby")
 ReactModal.defaultStyles.overlay.backgroundColor =
@@ -507,59 +507,62 @@ const Home = ({
         setManipulationChartData(value)
       })
       .catch(err => console.warn(err))
-  }, []) 
-
-  useEffect(() => {
-    const email = "theotran@rocketmail.com"
-    // const [emailForSignupWithLink, setEmailForSignupWithLink] = useState(null)
-    sendSignInLinkToEmail(auth, email, actionCodeSettings)
-      .then(() => {
-        // The link was successfully sent. Inform the user.
-        // Save the email locally so you don't need to ask the user for it again
-        // if they open the link on the same device.
-        console.log("Success")
-        window.localStorage.setItem("emailForSignIn", email)
-        // ...
-      })
-      .catch(error => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log("Error ", errorMessage)
-        // ...
-      })
   }, [])
 
-  // Confirm the link is a sign-in with email link.
-  const auth = getAuth()
-  if (isSignInWithEmailLink(auth, window.location.href)) {
-    // Additional state parameters can also be passed via URL.
-    // This can be used to continue the user's intended action before triggering
-    // the sign-in operation.
-    // Get the email if available. This should be available if the user completes
-    // the flow on the same device where they started it.
-    let email = window.localStorage.getItem("emailForSignIn")
-    if (!email) {
-      // User opened the link on a different device. To prevent session fixation
-      // attacks, ask the user to provide the associated email again. For example:
-      email = window.prompt("Please provide your email for confirmation")
+  // useEffect(() => {
+  //   const email = "theo@koat.ai"
+  //   // const [emailForSignupWithLink, setEmailForSignupWithLink] = useState(null)
+  //   sendSignInLinkToEmail(auth, email, actionCodeSettings)
+  //     .then(() => {
+  //       // The link was successfully sent. Inform the user.
+  //       // Save the email locally so you don't need to ask the user for it again
+  //       // if they open the link on the same device.
+  //       console.log("Success")
+  //       window.localStorage.setItem("emailForSignIn", email)
+  //       // ...
+  //     })
+  //     .catch(error => {
+  //       const errorCode = error.code
+  //       const errorMessage = error.message
+  //       console.log("Error ", errorMessage)
+  //       // ...
+  //     })
+  // }, [])
+
+  useEffect(() => {
+    // Confirm the link is a sign-in with email link.
+    const auth = getAuth()
+    console.log("Checking auth", auth)
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      // Additional state parameters can also be passed via URL.
+      // This can be used to continue the user's intended action before triggering
+      // the sign-in operation.
+      // Get the email if available. This should be available if the user completes
+      // the flow on the same device where they started it.
+      let email = window.localStorage.getItem("emailForSignIn")
+      if (!email) {
+        // User opened the link on a different device. To prevent session fixation
+        // attacks, ask the user to provide the associated email again. For example:
+        email = window.prompt("Please provide your email for confirmation")
+      }
+      // The client SDK will parse the code from the link for you.
+      signInWithEmailLink(auth, email, window.location.href)
+        .then(result => {
+          // Clear email from storage.
+          window.localStorage.removeItem("emailForSignIn")
+          // You can access the new user via result.user
+          // Additional user info profile not available via:
+          // result.additionalUserInfo.profile == null
+          // You can check if the user is new or existing:
+          // result.additionalUserInfo.isNewUser
+          console.log("result ", result.user)
+        })
+        .catch(error => {
+          // Some error occurred, you can inspect the code: error.code
+          // Common errors could be invalid email and invalid or expired OTPs.
+        })
     }
-    // The client SDK will parse the code from the link for you.
-    signInWithEmailLink(auth, email, window.location.href)
-      .then(result => {
-        // Clear email from storage.
-        window.localStorage.removeItem("emailForSignIn")
-        // You can access the new user via result.user
-        // Additional user info profile not available via:
-        // result.additionalUserInfo.profile == null
-        // You can check if the user is new or existing:
-        // result.additionalUserInfo.isNewUser
-        console.log("result ", result.user)
-      })
-      .catch(error => {
-        // Some error occurred, you can inspect the code: error.code
-        // Common errors could be invalid email and invalid or expired OTPs.
-      })
-  }
+  }, [])
 
   return (
     <Layout>
