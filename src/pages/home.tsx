@@ -96,7 +96,8 @@ const LandingPage = () => {
         console.log("Success")
         window.localStorage.setItem("emailForSignIn", email)
         // ...
-        navigate("/")
+        // navigate("/")
+        setModalIsOpen(false)
       })
       .catch(error => {
         const errorCode = error.code
