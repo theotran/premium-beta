@@ -10,6 +10,13 @@ const SearchInput = ({
   const HandleInputChange = e => {
     setSearchValue(e.target.value)
   }
+
+  const handleKeyDown = e => {
+    if (e.key === "Enter") {
+      console.log("do validate")
+      searchLiveAssetsByInput(searchValue)
+    }
+  }
   return (
     <Wrapper>
       <Label>Search</Label>
@@ -22,6 +29,7 @@ const SearchInput = ({
             searchLiveAssetsByInput(searchValue)
           }
         }}
+        onKeyDown={handleKeyDown}
       />
     </Wrapper>
   )

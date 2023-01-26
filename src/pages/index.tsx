@@ -2,13 +2,6 @@ import React, { useState, useLayoutEffect, useEffect } from "react"
 import { initializeApp } from "firebase/app"
 
 import {
-  // getAuth,
-  sendSignInLinkToEmail,
-  isSignInWithEmailLink,
-  signInWithEmailLink,
-} from "firebase/auth"
-
-import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
@@ -16,6 +9,10 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
+  onAuthStateChanged,
 } from "firebase/auth"
 
 import {
@@ -80,10 +77,11 @@ const actionCodeSettings = {
   dynamicLinkDomain: "pretium.page.link",
 }
 
-// const auth = getAuth()
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
+
+const provider = new GoogleAuthProvider()
 
 ReactModal.setAppElement("#___gatsby")
 ReactModal.defaultStyles.overlay.backgroundColor =
@@ -532,9 +530,7 @@ const Home = ({
   useEffect(() => {
     // Confirm the link is a sign-in with email link.
     const auth = getAuth()
-    if (!auth.userDataPresent) {
-      navigate("/home")
-    }
+
     if (isSignInWithEmailLink(auth, window.location.href)) {
       // Additional state parameters can also be passed via URL.
       // This can be used to continue the user's intended action before triggering
@@ -564,6 +560,22 @@ const Home = ({
           // Common errors could be invalid email and invalid or expired OTPs.
         })
     }
+  }, [])
+
+  useEffect(() => {
+    const auth = getAuth()
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        navigate("/home")
+      }
+    })
   }, [])
 
   return (

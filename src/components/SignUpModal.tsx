@@ -5,7 +5,12 @@ import { Link, navigate } from "gatsby"
 import Input from "Components/Input/Input"
 import SignupEmailLink from "Pages/signup-link"
 
-const SignUpModal = ({ modalIsOpen, setModalIsOpen, signUpWithEmail }) => {
+const SignUpModal = ({
+  modalIsOpen,
+  setModalIsOpen,
+  signUpWithEmail,
+  signInWithGoogle,
+}) => {
   const closeModal = e => {
     setModalIsOpen(false)
   }
@@ -47,6 +52,8 @@ const SignUpModal = ({ modalIsOpen, setModalIsOpen, signUpWithEmail }) => {
         <BlueButton onClick={e => signUpWithEmail(email)}>
           Send Verification Link
         </BlueButton>
+
+        <Button onClick={e => signInWithGoogle()}>Sign In With Google</Button>
       </ModalContent>
     </Modal>
   )
@@ -56,23 +63,25 @@ const Button = styled.button`
   width: 100%;
   // min-height: 83px;
   border-radius: 12px;
-  padding: 24px 14px;
+  padding: 20px 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0;
+  border: 3px solid #e2e2e2;
   cursor: pointer;
   background: #fff;
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  margin: 20px 0;
+  margin: 10px 0 0;
 `
 
 const BlueButton = styled(Button)`
   background: transparent linear-gradient(90deg, #56aff1 0%, #2fe1fb 100%) 0% 0%
     no-repeat padding-box;
   color: #fff;
+  border: 0;
+  margin-top: 20px;
 `
 
 const SignInButton = styled.button`

@@ -41,6 +41,9 @@ import {
   addDoc,
 } from "firebase/firestore"
 
+ReactModal.setAppElement("#___gatsby")
+ReactModal.defaultStyles.overlay.backgroundColor =
+  "linear-gradient(90deg, rgba(94, 166, 238, 1) 0%, rgba(96, 169, 237, 1) 23%, rgba(105, 180, 234, 1) 44%, rgba(119, 199, 230, 1) 65%, rgba(140, 225, 225, 1) 85%, rgba(160, 251, 220, 1) 100%) 0% 0%"
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -77,9 +80,7 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
 
-ReactModal.setAppElement("#___gatsby")
-ReactModal.defaultStyles.overlay.backgroundColor =
-  "linear-gradient(90deg, rgba(94, 166, 238, 1) 0%, rgba(96, 169, 237, 1) 23%, rgba(105, 180, 234, 1) 44%, rgba(119, 199, 230, 1) 65%, rgba(140, 225, 225, 1) 85%, rgba(160, 251, 220, 1) 100%) 0% 0%"
+const provider = new GoogleAuthProvider()
 
 const LandingPage = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -104,6 +105,30 @@ const LandingPage = () => {
         // ...
       })
   }
+
+  const SignInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then(result => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result)
+        const token = credential.accessToken
+        // The signed-in user info.
+        const user = result.user
+
+        navigate("/")
+        // ...
+      })
+      .catch(error => {
+        // Handle Errors here.
+        const errorCode = error.code
+        const errorMessage = error.message
+        // The email of the user's account used.
+        const email = error.customData.email
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error)
+        // ...
+      })
+  }
   return (
     <Layout>
       <SEO title="Sign Up" />
@@ -112,6 +137,7 @@ const LandingPage = () => {
           modalIsOpen={modalIsOpen}
           setModalIsOpen={setModalIsOpen}
           signUpWithEmail={SignUpWithEmailLink}
+          signInWithGoogle={SignInWithGoogle}
         />
         <HeroContainer>
           <Hero>
@@ -122,15 +148,15 @@ const LandingPage = () => {
           </Hero>
           <CTAContainer>
             <CTAHeader>
-              Unlock the power of true NFT valuation on over ##,### premint and
+              Unlock the power of true NFT valuation on over 17,000 premint and
               post mint assets.
             </CTAHeader>
             <Buttons>
               <Button onClick={e => setModalIsOpen(true)}>
                 Sign up for the beta
               </Button>
-              <BlueButton>Hot NFT's Coming Up For Mint</BlueButton>
-              <OrangeButton>Top valued NFT’s</OrangeButton>
+              <BlueButton>Hot NFT&rsquo;s Coming Up For Mint</BlueButton>
+              <OrangeButton>Top valued NFT&rsquo;s</OrangeButton>
             </Buttons>
           </CTAContainer>
         </HeroContainer>
