@@ -8,6 +8,8 @@ import NavBar from "Components/navBar/navBar"
 import styledTheme from "Styles/styledTheme"
 import GlobalStyle from "Styles/globalStyle"
 import packageJSON from "../../package.json"
+import PretiumAppContext from "./pretiumContext"
+
 const isServer = () => typeof window === "undefined"
 import "../fonts/MarkOT-Medium.otf"
 
@@ -32,19 +34,21 @@ const Layout: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={styledTheme}>
       <ThemeContext.Provider value={theme}>
-        <GlobalStyle />
-        <Container>
-          <NavBar title={title} themeToggler={themeToggler} />
-          {children}
-        </Container>
-        <Footer role="contentinfo">
-          <Copyright aria-label="Copyright">
-            {copyrightStr}
-            <RepoLink href={"https://koat.ai/"} target="__blank">
-              KOAT
-            </RepoLink>
-          </Copyright>
-        </Footer>
+        <PretiumAppContext.Provider>
+          <GlobalStyle />
+          <Container>
+            <NavBar title={title} themeToggler={themeToggler} />
+            {children}
+          </Container>
+          <Footer role="contentinfo">
+            <Copyright aria-label="Copyright">
+              {copyrightStr}
+              <RepoLink href={"https://koat.ai/"} target="__blank">
+                KOAT
+              </RepoLink>
+            </Copyright>
+          </Footer>
+        </PretiumAppContext.Provider>
       </ThemeContext.Provider>
     </ThemeProvider>
   )
