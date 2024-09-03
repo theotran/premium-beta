@@ -1,4 +1,4 @@
-# Pretium Beta - GatsbyJS
+# Premium Beta - GatsbyJS
 
 
 ## ✨ Features
